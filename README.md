@@ -6,12 +6,12 @@ This workshop will take you from "Hello Docker" to deploying a containerized web
 It's going to be a lot of fun!
 
 
-##Prerequisites
+## Prerequisites
 
 You need to have access to a linux box. Either your laptop or a cloud server.
 
 
-##Philosophy
+## Philosophy
 
 
 There are a few things you should know about this tutorial before we begin.
@@ -25,8 +25,8 @@ Instead, it will point you to the right resources (like documentation and blog p
 
 I prefer this approach because it helps prepare you to find answers about Docker questions *after* the tutorial is over.
 
-##Getting help
-------------
+## Getting help
+
 
 This is a big tutorial session, so I have set up chat rooms with `Gitter <https://gitter.im/>`_, a chat service that uses your GitHub account to log in.
 
@@ -36,7 +36,7 @@ https://gitter.im/atbaker/oscon-docker-tutorial
 
 **Join that chat room now.** I will also link to exercise-specific chat rooms as you go through the tutorial.
 
-**Please don't be shy about asking questions in the Gitter chat rooms or to your neighbors!**
+**Please don't be shy about asking questions on slack or to your neighbors!**
 
 Ready to begin?
 ---------------
