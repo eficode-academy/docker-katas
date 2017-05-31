@@ -1,7 +1,12 @@
+These exercises build uppon the following resources:
+* http://docker.atbaker.me/index.html
+* https://github.com/docker/labs/tree/master/beginner
+
+
 # Docker Exercises
 
 
-This workshop will take you from "Hello Docker" to deploying a containerized web application to a server. 
+This workshop will take you from "Hello Docker" to deploying a containerized web application to a server.
 
 It's going to be a lot of fun!
 
@@ -21,24 +26,23 @@ This tutorial is designed to be **self-paced** to make the most of your time.
 
 The exercises won't always tell you exactly what you need to do.
 
-Instead, it will point you to the right resources (like documentation and blog posts) to find the answer. 
+Instead, it will point you to the right resources (like documentation and blog posts) to find the answer.
 
 I prefer this approach because it helps prepare you to find answers about Docker questions *after* the tutorial is over.
 
 ## Getting help
 
-
-This is a big tutorial session, so I have set up chat rooms with `Gitter <https://gitter.im/>`_, a chat service that uses your GitHub account to log in.
+All throughout the academy, we use *Slack*.
 
 The chat room linked below should be used for general questions and comments about the tutorial:
 
-https://gitter.im/atbaker/oscon-docker-tutorial
+<INSERT URL>
 
-**Join that chat room now.** I will also link to exercise-specific chat rooms as you go through the tutorial.
+**Join that chat room now.**
 
 **Please don't be shy about asking questions on slack or to your neighbors!**
 
 Ready to begin?
 ---------------
 
-Head to exercises/exercise_0.
+Head over to [the first exercise](exercises/1.md) to begin.
