@@ -1,4 +1,4 @@
-These exercises build uppon the following resources:
+These exercises build upon the following resources:
 * http://docker.atbaker.me/index.html
 * https://github.com/docker/labs/tree/master/beginner
 
