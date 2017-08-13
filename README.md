@@ -51,6 +51,5 @@ Head over to [the first exercise](exercises/1.md) to begin.
 
 ### Misc:
 
-If you need some guidance on best practice for your docker files then head over to:
+If you need some guidance on best practice for your Dockerfiles then head over to:
 https://www.fromlatest.io/#/
-
