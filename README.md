@@ -36,7 +36,7 @@ All throughout the academy, we use *Slack*.
 
 The chat room linked below should be used for general questions and comments about the tutorial:
 
-<INSERT URL>
+https://code-academy.slack.com
 
 **Join that chat room now.**
 
