@@ -34,11 +34,7 @@ I prefer this approach because it helps prepare you to find answers about Docker
 
 All throughout the academy, we use *Slack*.
 
-The chat room linked below should be used for general questions and comments about the tutorial:
-
-https://code-academy.slack.com
-
-**Join that chat room now.**
+The chat room should be used for general questions and comments.
 
 **Please don't be shy about asking questions on slack or to your neighbors!**
 
