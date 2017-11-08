@@ -3,7 +3,7 @@ These exercises build upon the following resources:
 * https://github.com/docker/labs/tree/master/beginner
 
 
-# Docker Exercises
+# Docker labs
 
 
 This workshop will take you from "Hello Docker" to deploying a containerized web application to a server.
@@ -14,7 +14,6 @@ It's going to be a lot of fun!
 ## Prerequisites
 
 You need to have access to a linux box. Either your laptop or a cloud server.
-
 
 ## Philosophy
 
@@ -41,7 +40,7 @@ The chat room should be used for general questions and comments.
 Ready to begin?
 ---------------
 
-Head over to [the first exercise](exercises/1.md) to begin.
+Head over to [the first lab](labs/getting-started.md) to begin.
 
 
 

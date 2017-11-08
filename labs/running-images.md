@@ -1,4 +1,4 @@
-# Running your first container
+# Running your first container from image
 
 Now that you have everything setup, it's time to get your hands dirty. In this section, you are going to run an [Alpine Linux](http://www.alpinelinux.org/) container (a lightweight linux distribution) on your system and get a taste of the `docker run` command.
 
@@ -74,7 +74,7 @@ ff0a5c3750b9        alpine              "ls -l"                  8 minutes ago  
 c317d0a9e3d2        hello-world         "/hello"                 34 seconds ago      Exited (0) 12 minutes ago                       stupefied_mcclintock
 ```
 
-What you see above is a list of all containers that you ran. Notice that the `STATUS` column shows that these containers exited a few minutes ago. 
+What you see above is a list of all containers that you ran. Notice that the `STATUS` column shows that these containers exited a few minutes ago.
 
 Try using the `run` command again with the `-it` flag, so it attaches you to an interactive tty in the container. You can run as many commands in the container as you want! Take some time to run your favorite commands. (Remember, you can write `exit` when you want to quit.)
 
@@ -97,5 +97,3 @@ ecstatic_cray
 The container is now gone when you execute a `ps -a` command.
 
 Tip: As with Git, you can use a unique prefix of the container ID to refer to it.
-
-When you are done here, head over to the [exercise 3](./3.md) to run a webserver in a container.
