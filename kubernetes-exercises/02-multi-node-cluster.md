@@ -60,7 +60,7 @@ sudo kubeadm join --token 2731ee.bb0be06012dbac00 172.31.18.205:6443 --discovery
 
 This should allow the node to join the cluster ! Be mindful that for this to work port 6443 has to be open on master.
 
-Now you can run commands on master by using kubectl, which concludes the exercise!
+Now you can run commands on master by using kubectl!
 
 ## Optionally, execute commands on cluster from another machine than master
 Optionally, having to ssh to master is not the best of things. This can be changed by handing over the config to another machine: 
@@ -69,3 +69,5 @@ Optionally, having to ssh to master is not the best of things. This can be chang
 scp root@<master ip>:/etc/kubernetes/admin.conf .
 kubectl --kubeconfig ./admin.conf get nodes
 ```
+
+## Kubernetes yml
