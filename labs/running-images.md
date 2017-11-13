@@ -79,21 +79,3 @@ What you see above is a list of all containers that you ran. Notice that the `ST
 Try using the `run` command again with the `-it` flag, so it attaches you to an interactive tty in the container. You can run as many commands in the container as you want! Take some time to run your favorite commands. (Remember, you can write `exit` when you want to quit.)
 
 That concludes a whirlwind tour of the `docker run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker run`.
-
-### Cleaning up containers you do not use anymore
-
-Containers are still persisted, even though they are stopped.
-If you want to delete them from your server you need to use the `docker rm` command.
-`docker rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
-```
-sofus@Praq-Sof:~/git/docker-exercises$ docker ps -a
-CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES
-6a9246ff53cb        hello-world               "/hello"                 18 seconds ago      Exited (0) 16 seconds ago                                                                  ecstatic_cray
-
-sofus@Praq-Sof:~/git/docker-exercises$ docker rm ecstatic_cray
-ecstatic_cray
-```
-
-The container is now gone when you execute a `ps -a` command.
-
-Tip: As with Git, you can use a unique prefix of the container ID to refer to it.
