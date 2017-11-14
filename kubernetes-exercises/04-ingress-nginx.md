@@ -17,7 +17,10 @@ It will:
 
 The [example deployment file for nginx-ingress-controller](ingress-nginx/nginx-backend.yml) is taken from [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx), as is the [service exposing the backend](ingress-nginx/nginx-service.yml).
 
-They are automatically deployed by enabling ingress, which we will do later.
+Deploy by running: 
+```
+kubectl create -f ingress-nginx/nginx-backend/.
+```
 
 We will need a certificate for NGINX, which has been prepared in [a script](ingress-nginx/self-signed-cert.sh). We will need to turn that into a secret.
 
@@ -38,10 +41,13 @@ The reason it is not natively enabled, is because early versions of Kubernetes s
 Enabling gave us: 
 - A configmap 
     * kubectl get configmap nginx-load-balancer-conf -n kube-system
+    * This describes the nginx configuration
 - The nginx-ingress-controller
     * kubectl get rc nginx-ingress-controller -n kube-system
+    * This enables us to do ingress
 - A service exposing default NGINX backend pod handling
     * kubectl get svc default-http-backend -n kube-system
+    * This serves (together with the deployed yaml from earlier) the 404 and 200. 
 
 
 Nginx can be accessed this way : 
@@ -51,9 +57,15 @@ curl $(minikube service nginx-ingress --url)
 
 Which will return 404 default backend. 
 
-TODO make myapp work
+Go and modify [the yaml for your ingress](./ingress-nginx/ingress.yml) to reflect the correct service and deployment. 
 
-Access it on http://myapp.local. 
+Ingress works by using the DNS name, so we need to modify our hostfile to reflect the correct name (modify hosts file to include myapp.local pointing to the cluster): 
+
+```
+echo "$(minikube ip) myapp.local" | sudo tee -a /etc/hosts
+```
+
+You can now access it on http://myapp.local, though you probably get a https error on the certificate because it was self signed.
 
 This concludes the exercise for ingress. 
 
