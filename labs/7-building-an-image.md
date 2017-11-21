@@ -306,3 +306,36 @@ If you want to be able to use any cached layers from last time, they need to be 
 Try to move the two `COPY` commands before for the `RUN` and build again to see it taking the cached layers instead of making new ones.
 
 Now that you are familiar with making a Dockerfile, building it and running it, let us head over to [exercise 5](./5.md) to learn a little more about images and sharing of Dockerfiles.
+
+
+## Every layer can be run
+
+As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new layer in your image.
+
+Take a look again at some of the output from building the image above: 
+
+``` 
+ ---> c1f2dc732c7c
+Removing intermediate container f92f9c719287
+Step 6/8 : COPY app.py /usr/src/app/
+ ---> 6ed47d3c544a
+Removing intermediate container 61a68a949d68
+Step 7/8 : EXPOSE 5000
+ ---> Running in 1f939928b7d5
+ ---> 6c14a93b72f2
+ ```
+
+So what docker actually does is 
+* Taking the layer created just before
+* make a container based of it
+* run the command given
+* save the layer.
+
+Untill all the commands have been made.
+Try to create a container from your `COPY app.py /usr/src/app/` command. 
+The id of the layer will likely be different than the example above.
+
+`docker container run -ti 6ed47d3c544a bash`.
+
+
+
