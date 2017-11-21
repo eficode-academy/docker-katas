@@ -8,6 +8,8 @@ $ docker run --name some-nginx -v /some/content:/usr/share/nginx/html:ro -d ngin
 ```
 That will host whatever files are in the `/some/content` folder.
 
+The `:ro` atribute is making the host volume read-only, making sure the container can not edit the files on the host.
+
 So try to do the following on the server:
 
 * `git clone` this repository down to the server and navigate to the `labs/volumes/` folder.
