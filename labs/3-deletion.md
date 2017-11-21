@@ -85,6 +85,21 @@ Deleted: sha256:98c944e98de8d35097100ff70a31083ec57704be0991a92c51700465e4544d08
 
 What docker did here was to `untag` the image removing the references to the sha of the image. After the image has no references, it deletes the two layers the image itself is comprised of.
 
+### Cleaning up
+
+When building, running and rebuilding images, you download and store a lot of layers. These layers will not be deleted, as docker takes a very conservative approach to clean up.
+
+Docker provides a `prune` command, taking all dangling containers/images/networks/volumes.
+
+* `docker container prune`
+* `docker image prune`
+* `docker network prune`
+* `docker volume prune`
+
+The docker image prune command allows you to clean up unused images. By default, docker image prune only cleans up dangling images. A dangling image is one that is not tagged and is not referenced by any container. To remove all _unused_ resources, resources that are not directly used by any existing containers, use the `-a` command as well.
+
+If you want a general cleanup, then `docker system prune` is your friend.
+
 **Summary**
 
 You have now seen the swiftness of creating a new container from an image, trash it, and create a new one on top of it.
