@@ -308,7 +308,7 @@ Try to move the two `COPY` commands before for the `RUN` and build again to see 
 Now that you are familiar with making a Dockerfile, building it and running it, let us head over to [exercise 5](./5.md) to learn a little more about images and sharing of Dockerfiles.
 
 
-## Every layer can be run
+## Every layer can be a container
 
 As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new layer in your image.
 
@@ -337,5 +337,18 @@ The id of the layer will likely be different than the example above.
 
 `docker container run -ti 6ed47d3c544a bash`.
 
+You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 
+```
+root@cc5490748b2a:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@cc5490748b2a:/# ls /usr/src/app/
+app.py  requirements.txt
+
+root@cc5490748b2a:/# python /usr/src/app/app.py
+* Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+
+
+```
 
