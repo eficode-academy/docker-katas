@@ -91,6 +91,8 @@ When building, running and rebuilding images, you download and store a lot of la
 
 Docker provides a `prune` command, taking all dangling containers/images/networks/volumes.
 
+> You need version `1.13` or newer to have access to pruning.
+
 * `docker container prune`
 * `docker image prune`
 * `docker network prune`
