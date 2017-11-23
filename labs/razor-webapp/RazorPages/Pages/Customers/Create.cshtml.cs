@@ -26,7 +26,7 @@ namespace RazorPagesContacts.Pages
 
 			_db.Customers.Add(Customer);
 			await _db.SaveChangesAsync();
-			return RedirectToPage("/Index");
+			return RedirectToPage("Index");
 		}
 	}
 }

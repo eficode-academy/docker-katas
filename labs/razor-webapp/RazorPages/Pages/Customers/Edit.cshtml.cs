@@ -25,7 +25,7 @@ namespace RazorPagesContacts.Pages
 
 			if (Customer == null)
 			{
-				return RedirectToPage("/Index");
+				return RedirectToPage("Index");
 			}
 
 			return Page();
