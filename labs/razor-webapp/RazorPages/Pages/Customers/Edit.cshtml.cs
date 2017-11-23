@@ -49,7 +49,7 @@ namespace RazorPagesContacts.Pages
 				throw new Exception($"Customer {Customer.Id} not found!");
 			}
 
-			return RedirectToPage("/Index");
+			return RedirectToPage("Index");
 		}
 	}
 }
