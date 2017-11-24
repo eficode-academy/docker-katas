@@ -3,6 +3,7 @@
 In this section you will install Docker and run your very first container.
 
 ## Terminology
+
 In this section, you will see a lot of Docker-specific jargon which might be confusing to some. So before you go further, let's clarify some terminology that is used frequently in the Docker ecosystem.
 
 - *Images* - The file system and configuration of our application which are used to create containers. To find out more about a Docker image, run `docker inspect alpine`. If you do not have the `alpine` image this command will fail. You can use the `docker pull` command to download the **alpine** image. When you executed the command `docker run hello-world`, it also did a `docker pull` behind the scenes to download the **hello-world** image.
@@ -13,14 +14,4 @@ In this section, you will see a lot of Docker-specific jargon which might be con
 
 ## Installing Docker
 
-A couple of other things to remember when using the server:
-
-* Keep in mind that when accessing your containers that serves web-content through a browser, you will need to use the server hostname instead of ``localhost``
-* These servers will be terminated shortly after the end of the academy. So if there is anything on the server you wanna save, please do it on the 4th day.
-
-Log in to your server, and follow [the guide on installing docker.](https://store.docker.com/editions/community/docker-ce-server-ubuntu)
-
-By default, Docker commands will require `sudo` to run. If this bothers you, [look for extra instructions on your distro's installation page to create a `docker` user group to fix this.](https://docs.docker.com/engine/installation/linux/linux-postinstall/)
-We assume that you have made docker non-sudo. If not, then you need to add sudo to every docker command in the examples.
-
-After Docker finishes installing, you should be ready to go!
+Depending on what OS you are running, installation is different, but head over to the [Community Edition](https://www.docker.com/community-edition) website and follow the instructions there.
