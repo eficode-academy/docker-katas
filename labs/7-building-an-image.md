@@ -266,13 +266,13 @@ Try now to first:
 - remove the image file as well with the `rmi` [command](https://docs.docker.com/engine/reference/commandline/rmi/).
 - make `docker images` again to see that it's gone.
 
-## Images
+## Images and layers
 
 When dealing with docker images, a layer, or image layer is a change on an image, or an intermediate image. Every command you specify (FROM, RUN, COPY, etc.) in your Dockerfile causes the previous image to change, thus creating a new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
 
 Consider the following Dockerfile:
 
-``` bash
+```bash
   FROM ubuntu:latest
   RUN apt-get update -y
   RUN apt-get install -y python-pip python-dev build-essential
@@ -317,9 +317,9 @@ Now that you are familiar with making a Dockerfile, building it and running it, 
 
 ## Every layer can be a container
 
-As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new layer in your image.
+As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new layer in your image, and therefore also be an image of their own.
 
-Take a look again at some of the output from building the image above: 
+Take a look again at some of the output from building the image above:
 
 ``` bash
  ---> c1f2dc732c7c
@@ -339,11 +339,11 @@ So what docker actually does is
 - run the command given
 - save the layer.
 
-Untill all the commands have been made.
-Try to create a container from your `COPY app.py /usr/src/app/` command. 
+in a loop untill all the commands have been made.
+Try to create a container from your `COPY app.py /usr/src/app/` command.
 The id of the layer will likely be different than the example above.
 
-`docker container run -ti 6ed47d3c544a bash`.
+`docker container run -ti -p 5000:5000 6ed47d3c544a bash`.
 
 You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 
@@ -359,3 +359,10 @@ root@cc5490748b2a:/# python /usr/src/app/app.py
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
 ```
+
+And just like the image you builded above, you can browse the website now.
+
+## Summary
+
+You learned how to write your own docker images in a `Dockerfile` with the use of the `FROM` command to choose base-images like Alpine or Ubuntu and keywords like `RUN` for executing commands,`COPY` to add resources to the container, and `CMD` to indicate what to run when starting the container.
+You also learned that each of the keywords generates an image layer on top of the previous, and that everyone of the layers can be converted to a running container.
