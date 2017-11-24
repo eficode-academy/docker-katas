@@ -1,30 +1,42 @@
-
 # Attaching to your container
 
-If you want to go into the container again to execute something you have two options:
+If you want to go into a container again to execute something you have two options:
 
 - ``attach``  Attach to the specified process running on the container. In our example it is the nginx server.
 - ``exec`` Executing another process inside the container. This could be a shell, or a script of some sort.
 
 > NOTE:
-  When you attach to an already started container, you cannot exit without killing the container unless you issue the attach command like this:
-  ``docker attach --sig-proxy=false CONTAINER``
-  If you issue the `exec` command, you can stop it by `Ctrl+d` or detach yourself by `Ctrl+p Ctrl+q`
+> When you attach to an already started container, you cannot exit without killing the container unless you issue the attach command like this:
+> ``docker attach --sig-proxy=false CONTAINER``
+> If you issue the `exec` command, you can stop it by `Ctrl+d` or detach yourself by `Ctrl+p Ctrl+q`
+
+First, start up an Nginx container:
+
+```bash
+docker container run -d -p 8000:80 nginx
+661c6dd59d78b97f8142d67eff6b1d58fbbd42247900241e08f46abdbad19f06
+```
 
 Try to attach to the container. Exit it, and browse the webpage again to acknowledge it is gone.
 
 Start the container once again, and execute a bash inside the container:
 
+```bash
+docker container exec -it CONTAINER bash
 ```
-sofus@Praq-Sof:~/git/docker-exercises$ docker exec -it CONTAINER bash
-root@78c943461b49:/# ping 127.0.0.1 -c 100 > /tmp/ping
 
+Inside, we want to run a longer running process, like pinging itself 100 times.
+Because containers only have the bare minimum installed, we need to first install ping, and then use it:
+
+```bash
+apt-get update && apt-get install iputils-ping -y
+ping 127.0.0.1 -c 100 > /tmp/ping
 ```
 
 Then detach from the container with `Ctrl+p Ctrl+q` and run the following:
 
-```
-docker exec -it container bash
+```bash
+docker container exec -it container bash
 tail -f /tmp/ping
 64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.156 ms
 64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.183 ms
@@ -56,3 +68,7 @@ tail -f /tmp/ping
 
 Here you see that the ping process started in another shell is still running and producing this logfile.
 Just stop the process with a `Ctrl+d`.
+
+## summary
+
+You have tried to `attach` directly to the primary process of a container, as well as starting a new process by the `exec` command. You have also seen how to break out of a container either by terminating the process by `Ctrl+d`, or by detaching from the process by `Ctrl+p Ctrl+q`.
