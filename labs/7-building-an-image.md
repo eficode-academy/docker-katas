@@ -50,15 +50,14 @@ It is a simple way to automate the image creation process. The best part is that
   FROM ubuntu:latest
   ```
 
-1. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
-
-  ```bash
+2. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
+  ```
   RUN apt-get update -y
   RUN apt-get install -y python-pip python-dev build-essential
   ```
 
 
-1. Let's add the files that make up the Flask Application.
+3. Let's add the files that make up the Flask Application.
 
   Install all Python requirements for our app to run. This will be accomplished by adding the lines:
 
@@ -74,12 +73,12 @@ It is a simple way to automate the image creation process. The best part is that
 
   ```
 
-1. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
+4. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
   ```
   EXPOSE 5000
   ```
 
-1. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
+5. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
   ```
   CMD ["python", "/usr/src/app/app.py"]
@@ -87,7 +86,7 @@ It is a simple way to automate the image creation process. The best part is that
 
   The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
 
-1. Verify your Dockerfile.
+6. Verify your Dockerfile.
 
   Our `Dockerfile` is now ready. This is how it looks:
 
