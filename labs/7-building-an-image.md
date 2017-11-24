@@ -77,6 +77,7 @@ It is a simple way to automate the image creation process. The best part is that
   ```
   EXPOSE 5000
   ```
+> The `EXPOSE` instruction does not actually publish the port. It functions as a type of documentation between the person who builds the image and the person who runs the container, about which ports are intended to be published. You need the `-p`/`-P` command to actually open the host ports.
 
 5. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
