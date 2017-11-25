@@ -7,7 +7,8 @@ Let's try to run an alpine container and delete the file system.
 Spin up the container with `docker run -ti alpine`
 
 list all the folders on the root level to see the whole distribution:
-```
+
+```bash
 # ls /
 
 bin    etc    lib    mnt    root   sbin   sys    usr
@@ -20,7 +21,7 @@ Now, delete the whole file system with `rm -rf /`
 
 Try to navigate around to see how much of the OS is gone
 
-```
+```bash
 # ls
 /bin/sh: ls: not found
 
@@ -33,7 +34,7 @@ sh: whoami: not found
 
 Exit out by `Ctrl+D` and create a new instance of the Alpine image and look a bit around:
 
-```
+```bash
 $ docker run -ti alpine
 # ls /
 bin    etc    lib    mnt    root   sbin   sys    usr
@@ -42,7 +43,24 @@ dev    home   media  proc   run    srv    tmp    var
 
 Try to perform the same tasks as displayed above to see that you have a fresh new instance ready to go.
 
-### Cleaning up containers you do not use anymore
+## Auto-remove a container after use
+
+Every time you create a new container, it will take up some space, even though it usually is minimal.
+To see what your containers are taking up of space try to run the `docker ps -as` command.
+
+```bash
+CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES               SIZE
+4b09b2fe1d8c        alpine                    "/bin/sh"                7 seconds ago       Exited (1) 1 second ago                                                                    silly_jones         0B (virtual 3.97MB)
+```
+
+Here you can see that the alpine image itself takes 3.97MB, and the container itself takes 0B. When you begin to manipulate files in your container, the size of the container will rise.
+
+If you are creating a lot of new containers eg. to test something, you can tell the Docker daemon to remove the container once stopped with the `--rm` option:
+`docker run --rm -ti alpine`
+
+This will remove the container immediately after it is stopped.
+
+## Cleaning up containers you do not use anymore
 
 Containers are still persisted, even though they are stopped.
 If you want to delete them from your server you need to use the `docker rm` command.
@@ -58,7 +76,7 @@ ecstatic_cray
 
 The container is now gone when you execute a `ps -a` command.
 
-Tip: As with Git, you can use any unique part of the container ID to refer to it.
+> **Tip:** As with Git, you can use any unique part of the container ID to refer to it.
 
 ### Deleting images
 You deleted the container instance above, but not the image of hello-world itself. And as you are now on the verge to become a docker expert, you do not need the hello-world image anymore so let us delete it.
