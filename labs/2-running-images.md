@@ -78,4 +78,22 @@ What you see above is a list of all containers that you ran. Notice that the `ST
 
 Try using the `run` command again with the `-it` flag, so it attaches you to an interactive tty in the container. You can run as many commands in the container as you want! Take some time to run your favorite commands. (Remember, you can write `exit` when you want to quit.)
 
+## Naming your container
+
+Take a look again at the output of the `docker ps -a`:
+
+``` bash
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+36171a5da744        alpine              "/bin/sh"                5 minutes ago       Exited (0) 2 minutes ago                        fervent_newton
+a6a9d46d0b2f        alpine              "echo 'hello from alp"   6 minutes ago       Exited (0) 6 minutes ago                        lonely_kilby
+ff0a5c3750b9        alpine              "ls -l"                  8 minutes ago       Exited (0) 8 minutes ago                        elated_ramanujan
+c317d0a9e3d2        hello-world         "/hello"                 34 seconds ago      Exited (0) 12 minutes ago                       stupefied_mcclintock
+```
+
+All containers have an **ID** and a **name**. Both the ID and name is generated every time a new container spins up with a random seed for uniqueness.
+If you want to assign a specific name to a container then you can use the `--name` option. That can make it easier for you to reference the container going forward.
+
+## Summary
+
 That concludes a whirlwind tour of the `docker run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker run`.
