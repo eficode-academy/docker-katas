@@ -4,7 +4,7 @@ Running containers others made is useful, but if you want to use docker for prod
 
 ### Dockerfile commands summary
 
-Here's a quick summary of the few basic commands we will use in our Dockerfile.
+Here's a quick summary of some basic commands we will use in our Dockerfile.
 
 - FROM
 - RUN
@@ -19,7 +19,8 @@ Here's a quick summary of the few basic commands we will use in our Dockerfile.
 * `COPY` copies local files into the container. The files need to be in the same folder (or a sub folder) as the Dockerfile itself. An example is copying the requirements for a python app into the container: `COPY requirements.txt /usr/src/app/`.
 
 * `CMD` defines the commands that will run on the image at start-up. Unlike a `RUN`, this does not create a new layer for the image, but simply runs the command. There can only be one `CMD` in a Dockerfile. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
-```
+
+``` docker
   CMD ["python", "./app.py"]
 
   CMD ["/bin/bash", "echo", "Hello World"]
@@ -27,31 +28,32 @@ Here's a quick summary of the few basic commands we will use in our Dockerfile.
 
 * `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker inspect <container-id>`.
 
->**Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
+> **Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
 publishing ports by means of the `-p` or `-P` flag when using `$ docker run`.
 
 ## Write a Dockerfile
+
 We want to create a Docker image with a Python web app.
 
 As mentioned above, all user images are based on a _base image_. Since our application is written in Python, we will build our own Python image based on [Ubuntu](https://hub.docker.com/_/ubuntu/). We'll do that using a **Dockerfile**.
 
->**Note:** If you want to learn more about Dockerfiles, check out [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+> **Note:** If you want to learn more about Dockerfiles, check out [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
 
 A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file containing a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up.
 
 It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are *almost* identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
 
+1. Create a file called **Dockerfile**, and add content to it as described below. We have made a small boilerplate file and app for you in the [/building-an-image](./building-an-image/) folder, so head over there.
 
-1. Create a file called **Dockerfile**, and add content to it as described below. We have made a small boilerplate file and app for you in the [/4](./4/) folder, so head over there.
+We'll start by specifying our base image, using the `FROM` keyword:
 
-  We'll start by specifying our base image, using the `FROM` keyword:
-
-  ```bash
+  ```docker
   FROM ubuntu:latest
   ```
 
 2. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
-  ```
+
+  ```docker
   RUN apt-get update -y
   RUN apt-get install -y python-pip python-dev build-essential
   ```
@@ -61,27 +63,28 @@ It is a simple way to automate the image creation process. The best part is that
 
   Install all Python requirements for our app to run. This will be accomplished by adding the lines:
 
-  ```
+  ```docker
   COPY requirements.txt /usr/src/app/
   RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
   ```
 
   Copy the application app.py into our image by using the [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
 
-  ```
+  ```docker
   COPY app.py /usr/src/app/
 
   ```
 
 4. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
-  ```
+
+  ```docker
   EXPOSE 5000
   ```
 > The `EXPOSE` instruction does not actually publish the port. It functions as a type of documentation between the person who builds the image and the person who runs the container, about which ports are intended to be published. You need the `-p`/`-P` command to actually open the host ports.
 
 5. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
-  ```
+  ```docker
   CMD ["python", "/usr/src/app/app.py"]
   ```
 
@@ -91,7 +94,7 @@ It is a simple way to automate the image creation process. The best part is that
 
   Our `Dockerfile` is now ready. This is how it looks:
 
-``` bash
+``` docker
   # The base image
   FROM ubuntu:latest
 
@@ -242,29 +245,12 @@ If everything went well, your image should be ready! Run `docker images` and see
 The next step in this section is to run the image and see if it actually works.
 
 ``` bash
+
 $ docker run -p 8888:5000 --name myfirstapp myfirstapp
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
 Head over to `http://localhost:8888` or your server's URL and your app should be live.
-
-### Delete your image
-
-If you make a `docker ps -a` command, you can now see a container with the name *myfirstapp* from the image named *myfirstapp*.
-
-``` bash
-sofus@Praq-Sof:/4$ docker ps -a
-CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS                      PORTS                                                          NAMES
-fcfba2dfb8ee        myfirstapp                "python /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
-```
-
-Make a `docker images` command to see that you have a docker image with the name `myfirstapp`
-
-Try now to first:
-
-- remove the container
-- remove the image file as well with the `rmi` [command](https://docs.docker.com/engine/reference/commandline/rmi/).
-- make `docker images` again to see that it's gone.
 
 ## Images and layers
 
@@ -313,8 +299,6 @@ If you want to be able to use any cached layers from last time, they need to be 
 
 Try to move the two `COPY` commands before for the `RUN` and build again to see it taking the cached layers instead of making new ones.
 
-Now that you are familiar with making a Dockerfile, building it and running it, let us head over to [exercise 5](./5.md) to learn a little more about images and sharing of Dockerfiles.
-
 ## Every layer can be a container
 
 As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new layer in your image, and therefore also be an image of their own.
@@ -361,6 +345,24 @@ root@cc5490748b2a:/# python /usr/src/app/app.py
 ```
 
 And just like the image you builded above, you can browse the website now.
+
+### Delete your image
+
+If you make a `docker ps -a` command, you can now see a container with the name *myfirstapp* from the image named *myfirstapp*.
+
+``` bash
+sofus@Praq-Sof:/4$ docker ps -a
+CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS                      PORTS                                                          NAMES
+fcfba2dfb8ee        myfirstapp                "python /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
+```
+
+Make a `docker images` command to see that you have a docker image with the name `myfirstapp`
+
+Try now to first:
+
+- remove the container
+- remove the image file as well with the `rmi` [command](https://docs.docker.com/engine/reference/commandline/rmi/).
+- make `docker images` again to see that it's gone.
 
 ## Summary
 
