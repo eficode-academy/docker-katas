@@ -149,7 +149,7 @@ Before you go on, use the [Docker command line interface](https://docs.docker.co
 
 > **NOTE:** When running most docker commands, you only need to specify the first few characters of a container's ID. For example, if a container has the ID ``df4fd19392ba``, you can stop it with ``docker container stop df4``. You can also use the silly names Docker provides containers by default, such as ``boring_bardeen``.
 
-If you want to read more, I recommend [Digital Oceans](https://www.digitalocean.com/community/tutorials/how-to-share-data-between-docker-containers) guides to sharing data through containers.
+If you want to read more, I recommend [Digital Oceans](https://www.digitalocean.com/community/tutorials/how-to-share-data-between-docker-containers) guides to sharing data through containers, as well as Dockers own article about [volumes](https://docs.docker.com/engine/admin/volumes).
 
 ## summary
 
