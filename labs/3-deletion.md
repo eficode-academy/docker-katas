@@ -4,7 +4,7 @@ As containers are just a thin base layer on top of the host kernel, it is really
 
 Let's try to run an alpine container and delete the file system.
 
-Spin up the container with `docker run -ti alpine`
+Spin up the container with `docker container run -ti alpine`
 
 list all the folders on the root level to see the whole distribution:
 
@@ -35,7 +35,7 @@ sh: whoami: not found
 Exit out by `Ctrl+D` and create a new instance of the Alpine image and look a bit around:
 
 ```bash
-$ docker run -ti alpine
+$ docker container run -ti alpine
 # ls /
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
@@ -56,7 +56,7 @@ CONTAINER ID        IMAGE                     COMMAND                  CREATED  
 Here you can see that the alpine image itself takes 3.97MB, and the container itself takes 0B. When you begin to manipulate files in your container, the size of the container will rise.
 
 If you are creating a lot of new containers eg. to test something, you can tell the Docker daemon to remove the container once stopped with the `--rm` option:
-`docker run --rm -ti alpine`
+`docker container run --rm -ti alpine`
 
 This will remove the container immediately after it is stopped.
 

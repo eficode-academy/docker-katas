@@ -28,7 +28,7 @@ Here's a quick summary of the few basic commands we will use in our Dockerfile.
 * `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker inspect <container-id>`.
 
 >**Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
-publishing ports by means of the `-p` or `-P` flag when using `$ docker run`.
+publishing ports by means of the `-p` or `-P` flag when using `$ docker container run`.
 
 ## Write a Dockerfile
 We want to create a Docker image with a .NET web app.
@@ -155,7 +155,7 @@ If everything went well, your image should be ready! Run `docker images` and see
 The next step in this section is to run the image and see if it actually works.
 
 ```
-$ docker run -p 8888:5000 --name myfirstapp myfirstapp
+$ docker container run -p 8888:5000 --name myfirstapp myfirstapp
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 

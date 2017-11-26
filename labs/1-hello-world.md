@@ -3,7 +3,7 @@
 
 Try running a command with Docker:
 
-`docker run hello-world`
+`docker container run hello-world`
 
 Your terminal output should look like this:
 ```
@@ -26,7 +26,7 @@ To generate this message, Docker took the following steps:
     to your terminal.
 
 To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
+ $ docker container run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
  https://cloud.docker.com/
@@ -39,6 +39,6 @@ This message shows that your installation appears to be working correctly.
 
 _*Q: So what did this do?*_
 
-Try to run `docker run hello-world` again.
+Try to run `docker container run hello-world` again.
 
 Docker has now already downloaded the image locally, and can therefore execute the container straight away.
