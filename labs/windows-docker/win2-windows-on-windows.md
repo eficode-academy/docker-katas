@@ -54,6 +54,16 @@ docker run -d -p 1433:1433 -e sa_password=<SA_PASSWORD> -e ACCEPT_EULA=Y microso
 
 Which spins up a development server for Microsoft SQL. Since the remote desktop machines are not set up with tools, you cannot access it - but a real development machine could just use SQL management tools.
 
+Or how about the entire azure powershell commandline interface?
+
+
+```
+docker run -it azuresdk/azure-powershell powershell
+Get-Help Add-AzureRmAccount
+```
+
+Microsoft did a pretty good job, making it feel and seem like native docker - because it is. They have an upstream docker fork, that they pull in for releasing docker on windows. 
+
 
 Let's look at some examples to finish: 
 ```
