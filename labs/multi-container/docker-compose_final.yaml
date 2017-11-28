@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  wordpress_container:
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_HOST: mysql
+    depends_on:
+      - mysql
+
+  mysql_container:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
