@@ -41,4 +41,4 @@ Go to your profile page on the Docker Hub and you should see your new repository
 
 **Congrats!** You just made your first Docker image and shared it with the world!
 
-Try to pull down the images that your fellow students on the left and right have pushed to see that it's really up there.
+Try to pull down the images that your fellows have pushed to see that it's really up there.
