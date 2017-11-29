@@ -65,6 +65,8 @@ Ingress works by using the DNS name, so we need to modify our hostfile to reflec
 echo "$(minikube ip) myapp.local" | sudo tee -a /etc/hosts
 ```
 
+To make it work for your cluster, replace the minikube ip with a node ip. 
+
 You can now access it on http://myapp.local, though you probably get a https error on the certificate because it was self signed.
 
 This concludes the exercise for ingress. 

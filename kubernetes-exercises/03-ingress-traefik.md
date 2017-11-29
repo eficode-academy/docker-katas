@@ -25,6 +25,8 @@ Instead of going through the trouble of setting up a proper DNS, we can modify t
 echo "$(minikube ip) traefik-ui.local" | sudo tee -a /etc/hosts
 ```
 
+To make it work for your cluster, replace the minikube ip with a node ip. 
+
 Which means you can access it like by clicking http://traefik-ui.local
 
 So the magic here is that: 
