@@ -47,3 +47,42 @@ Which can be accessed in internet explorer (sorry, only browser there) on this i
 ```
 docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' iis
 ```
+
+This fresh installation does not have golang installed. We can just use a container to fix that. 
+Create the following file: 
+
+and run: 
+
+```
+docker run -it -v C:\<yourpath>:C:\code golang:nanoserver powershell
+cd \code
+go build webserver.go
+```
+
+Voila. Webserver.exe has been put into the current directory. 
+
+Use the following dockerfile: 
+```
+FROM microsoft/nanoserver
+
+COPY webserver.go /code/webserver.exe /webserver.exe
+
+EXPOSE 8080
+
+CMD ["\\webserver.exe"]
+```
+
+IIS needs to be able to find it later, and it does not run on localhost. So we need to name our container: 
+```
+docker run -d --name=mysite -p 8080:8080 <yourtag>
+```
+
+If you mess it up somehow, and need to kill the container dont forget to run rm mysite. 
+
+You can access it by running: 
+```
+start http://$(docker inspect -f '{{ .NetworkSettings.Networks.nat.IPAddress }}' mysite):8080
+```
+
+This concludes the Windows bit of the workshop for now, but everything you worked with in regards to Docker works with Windows. 
+However multi container builds require a newer version of Docker than the Virtual machines have, so this is something you'll have to try at home ;) 
