@@ -8,9 +8,9 @@ services:
       - 8080:80
     environment:
       WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_HOST: mysql_container
     depends_on:
-      - mysql
+      - mysql_container
 
   mysql_container:
     image: mysql

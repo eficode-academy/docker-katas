@@ -2,6 +2,11 @@ version: '3.1'
 
 services:
 
-  wordpress_container:
+#  wordpress_container:
   
   mysql_container:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
