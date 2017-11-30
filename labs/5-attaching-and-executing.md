@@ -6,8 +6,8 @@ If you want to go into a container again to execute something you have two optio
 - ``exec`` Executing another process inside the container. This could be a shell, or a script of some sort.
 
 > NOTE:
-> When you attach to an already started container, you cannot exit without killing the container unless you issue the attach command like this:
-> ``docker attach --sig-proxy=false CONTAINER``
+> When you attach to an already started container, you cannot exit normally without killing the container unless you issue the attach command like this:
+> ``docker attach --sig-proxy=false CONTAINER`` or by issuing `Ctrl+p Ctrl+q`
 > If you issue the `exec` command, you can stop it by `Ctrl+d` or detach yourself by `Ctrl+p Ctrl+q`
 
 First, start up an Nginx container:
