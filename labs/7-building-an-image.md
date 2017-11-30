@@ -28,7 +28,7 @@ Here's a quick summary of some basic commands we will use in our Dockerfile.
   CMD ["/bin/bash", "echo", "Hello World"]
 ```
 
-* `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker inspect <container-id>`.
+* `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker container inspect <container-id>`.
 
 > **Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
 publishing ports by means of the `-p` or `-P` flag when using `$ docker container run`.
@@ -352,21 +352,21 @@ And just like the image you builded above, you can browse the website now.
 
 ### Delete your image
 
-If you make a `docker ps -a` command, you can now see a container with the name *myfirstapp* from the image named *myfirstapp*.
+If you make a `docker container ls -a` command, you can now see a container with the name *myfirstapp* from the image named *myfirstapp*.
 
 ``` bash
-sofus@Praq-Sof:/4$ docker ps -a
+sofus@Praq-Sof:/4$ docker container ls -a
 CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS                      PORTS                                                          NAMES
 fcfba2dfb8ee        myfirstapp                "python /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
 ```
 
-Make a `docker images` command to see that you have a docker image with the name `myfirstapp`
+Make a `docker image ls` command to see that you have a docker image with the name `myfirstapp`
 
 Try now to first:
 
 - remove the container
-- remove the image file as well with the `rmi` [command](https://docs.docker.com/engine/reference/commandline/rmi/).
-- make `docker images` again to see that it's gone.
+- remove the image file as well with the `image rm` [command](https://docs.docker.com/engine/reference/commandline/image_rm/).
+- make `docker image ls` again to see that it's gone.
 
 ### Instructions
 Here is the list of all the instructions that can be used in a Dockerfile:

@@ -46,7 +46,7 @@ Try to perform the same tasks as displayed above to see that you have a fresh ne
 ## Auto-remove a container after use
 
 Every time you create a new container, it will take up some space, even though it usually is minimal.
-To see what your containers are taking up of space try to run the `docker ps -as` command.
+To see what your containers are taking up of space try to run the `docker container ls -as` command.
 
 ```bash
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES               SIZE
@@ -64,17 +64,17 @@ This will remove the container immediately after it is stopped.
 
 Containers are still persisted, even though they are stopped.
 If you want to delete them from your server you need to use the `docker rm` command.
-`docker rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
+`docker container rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
 ```
-sofus@Praq-Sof:~/git/docker-exercises$ docker ps -a
+sofus@Praq-Sof:~/git/docker-exercises$ docker container ls -a
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES
 6a9246ff53cb        hello-world               "/hello"                 18 seconds ago      Exited (0) 16 seconds ago                                                                  ecstatic_cray
 
-sofus@Praq-Sof:~/git/docker-exercises$ docker rm ecstatic_cray
+sofus@Praq-Sof:~/git/docker-exercises$ docker container rm ecstatic_cray
 ecstatic_cray
 ```
 
-The container is now gone when you execute a `ps -a` command.
+The container is now gone when you execute a `ls -a` command.
 
 > **Tip:** As with Git, you can use any unique part of the container ID to refer to it.
 
@@ -84,17 +84,17 @@ You deleted the container instance above, but not the image of hello-world itsel
 First off, list all the images you have downloaded to your computer:
 
 ```
-sofus@praq-sal:~$ docker images
+sofus@praq-sal:~$ docker image ls
 REPOSITORY                              TAG                   IMAGE ID            CREATED             SIZE
 alpine                                  latest                053cde6e8953        9 days ago          3.97MB
 hello-world                             latest                48b5124b2768        10 months ago       1.84kB
 ```
 
 Here you can see the images downloaded as well as their size.
-To remove the hello-world image use the `docker rmi` command together with the id of the docker image.
+To remove the hello-world image use the `docker image rm` command together with the id of the docker image.
 
 ```
-sofus@praq-sal:~$ docker rmi 48b5124b2768
+sofus@praq-sal:~$ docker image rm 48b5124b2768
 Untagged: hello-world:latest
 Untagged: hello-world@sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7
 Deleted: sha256:48b5124b2768d2b917edcb640435044a97967015485e812545546cbed5cf0233
@@ -123,4 +123,4 @@ If you want a general cleanup, then `docker system prune` is your friend.
 **Summary**
 
 You have now seen the swiftness of creating a new container from an image, trash it, and create a new one on top of it.
-You have learned to use `rm` for deleting containers, `rmi` for images, `images` for listing the images and `ps -a` to look at all the containers on your host. 
+You have learned to use `container rm` for deleting containers, `image rm` for images, `image ls` for listing the images and `container ls -a` to look at all the containers on your host. 
