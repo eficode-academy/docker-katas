@@ -4,37 +4,43 @@ In this folder are a lot of exercises. They are numbered in the way we think mak
 Below is a cheatsheet for many of the commands we will touch uppon in the lab.
 
 ```bash
-docker build -t friendlyname .  # Create image using this directory's Dockerfile
+docker build -t friendlyname .              # Create image using this directory's Dockerfile
 
-docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
+docker container run -p 4000:80 friendlyname    # Run "friendlyname" mapping port 4000 to 80
 
-docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
+docker container run -d -p 4000:80 friendlyname           # Same thing, but in detached mode
 
-docker run -ti friendlyname             # Run "friendlyname" in interactive mode
+docker container run -ti friendlyname               # Run "friendlyname" in interactive mode
 
-docker container ls                                # List all running containers
+docker container ls                                            # List all running containers
 
-docker container ls -a             # List all containers, even those not running
+docker container ls -a                         # List all containers, even those not running
 
-docker container stop <hash>           # Gracefully stop the specified container
+docker container stop <hash>                       # Gracefully stop the specified container
 
-docker container kill <hash>         # Force shutdown of the specified container
+docker container kill <hash>                     # Force shutdown of the specified container
 
-docker container rm <hash>        # Remove specified container from this machine
+docker container rm <hash>                    # Remove specified container from this machine
 
-docker container rm $(docker container ls -a -q)         # Remove all containers
+docker container prune                                       # Remove all stopped containers
 
-docker image ls -a                             # List all images on this machine
+docker image ls -a                                         # List all images on this machine
 
-docker image rm <image id>            # Remove specified image from this machine
+docker image rm <image id>                        # Remove specified image from this machine
 
-docker image rm $(docker image ls -a -q)   # Remove all images from this machine
+docker image prune                          # Remove all 'dangling' images from this machine
 
-docker login             # Log in this CLI session using your Docker credentials
+docker image prune -a  # Remove all images without at least one container associated to them
 
-docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker login                         # Log in this CLI session using your Docker credentials
 
-docker push username/repository:tag            # Upload tagged image to registry
+docker tag <image> username/repository:tag              # Tag <image> for upload to registry
 
-docker run username/repository:tag                   # Run image from a registry
+docker push username/repository:tag                        # Upload tagged image to registry
+
+docker run username/repository:tag                               # Run image from a registry
+
+Ctrl + P, Ctrl + Q                    # Detach from container you're in, but keep it running
+
+Ctrl + D                        # Detach from container you're in, and stop it, same as exit
 ```
