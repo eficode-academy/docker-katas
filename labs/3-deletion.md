@@ -123,4 +123,4 @@ If you want a general cleanup, then `docker system prune` is your friend.
 **Summary**
 
 You have now seen the swiftness of creating a new container from an image, trash it, and create a new one on top of it.
-You have learned to use `container rm` for deleting containers, `image rm` for images, `image ls` for listing the images and `container ls -a` to look at all the containers on your host. 
+You have learned to use `container rm` for deleting containers, `image rm` for images, `image ls` for listing the images and `container ls -a` to look at all the containers on your host.

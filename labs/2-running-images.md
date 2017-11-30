@@ -9,9 +9,9 @@ $ docker pull alpine
 
 > **Note:** Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. You may need to prefix your `docker` commands with `sudo` as stated before. Alternatively you can [create a docker group](https://docs.docker.com/engine/installation/linux/linux-postinstall/) to get rid of this issue.
 
-The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in your system. You can use the `docker images` command to see a list of all images on your system.
+The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in your system. You can use the `docker image ls` command to see a list of all images on your system.
 ```
-$ docker images
+$ docker image ls
 REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 alpine                  latest              c51f86c28340        4 weeks ago         1.109 MB
 hello-world             latest              690ed74de00f        5 months ago        960 B

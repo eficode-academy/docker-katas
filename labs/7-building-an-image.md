@@ -242,7 +242,7 @@ Successfully tagged myfirstapp:latest
 
 If you don't have the `ubuntu:latest` image, the client will first pull the image and then create your image. If you do have it, your output on running the command will look different from mine.
 
-If everything went well, your image should be ready! Run `docker images` and see if your image (`myfirstapp`) shows.
+If everything went well, your image should be ready! Run `docker image ls` and see if your image (`myfirstapp`) shows.
 
 ### Run your image
 
@@ -256,7 +256,7 @@ $ docker container run -p 8888:5000 --name myfirstapp myfirstapp
 
 Head over to `http://localhost:8888` or your server's URL and your app should be live.
 
-## Images and layers
+##  and layers
 
 When dealing with docker images, a layer, or image layer is a change on an image, or an intermediate image. Every command you specify (FROM, RUN, COPY, etc.) in your Dockerfile causes the previous image to change, thus creating a new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
 
