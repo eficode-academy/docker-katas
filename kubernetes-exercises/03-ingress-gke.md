@@ -5,8 +5,8 @@ GoogleKubernetesEngine (GKE) does Ingress a bit differently. For reference, thos
 However because we are running things on GKE, we are going to focus on that today. 
 
 An ingress is loosely translatable to DNS namespace, and makes it so that: 
-- traffic to port 80 (http) and port 443 (https) goes to ingress rules instead AND
-- 
+- Traffic to port 80 (http) and port 443 (https) goes to ingress rules instead AND
+- A name call to (example) myapplication.example.local gets translated to an IP and then routed to a container.
 
 
 Create an nginx deployment and service, exposing the service as a nodeport. If you need a hint as to how this is done, look at [the getting started](01-getting-started.md).
