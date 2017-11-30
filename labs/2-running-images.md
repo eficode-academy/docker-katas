@@ -9,9 +9,9 @@ $ docker pull alpine
 
 > **Note:** Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. You may need to prefix your `docker` commands with `sudo` as stated before. Alternatively you can [create a docker group](https://docs.docker.com/engine/installation/linux/linux-postinstall/) to get rid of this issue.
 
-The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in your system. You can use the `docker images` command to see a list of all images on your system.
+The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in your system. You can use the `docker image ls` command to see a list of all images on your system.
 ```
-$ docker images
+$ docker image ls
 REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 alpine                  latest              c51f86c28340        4 weeks ago         1.109 MB
 hello-world             latest              690ed74de00f        5 months ago        960 B
@@ -56,17 +56,17 @@ Wait, nothing happened! Is that a bug? Well, no. These interactive shells will e
 You are now inside the container shell and you can try out a few commands like `ls -l`, `uname -a` and others. Exit out of the container by giving the `exit` command.
 
 
-Ok, now it's time to see the `docker ps` command. The `docker ps` command shows you all containers that are currently running.
+Ok, now it's time to see the `docker container ls` command. The `docker container ls` command shows you all containers that are currently running.
 
 ```
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
-Is _this_ a bug? Also no; when you wrote `exit` in the shell, the process stopped. No containers are running, you see a blank line. Let's try a more useful variant: `docker ps -a`
+Is _this_ a bug? Also no; when you wrote `exit` in the shell, the process stopped. No containers are running, you see a blank line. Let's try a more useful variant: `docker container ls -a`
 
 ```
-$ docker ps -a
+$ docker container ls -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 36171a5da744        alpine              "/bin/sh"                5 minutes ago       Exited (0) 2 minutes ago                        fervent_newton
 a6a9d46d0b2f        alpine              "echo 'hello from alp"   6 minutes ago       Exited (0) 6 minutes ago                        lonely_kilby
@@ -80,10 +80,10 @@ Try using the `run` command again with the `-it` flag, so it attaches you to an 
 
 ## Naming your container
 
-Take a look again at the output of the `docker ps -a`:
+Take a look again at the output of the `docker container ls -a`:
 
 ``` bash
-$ docker ps -a
+$ docker container ls -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 36171a5da744        alpine              "/bin/sh"                5 minutes ago       Exited (0) 2 minutes ago                        fervent_newton
 a6a9d46d0b2f        alpine              "echo 'hello from alp"   6 minutes ago       Exited (0) 6 minutes ago                        lonely_kilby

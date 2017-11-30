@@ -26,7 +26,7 @@ docker run -it microsoft/nanoserver powershell
 
 If you want leave out the "powershell" in the end, it will automatically execute cmd which messes a bit with the powershell of your VM.
 
-If you run docker images, you'll note that hello-world is built on nanoserver:
+If you run `docker image ls`, you'll note that hello-world is built on nanoserver:
 
 ```
 REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE

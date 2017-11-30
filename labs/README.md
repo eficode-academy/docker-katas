@@ -16,6 +16,8 @@ docker container ls                                            # List all runnin
 
 docker container ls -a                         # List all containers, even those not running
 
+docker container exec -it <hash> bash           # Interacts with container and executes bash
+
 docker container stop <hash>                       # Gracefully stop the specified container
 
 docker container kill <hash>                     # Force shutdown of the specified container

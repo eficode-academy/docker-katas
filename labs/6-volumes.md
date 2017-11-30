@@ -34,7 +34,7 @@ Try to do the following:
 
 This will give you a nginx server running, serving your static files... _But on which port?_
 
-* Run a `docker ps` command to find out if it has any ports forwarded from the host.
+* Run a `docker container ls` command to find out if it has any ports forwarded from the host.
 
 Remember the past exercise on port forwarding in Docker.
 
@@ -118,7 +118,7 @@ Head over to your newly created webpage at: `http://<IP>:8080/hello.html`
 
 Exit out of your ubuntu server and execute a `docker container stop www` to stop the nginx container.
 
-Run a `docker ps` to make sure that no other containers are running.
+Run a `docker container ls` to make sure that no other containers are running.
 ```bash
 docker ps
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                          NAMES
@@ -141,9 +141,9 @@ If you want to share volumes or bindmounts between two containers, then use the 
 
 Before you go on, use the [Docker command line interface](https://docs.docker.com/engine/reference/commandline/cli/) documentation to try a few more commands:
 
-* While your detached container is running, use the ``docker ps`` command to see what silly name Docker gave your container. **This is one command you're going to use often!**
+* While your detached container is running, use the ``docker container ls`` command to see what silly name Docker gave your container. **This is one command you're going to use often!**
 * While your detached container is still running, look at its logs. Try following its logs and refreshing your browser.
-* Stop your detached container, and confirm that it is stopped with the `ps` command.
+* Stop your detached container, and confirm that it is stopped with the `ls` command.
 * Start it again, wait 10 seconds for it to fire up, and stop it again.
 * Then delete that container from your system.
 
