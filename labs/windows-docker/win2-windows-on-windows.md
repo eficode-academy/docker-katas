@@ -75,15 +75,22 @@ docker run microsoft/dotnet-framework-samples
 or specify a specific ASP framework version:
 
 ```
-docker run microsoft/dotnet-framework-samples:4.6.2
+docker run microsoft/dotnet-framework-samples:4.7.1
 ```
 The docker file for the above example looks like this: 
 
 ```
-FROM microsoft/dotnet-framework:4.6.2
+
+FROM microsoft/dotnet-framework-build:4.7.1 as builder
 WORKDIR /app
-COPY bin/Release .
-ENTRYPOINT ["dotnetapp-4.6.2.exe"]
+COPY . ./
+RUN ["msbuild.exe", "dotnetapp-4.7.1.csproj", "/p:Configuration=Release"]
+
+FROM microsoft/dotnet-framework:4.7.1
+WORKDIR /app
+COPY --from=builder /app/bin/Release .
+
+ENTRYPOINT ["dotnetapp-4.7.1.exe"]
 ```
 
 The above dockerfile is also a way to get started with shipping apps natively on Windows, as you can publish your app and copy it in in a similar fashion. Just make use of the servercore image instead.
