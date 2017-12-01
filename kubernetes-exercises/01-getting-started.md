@@ -89,12 +89,12 @@ However the pods are currently not accessible, since no port forwarding is happe
 We need to set up another Kubernetes object - a service. Think of a service as a port and ip endpoint, allowing you to reach a container. We tell it which port to target (for dotnet core it is 5000) and what type of service, here it is NodePort which also opens an external port on the Kubernetes node.
 
 ```
-kubectl expose deployment dotnet --type=NodePort --port=5000
+kubectl expose deployment dotnet --type=NodePort --port=5000 -n yournamespace
 ```
 
 Similarly to how it was done for a pod, you can describe a service. Here we need the NodePort: 
 ```
-kubectl describe svc dotnet | grep NodePort
+kubectl describe svc dotnet | grep NodePort -n yournamespace
 ```
 
 Which should return a port above 30000, which is serving our container. Since the port is serving as a NodePort, we need to hit a node in the cluster. 
