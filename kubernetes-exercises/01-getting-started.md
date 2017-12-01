@@ -104,7 +104,7 @@ For this we require the ip address or dns of the node, and the exposed port:
 
 ```
 kubectl describe node gke-cluster-1-default-pool-847fbafa-4cpk | grep ExternalIP
-kubectl describe svc nginx -n <namespace> | grep NodePort  
+kubectl describe svc dotnet -n <namespace> | grep NodePort  
 ```
 Then we simply access it in a browser, like so: 
 
