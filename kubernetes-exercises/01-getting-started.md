@@ -127,6 +127,11 @@ Have a look at the file. This is how Kubernetes sees the deployment. A lot of th
 
 For example creationTimestamp is not good practice to keep in a yaml file. 
 
+If you want to target your own namespace instead of default every time without the -n command, run: 
+```
+kubectl config set-context $(kubectl config current-context) --namespace=<insert-namespace-name-here>
+```
+
 The yaml files for the coming exercises will give you a better impression of what is sensible.
 
 This concludes the exercise, happy coding!
