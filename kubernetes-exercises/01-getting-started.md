@@ -94,7 +94,7 @@ kubectl expose deployment dotnet --type=NodePort --port=5000 -n yournamespace
 
 Similarly to how it was done for a pod, you can describe a service. Here we need the NodePort: 
 ```
-kubectl describe svc dotnet | grep NodePort -n yournamespace
+kubectl describe svc dotnet -n yournamespace | grep NodePort
 ```
 
 Which should return a port above 30000, which is serving our container. Since the port is serving as a NodePort, we need to hit a node in the cluster. 
