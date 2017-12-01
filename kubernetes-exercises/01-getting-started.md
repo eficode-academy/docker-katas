@@ -69,7 +69,7 @@ kubectl get pods
 So let's try to use some of the Kubernetes objects, starting with a deployment. 
 
 ```
-kubectl run dotnet --image=sharor/hello-world --replicas=3
+kubectl run dotnet --image=sharor/hello-world --replicas=3 -n <yourname>
 ```
 
 We can check the 3 containers are running (dont forget the namespace): 
