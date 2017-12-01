@@ -26,6 +26,8 @@ docker run -it microsoft/nanoserver powershell
 
 If you want leave out the "powershell" in the end, it will automatically execute cmd which messes a bit with the powershell of your VM.
 
+Exit the container by typing `exit` to exit the container.
+
 If you run `docker image ls`, you'll note that hello-world is built on nanoserver:
 
 ```
