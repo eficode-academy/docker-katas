@@ -82,7 +82,7 @@ Use the following dockerfile:
 ```
 FROM microsoft/nanoserver
 
-COPY webserver.go /code/webserver.exe /webserver.exe
+COPY webserver.go /webserver.exe
 
 EXPOSE 8080
 
