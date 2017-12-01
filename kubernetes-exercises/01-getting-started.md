@@ -82,7 +82,7 @@ kubectl get pods (-n yournamespace)
 To look closer at a pod, you can describe it: 
 
 ```
-kubectl describe pod dotnet-<unique-pod-name>
+kubectl describe pod dotnet-<unique-pod-name> -n yournamespace
 ```
 However the pods are currently not accessible, since no port forwarding is happening to the container. 
 
