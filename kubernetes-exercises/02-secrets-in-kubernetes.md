@@ -39,6 +39,11 @@ We can run that in our Kubernetes cluster after pushing it to Docker hub.
 
 Fill out [the deployment](./secrets/deployment.yml). Notice the env values added in the bottom. 
 
+Run the deployment by writing: 
+```
+kubectl apply -f yourfile.yml
+```
+
 Expose the deployment on a nodeport, so you can see the running container. 
 
 Despite the default value in the Dockerfile, it should be overwritten by the deployment env values! 
