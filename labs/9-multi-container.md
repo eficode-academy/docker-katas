@@ -17,7 +17,9 @@ Both containers already exists on the dockerhub: [Wordpress](https://hub.docker.
 
 To start a mysql container, issue the following command
 
-`docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql`
+```bash
+docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql
+```
 
 Let's recap what this command does:
 
@@ -38,20 +40,22 @@ You can get the IP by issuing the `ifconfig` command on the host.
 
 After you have noted down the IP, spin up the wordpress container with the host IP as a variable:
 
-`docker container run --name wordpress-container --rm -e WORDPRESS_DB_HOST=<YOURIP> -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress`
+```bash
+docker container run --name wordpress-container --rm -e WORDPRESS_DB_HOST=<YOURIP> -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress
+```
 
 You can now browse to the IP:8080 and have your very own wordpress server running.
 
 ## Making a container network
 
-Even though we in two commands made the setup running in the above scenario, there are some problems here we can fix: 
+Even though we in two commands made the setup running in the above scenario, there are some problems here we can fix:
 
 - We need to know the host IP to get them to talk to each other.
 - And we have exposed the database to the outside world.
 
 In order to connect multiple docker containers without binding them to the hosts network interface we need to create a docker network.
 
-The `docker network` command securely connect and provide a channel to transfer information from one container to another. 
+The `docker network` command securely connect and provide a channel to transfer information from one container to another.
 
 First off make a new network for the containers to communicate through:
 
@@ -184,7 +188,7 @@ version: '3.1'
 services:
 
 #  wordpress_container:
-  
+
   mysql_container:
     image: mysql
     ports:
@@ -222,7 +226,7 @@ Try to spin up the container in detached mode:
 ```bash
 docker-compose up -d
 Creating network "multicontainer_default" with the default driver
-Creating multicontainer_mysql_container_1 ... 
+Creating multicontainer_mysql_container_1 ...
 Creating multicontainer_mysql_container_1 ... done
 ```
 

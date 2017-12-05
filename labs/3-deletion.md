@@ -56,14 +56,14 @@ CONTAINER ID        IMAGE                     COMMAND                  CREATED  
 Here you can see that the alpine image itself takes 3.97MB, and the container itself takes 0B. When you begin to manipulate files in your container, the size of the container will rise.
 
 If you are creating a lot of new containers eg. to test something, you can tell the Docker daemon to remove the container once stopped with the `--rm` option:
-`docker container run --rm -ti alpine`
+`docker container run --rm -it alpine`
 
 This will remove the container immediately after it is stopped.
 
 ## Cleaning up containers you do not use anymore
 
 Containers are still persisted, even though they are stopped.
-If you want to delete them from your server you need to use the `docker rm` command.
+If you want to delete them from your server you need to use the `docker container rm` command.
 `docker container rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
 ```
 sofus@Praq-Sof:~/git/docker-exercises$ docker container ls -a
