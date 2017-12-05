@@ -59,7 +59,7 @@ You are now inside the container shell and you can try out a few commands like `
 Ok, now it's time to see the `docker container ls` command. The `docker container ls` command shows you all containers that are currently running.
 
 ```
-$ docker ps
+$ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
