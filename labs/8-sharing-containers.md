@@ -12,7 +12,7 @@ We're almost ready to push our Flask image up to the Docker Hub. We just need to
 
 Using the ``docker tag`` command, tag the image you created in the previous section to your namespace. For example, I would run:
 
-```
+```bash
 sofus@Praq-Sof:/tmp/4$ docker tag myfirstapp praqmasofus/myfirstapp:latest
 ```
 
@@ -22,7 +22,7 @@ The `:latest` is a versioning scheme you can append to.
 
 All that's left to do is push up your image:
 
-```
+```bash
 sofus@Praq-Sof:/tmp/4$ docker push praqmasofus/myfirstapp
 The push refers to a repository [docker.io/praqmasofus/myfirstapp]
 6daf7f1140cb: Pushed
@@ -37,6 +37,7 @@ b27287a6dbce: Mounted from library/ubuntu
 2df9b8def18a: Mounted from library/ubuntu
 latest: digest: sha256:e7016870c297b3c49996ee00972d8abe7f20b4cbe45089dc914193fa894991d3 size: 2407
 ```
+
 Go to your profile page on the Docker Hub and you should see your new repository listed: https://registry.hub.docker.com/repos/
 
 **Congrats!** You just made your first Docker image and shared it with the world!
