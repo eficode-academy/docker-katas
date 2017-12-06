@@ -26,6 +26,12 @@ docker container rm <hash>                    # Remove specified container from 
 
 docker container prune                                       # Remove all stopped containers
 
+docker volume create <name>                 # Creates a named volume with the default driver
+
+docker volume inspect <name>              # prints out details about the given volume entity
+
+docker volume rm <name>                           # removes the given volume from the system
+
 docker image ls -a                                         # List all images on this machine
 
 docker image rm <image id>                        # Remove specified image from this machine
@@ -33,6 +39,10 @@ docker image rm <image id>                        # Remove specified image from 
 docker image prune                          # Remove all 'dangling' images from this machine
 
 docker image prune -a  # Remove all images without at least one container associated to them
+
+docker system prune # delete all unused data; containers, volumes and images w.o. containers
+
+docker system df -v       # presents a summary of the space used by different docker objects
 
 docker login                         # Log in this CLI session using your Docker credentials
 
