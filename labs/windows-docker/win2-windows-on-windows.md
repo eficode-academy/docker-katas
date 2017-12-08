@@ -28,12 +28,15 @@ If you want leave out the "powershell" in the end, it will automatically execute
 
 Exit the container by typing `exit` to exit the container.
 
-If you run `docker image ls`, you'll note that hello-world is built on nanoserver:
+If you run `docker image ls`, you'll note that hello-world is built on nanoserver by looking at the size:
 
 ```
-REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
-hello-world            latest              b14262c9a790        6 days ago          1.1 GB
-microsoft/nanoserver   latest              edc711fca788        12 days ago         1.1 GB
+REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
+microsoft/dotnet-framework-samples         latest              e5cc04acc880        13 hours ago        12.4GB
+microsoft/mssql-server-windows-developer   latest              9e08a14c562e        3 days ago          11.6GB
+hello-world                                latest              b14262c9a790        2 weeks ago         1.1GB
+microsoft/windowsservercore                latest              1fbef5019583        3 weeks ago         10.4GB
+microsoft/nanoserver                       latest              edc711fca788        3 weeks ago         1.1GB
 ```
 
 It is a bit bigger than the linux equivalent.. but it does the same thing, and loads an entire windows OS while we are at it. 
@@ -46,7 +49,9 @@ docker run -it microsoft/windowsservercore powershell
 
 The biggest challenge working with Windows containers in my experience, has been adapting things that are natively provided to run in a container. 
 
-Examples include how to build and deploy a project that normally Visual Studio and IIS took care of. This means the real tradeoff to using Windows containers is learning how Microsoft works under the hood. The gain is that a lot of the common problems with Windows go away. Let that sink in. 
+Examples include how to build and deploy a project that normally Visual Studio and IIS took care of. This means the real tradeoff to using Windows containers is learning how Microsoft works under the hood. The gain is that a lot of the common problems with Windows go away. 
+
+> remember to `exit` your container before moving to the next command-
 
 Containers will allow you to spin up things seamlessly, just like on Linux. For example: 
 
