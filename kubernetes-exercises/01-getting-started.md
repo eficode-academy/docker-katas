@@ -103,6 +103,7 @@ To reach an application in a container inside the cluster, we need to reach a no
 For this we require the ip address or dns of the node, and the exposed port: 
 
 ```
+kubectl get nodes
 kubectl describe node gke-cluster-1-default-pool-847fbafa-4cpk | grep ExternalIP
 kubectl describe svc dotnet -n <namespace> | grep NodePort  
 ```
