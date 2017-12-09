@@ -2,6 +2,8 @@
 
 Now, time to show that Docker on Windows really just is Docker as you know it from Linux by now. 
 
+## Volumes
+
 Let's start with volume. Make a folder in your C drive, called data and run:  
 
 ```
@@ -10,7 +12,7 @@ mkdir /data
 docker container run -it -v C:\data:C:\data microsoft/nanoserver powershell
 ```
 
-Make some files in the directory by your nomal explorer, and run
+Make some files in the directory by your nomal explorer, and run the following in your container:
 ```
 PS C:\> dir data
 
@@ -25,7 +27,9 @@ Mode                LastWriteTime         Length Name
 -a----       11/29/2017  12:54 PM              0 Windows.txt
 ```
 
-Similarly, let's play with the Dockerfile. 
+## Building 
+
+Similarly, let's play with a Dockerfile like the one below:
 ```
 FROM microsoft/windowsservercore
 
@@ -34,24 +38,32 @@ ENV chocolateyUseWindowsCompression false
 RUN powershell -Command \
     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
 ```
+`Build` that image, and run a container based on your image.
 
-And run the container - you now have chocolatey (a package manager for Windows powershell): 
+You now have chocolatey (a package manager for Windows powershell): 
 ```
 chocolatey -?
 ``` 
+It will print out the avaliable commands on chocolatey. Now, exit the container again.
 
-Or what about an IIS? 
+## Port forwarding
+
+Let's look at an IIS Server: 
 ```
 docker run -d -p 80:80 --name iis microsoft/iis
 ```
 
-Which can be accessed in internet explorer (sorry, only browser there) on this ip: 
+Which can be accessed via your windows machine on this ip: 
 ```
 docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' iis
 ```
+You see the welcome screen of the IIS, but that is not very usefull, so let's start making an application.
+
+## Compiling and serving code
 
 This fresh installation does not have golang installed. We can just use a container to fix that. 
-Create the following file: 
+Create the following file called `webserver.go`: 
+
 ```
 package main
 
@@ -73,35 +85,43 @@ func main() {
 and run: 
 
 ```
-docker run -it -v C:\<yourpath>:C:\code golang:nanoserver powershell
-cd \code
+docker run -it -v C:\data:C:\code -w C:\code golang:nanoserver powershell
+
 go build webserver.go
 ```
 
 Voila. Webserver.exe has been put into the current directory. 
 
-Use the following dockerfile: 
+Now we need to serve the application in a container.
+
+Make the following dockerfile in the same directory: 
 ```
 FROM microsoft/nanoserver
 
-COPY webserver.go /webserver.exe
+COPY webserver.exe /webserver.exe
 
 EXPOSE 8080
 
-CMD ["\\webserver.exe"]
+CMD ["/webserver.exe"]
 ```
+And build an image.
 
 IIS needs to be able to find it later, and it does not run on localhost. So we need to name our container: 
 ```
-docker run -d --name=mysite -p 8080:8080 <yourtag>
+docker run -d --rm --name=mysite -p 8080:8080 <yourtag>
 ```
 
-If you mess it up somehow, and need to kill the container dont forget to run rm mysite. 
+> the `--rm` part makes sure that if the container stops, it gets automatically deleted.
 
 You can access it by running: 
 ```
 start http://$(docker inspect -f '{{ .NetworkSettings.Networks.nat.IPAddress }}' mysite):8080
 ```
 
+It will show you a folder view of the containers files, including the webserver.exe that is running.
+
+## Summary
+
 This concludes the Windows bit of the workshop for now, but everything you worked with in regards to Docker works with Windows. 
+
 However multi container builds require a newer version of Docker than the Virtual machines have, so this is something you'll have to try at home ;) 
