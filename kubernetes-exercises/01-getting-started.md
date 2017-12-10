@@ -21,12 +21,22 @@ For the remainder of this workshop, we will therefore be executing on a Kubernet
 To authenticate against the cluster, you will need a gmail account. Run: 
 
 ```
-gcloud auth login
-```
+# cluster connection via service account
 
-Afterwards run: 
-```
-gcloud container clusters get-credentials cluster-1 --zone europe-west1-b --project docker-training-185510
+# Install the tools 
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get update && sudo apt-get install google-cloud-sdk
+
+# Create key file on your vm - the instructor will mail you the contents
+vi keyfile.json
+
+# authenticate with cloud
+gcloud auth activate-service-account --key-file keyfile.json
+
+# Get the cluster credentials for kubectl
+gcloud container clusters get-credentials aalesund2 --zone europe-west2-a --project praqma-education
 ```
 
 Google will do some magic under the hood, which does a few things: 
