@@ -1,4 +1,7 @@
 # First encounter with Kubernetes
+
+## 1.1 Set up kubectl
+
 For development it is necessary to be able to deploy services locally. 
 
 Normally the way you would do this is to deploy in a development namespace on your production cluster, but here we are going to get a simple little cluster up and running in no time. 
@@ -44,6 +47,8 @@ kubectl get nodes
 ``` 
 Be aware that you are not the only tenant on the cluster, you are sharing with the rest of the people around you in the course! 
 
+## 1.2 Create a namespace and create a deployment with three pods
+
 ```
 kubectl create namespace <name>
 kubectl get pods -n <name>
@@ -85,6 +90,8 @@ To look closer at a pod, you can describe it:
 kubectl describe pod dotnet-<unique-pod-name> -n yournamespace
 ```
 However the pods are currently not accessible, since no port forwarding is happening to the container. 
+
+## 1.3 Expose the service
 
 We need to set up another Kubernetes object - a service. Think of a service as a port and ip endpoint, allowing you to reach a container. We tell it which port to target (for dotnet core it is 5000) and what type of service, here it is NodePort which also opens an external port on the Kubernetes node.
 
