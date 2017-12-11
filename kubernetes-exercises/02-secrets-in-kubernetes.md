@@ -1,4 +1,10 @@
 # Secrets (and configmaps)
+
+Before we start, make sure you have set your working namespace
+````
+kubectl config set-context $(kubectl config current-context) --namespace=<insert-namespace-name-here>
+````
+
 Secrets are a way to store things that you do not want floating around in your code. 
 
 It's things like passwords for databases, API keys and certificates.
@@ -7,24 +13,19 @@ Similarly configmaps are for configuration, that doesn't really belong in code b
 
 We will look at both these in this coming exercise. 
 
-Our [maginificent app](./secrets/secretapp.js) has it's API key and language hardcoded and will therefore be committed to git for all the world to see. 
-If you feel adventurous, you can do this exercise to an app of your choice. 
+## Secrets as environment variables
 
-Keeping credentials in plain sight is slightly problematic, as any security expert will probably preach. 
+Our [maginificent app](./secrets/secretapp.js) requries it's API key and language.  Rather than hardcode this sensitive information and  commit it to git for all the world to see, we source these values from environment variables.
 
 The first step to fixing it, would be to make our variables as environmental variables.
 
-Change: 
-```
-  const language = 'English';
-  const API_KEY = '123-456-789';
-```
-To: 
+We have sourced the values in the code like this:
 ```
   const language = process.env.LANGUAGE;
   const API_KEY = process.env.API_KEY;
 ```
-Now that we are reading from the env variables instead, let's go ahead and dockerize that. 
+
+Because we are reading from the env variables we can specify some default in the Dockerfile.  We have used this: 
 
 ```
 FROM node:9.1.0-alpine
@@ -35,22 +36,23 @@ COPY secretapp.js .
 ENTRYPOINT node secretapp.js
 ```
 
-We can run that in our Kubernetes cluster after pushing it to Docker hub. 
+This image is available as `praqma/secrets-demo`. We can run that in our Kubernetes cluster by using the [the deployment file](./secrets/deployment.yml). Notice the env values added in the bottom. 
 
-Fill out [the deployment](./secrets/deployment.yml). Notice the env values added in the bottom. 
-
-Run the deployment by writing: 
+Set your namespace in the file and run the deployment by writing: 
 ```
-kubectl apply -f yourfile.yml
+kubectl apply -f deployment.yml 
 ```
 
 Expose the deployment on a nodeport, so you can see the running container. 
 
-Despite the default value in the Dockerfile, it should be overwritten by the deployment env values! 
+Despite the default value in the Dockerfile, it should now be overwritten by the deployment env values! 
 
 However we just moved it from being hardcoded in our app to being hardcoded in our Dockerfile. 
 
+## Secrets using the kubernetes secret resource
+
 Let's move the API key to a (generic) secret: 
+
 ```
 kubectl create secret generic apikey --from-literal=API_KEY=oneringtorulethemall
 ```
