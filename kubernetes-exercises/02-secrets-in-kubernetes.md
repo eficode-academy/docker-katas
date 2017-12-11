@@ -115,3 +115,16 @@ kubectl delete pod envtest-3380598928-kgj9d
 ```
 
 This concludes the exercise on secrets and configuration maps. 
+
+
+# Cheatsheet
+
+````
+kubectl expose deployment envtest --type=NodePort --port=3000
+kubectl delete pod <podname>
+kubectl describe configmap language
+kubectl describe secret apikey
+kubectl describe service envtest
+````
+
+If you are stuck - take a look at `final.deployment.yml`
