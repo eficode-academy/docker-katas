@@ -56,7 +56,7 @@ Examples include how to build and deploy a project that normally Visual Studio a
 Containers will allow you to spin up things seamlessly, just like on Linux. For example: 
 
 ```
-docker run -d -p 1433:1433 -e sa_password=<SA_PASSWORD> -e ACCEPT_EULA=Y microsoft/mssql-server-windows-developer
+docker run -d -p 1433:1433 -e sa_password=YOUR_PWD_HERE -e ACCEPT_EULA=Y microsoft/mssql-server-windows-developer
 ```
 
 Which spins up a development server for Microsoft SQL. Since the remote desktop machines are not set up with tools, you cannot access it - but a real development machine could just use SQL management tools.
