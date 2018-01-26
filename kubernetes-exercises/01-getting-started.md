@@ -103,10 +103,10 @@ However the pods are currently not accessible, since no port forwarding is happe
 
 ## 1.3 Expose the service
 
-We need to set up another Kubernetes object - a service. Think of a service as a port and ip endpoint, allowing you to reach a container. We tell it which port to target (for ngingo core it is 8080) and what type of service, here it is NodePort which also opens an external port on the Kubernetes node.
+We need to set up another Kubernetes object - a service. Think of a service as a port and ip endpoint, allowing you to reach a container. We tell it which port to target (for ngingo core it is 80) and what type of service, here it is NodePort which also opens an external port on the Kubernetes node.
 
 ```
-kubectl expose deployment ngingo --type=NodePort --port=8080 -n yournamespace
+kubectl expose deployment ngingo --type=NodePort --port=80 -n yournamespace
 ```
 
 Similarly to how it was done for a pod, you can describe a service. Here we need the NodePort:
