@@ -84,20 +84,20 @@ kubectl get pods
 So let's try to use some of the Kubernetes objects, starting with a deployment.
 
 ```
-kubectl run ngingo --image=praqma/ngingo --replicas=3 -n <yournamespace>
+kubectl run ngingo --image=praqma/ngingo --replicas=3 -n <namespace>
 ```
 
 We can check the 3 containers are running (dont forget the namespace):
 
 ```
-kubectl get pods (-n yournamespace)
+kubectl get pods (-n <namespace>)
 
 ```
 
 To look closer at a pod, you can describe it:
 
 ```
-kubectl describe pod ngingo-<unique-pod-name> -n yournamespace
+kubectl describe pod ngingo-<unique-pod-name> -n <namespace>
 ```
 However the pods are currently not accessible, since no port forwarding is happening to the container.
 
@@ -106,12 +106,12 @@ However the pods are currently not accessible, since no port forwarding is happe
 We need to set up another Kubernetes object - a service. Think of a service as a port and ip endpoint, allowing you to reach a container. We tell it which port to target (for ngingo core it is 80) and what type of service, here it is NodePort which also opens an external port on the Kubernetes node.
 
 ```
-kubectl expose deployment ngingo --type=NodePort --port=80 -n yournamespace
+kubectl expose deployment ngingo --type=NodePort --port=80 -n <namespace>
 ```
 
 Similarly to how it was done for a pod, you can describe a service. Here we need the NodePort:
 ```
-kubectl describe svc ngingo -n yournamespace | grep NodePort
+kubectl describe svc ngingo -n <namespace> | grep NodePort
 ```
 
 Which should return a port above 30000, which is serving our container. Since the port is serving as a NodePort, we need to hit a node in the cluster.
@@ -137,7 +137,7 @@ If you delete a namespace for example, everything running in the namespace is si
 Extract the yaml from Kubernetes for our deployment:
 
 ```
-kubectl get deployment ngingo -o yaml -n somenamespace > myapp-deployment.yml
+kubectl get deployment ngingo -o yaml -n <namespace> myapp-deployment.yml
 cat myapp-deployment.yml
 ```
 
