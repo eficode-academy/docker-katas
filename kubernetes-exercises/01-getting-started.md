@@ -137,7 +137,7 @@ If you delete a namespace for example, everything running in the namespace is si
 Extract the yaml from Kubernetes for our deployment:
 
 ```
-kubectl get deployment ngingo -o yaml -n <namespace> myapp-deployment.yml
+kubectl get deployment ngingo -o yaml -n <namespace> > myapp-deployment.yml
 cat myapp-deployment.yml
 ```
 
