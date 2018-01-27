@@ -36,7 +36,7 @@ vi keyfile.json
 gcloud auth activate-service-account --key-file keyfile.json
 
 # Get the cluster credentials for kubectl
-gcloud container clusters get-credentials cluster-london --zone europe-west2-a --project praqma-education
+gcloud container clusters get-credentials cluster-london --zone europe-west1-b --project praqma-education
 ```
 
 Google will do some magic under the hood, which does a few things:
