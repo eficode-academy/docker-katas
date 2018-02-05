@@ -6,7 +6,7 @@ Running containers others made is useful, but if you want to use docker for prod
 
 Here's a quick summary of some basic commands we will use in our Dockerfile.
 
-> As a rule of thumb, all commands that is in CAPITAL LETTERS are intented for the docker engine.
+> As a rule of thumb, all commands in CAPITAL LETTERS are intended for the docker engine.
 
 - FROM
 - RUN

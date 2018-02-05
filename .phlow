@@ -1,0 +1,7 @@
+[default]
+remote                 = origin
+service                = github
+integration_branch     = master
+issue_url              = https://api.github.com
+delivery_branch_prefix = ready
+
