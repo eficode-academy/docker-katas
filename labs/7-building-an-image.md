@@ -6,6 +6,7 @@ Running containers others made is useful, but if you want to use docker for prod
 
 Here's a quick summary of some basic commands we will use in our Dockerfile.
 
+> As a rule of thumb, all commands that is in CAPITAL LETTERS are intented for the docker engine.
 
 - FROM
 - RUN
@@ -48,6 +49,8 @@ A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file
 It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are *almost* identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
 
 1. Create a file called **Dockerfile**, and add content to it as described below. We have made a small boilerplate file and app for you in the [/building-an-image](./building-an-image/) folder, so head over there.
+
+> If you want to make a file from scratch, you can use the linux command `touch <filename>` to create an empty file, and the text editor `nano <filename>` to manipulate the file.
 
 We'll start by specifying our base image, using the `FROM` keyword:
 
