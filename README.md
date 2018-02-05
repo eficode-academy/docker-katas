@@ -1,9 +1,4 @@
-These exercises build upon the following resources:
-* http://docker.atbaker.me/index.html
-* https://github.com/docker/labs/tree/master/beginner
-
-
-# Docker labs
+# Docker katas
 
 
 This workshop will take you from "Hello Docker" to deploying a containerized web application to a server.
@@ -48,3 +43,7 @@ Head over to [the first lab](labs/0-getting-started.md) to begin.
 
 If you need some guidance on best practice for your Dockerfiles then head over to:
 https://www.fromlatest.io/#/
+
+These exercises build upon and have been inspired by the following resources:
+* http://docker.atbaker.me/index.html
+* https://github.com/docker/labs/tree/master/beginner
