@@ -7,7 +7,7 @@ Now, time to show that Docker on Windows really just is Docker as you know it fr
 Let's start with volume. Make a folder in your C drive, called data and run:  
 
 ```
-mkdir /data
+mkdir \data
 
 docker container run -it -v C:\data:C:\data microsoft/nanoserver powershell
 ```
