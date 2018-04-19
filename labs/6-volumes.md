@@ -120,7 +120,7 @@ Exit out of your ubuntu server and execute a `docker container stop www` to stop
 
 Run a `docker container ls` to make sure that no other containers are running.
 ```bash
-docker ps
+docker container ls
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                          NAMES
 ```
 
