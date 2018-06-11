@@ -36,7 +36,7 @@ ping 127.0.0.1 -c 100 > /tmp/ping
 Then detach from the container with `Ctrl+p Ctrl+q` and run the following:
 
 ```bash
-docker container exec -it <container-id> bash
+docker container exec -it CONTAINER bash
 tail -f /tmp/ping
 64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.156 ms
 64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.183 ms
