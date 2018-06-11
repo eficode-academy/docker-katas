@@ -18,7 +18,7 @@ Both containers already exists on the dockerhub: [Wordpress](https://hub.docker.
 To start a mysql container, issue the following command
 
 ```bash
-docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql
+docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql:5.7
 ```
 
 Let's recap what this command does:
@@ -66,7 +66,7 @@ Docker will return the networkID for the newly created network. You can referenc
 Now you need to connect the two containers to the network, by adding the `--network` option:
 
 ```bash
-docker container run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -d mysql
+docker container run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -d mysql:5.7
 af38acac52301a7c9689d708e6c3255704cdffb1972bcc245d67b02840983a50
 
 docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress
@@ -190,7 +190,7 @@ services:
 #  wordpress_container:
 
   mysql_container:
-    image: mysql
+    image: mysql:5.7
     ports:
       - 3306:3306
     environment:
