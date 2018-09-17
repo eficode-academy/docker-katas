@@ -19,9 +19,10 @@ docker container run -d -p 8000:80 nginx
 
 Try to attach to the container. Exit it, and browse the webpage again to acknowledge it is gone.
 
-Step into the container by executing a bash inside the container:
+Step into a new container by executing a bash inside the container:
 
 ```bash
+docker container run -d -p 8000:80 nginx
 docker container exec -it CONTAINER bash
 ```
 
