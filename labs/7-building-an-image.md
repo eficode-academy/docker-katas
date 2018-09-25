@@ -21,6 +21,8 @@ Here's a quick summary of some basic commands we will use in our Dockerfile.
 
 * `COPY` copies local files into the container. The files need to be in the same folder (or a sub folder) as the Dockerfile itself. An example is copying the requirements for a python app into the container: `COPY requirements.txt /usr/src/app/`.
 
+* `ADD` should only be used if you want to copy and unpack a tar file into the image. In any other case, use `COPY`.
+
 * `CMD` defines the commands that will run on the image at start-up. Unlike a `RUN`, this does not create a new layer for the image, but simply runs the command. There can only be one `CMD` in a Dockerfile. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
 
 ```docker
