@@ -38,7 +38,7 @@ b27287a6dbce: Mounted from library/ubuntu
 latest: digest: sha256:e7016870c297b3c49996ee00972d8abe7f20b4cbe45089dc914193fa894991d3 size: 2407
 ```
 
-Go to your profile page on the Docker Hub and you should see your new repository listed: https://registry.hub.docker.com/repos/
+Go to your profile page on the Docker Hub and you should see your new repository listed: https://hub.docker.com/repos/u/<username>
 
 **Congrats!** You just made your first Docker image and shared it with the world!
 
