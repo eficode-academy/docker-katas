@@ -15,9 +15,9 @@ bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
 
-Now, delete the whole file system with `rm -rf /`
+> **Warning:** Do never try to run the following command as a super user in your own environment, as it will delete *everything* on your computer.
 
-> **Warning:** Do never try to run this command as a super user in your own environment, as it will delete *everything* on your computer.
+Now, delete the whole file system with `rm -rf /`
 
 Try to navigate around to see how much of the OS is gone
 
