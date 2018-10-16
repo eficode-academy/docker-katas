@@ -2,6 +2,8 @@
 
 ## Task: create a tiny go-application container
 
+> NB: requires docker version 17.05
+
 Imagine you have the following go application.
 
 `hello.go`
@@ -18,7 +20,7 @@ func main() {
 
 You want to containerize it. That's easy!
     You don't even have to have go installed,
-    because you can just use an `base image`
+    because you can just use a `base image`
     that has go!
 
 `Dockerfile`
@@ -34,14 +36,15 @@ ENTRYPOINT ./goapp
 Try building the image with `docker build` and run it.
     You should see "Hello world!" printed to the console
 
-## Multi Stage Builds
+## Using Multi Stage Builds
 
 Now try `docker image ls`.
     Could we make it smaller?
     We only need the compiler on build-time,
     since go is a statically compiled language.
 
-See the following `Dockerfile`
+See the following `Dockerfile`, it has two `build stages`,
+    wherein the latter stage is using the compiled artifacts from the first,
 
 ```Dockerfile
 # build stage
@@ -63,6 +66,11 @@ Try inspecting the size with `docker image ls`.
 
 Compare the size of the two images.
     The latter image should be much smaller,
-    since it's just containing the go-application using `alpine` as the `base image`.
+    since it's just containing the go-application using `alpine` as the `base image`,
+    and not the entire `golang`-suite of tools.
 
 You can read more about this on: [Use multi-stage builds - docs.docker.com](https://docs.docker.com/develop/develop-images/multistage-build/)
+
+Bonus exercise: by statically compiling a go application,
+    you can actually use `scratch` as the `base image`.
+    This is left as an exercise to the reader.
