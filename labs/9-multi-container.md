@@ -77,7 +77,7 @@ Notice the `WORDPRESS_DB_HOST` env variable. When you make a container join a ne
 
 You have now deployed both containers into the network. Take a deeper look into the container network by issuing: `docker network inspect if_wordpress`.
 
-```bash
+```json
 docker network inspect if_wordpress
 [
     {
