@@ -353,7 +353,7 @@ root@cc5490748b2a:/# python /usr/src/app/app.py
 
 ```
 
-And just like the image you builded above, you can browse the website now.
+And just like the image you built above, you can browse the website now.
 
 ### Delete your image
 
