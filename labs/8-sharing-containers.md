@@ -1,4 +1,4 @@
-# Sharing containers
+# Sharing images
 
 Before we can take our dockerized Flask app to another computer, we need to push it up to the Docker Hub so that we (or other people) can pull it down on other machines.
 
