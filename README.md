@@ -1,4 +1,4 @@
-[![Open in Cloud Shell](//gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/praqma-training/docker-katas.git)
+[![Open the exercises in Cloud Shell](//gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/praqma-training/docker-katas.git)
 
 These exercises build upon the following resources:
 * http://docker.atbaker.me/index.html
