@@ -1,5 +1,6 @@
 # Docker katas
 
+[![Open the exercises in Cloud Shell](//gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/praqma-training/docker-katas.git)
 
 This workshop will take you from "Hello Docker" to deploying a containerized web application to a server.
 
