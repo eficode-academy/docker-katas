@@ -70,6 +70,6 @@ tail -f /tmp/ping
 Here you see that the ping process started in another shell is still running and producing this logfile.
 Just stop the process with a `Ctrl+d`.
 
-## summary
+## Summary
 
 You have tried to `attach` directly to the primary process of a container, as well as starting a new process by the `exec` command. You have also seen how to break out of a container either by terminating the process by `Ctrl+d`, or by detaching from the process by `Ctrl+p Ctrl+q`.
