@@ -44,7 +44,7 @@ After you have noted down the IP, spin up the wordpress container with the host 
 docker container run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress
 ```
 
-You can now browse to the IP:8080 and have your very own wordpress server running.
+You can now browse to the IP:8080 and have your very own wordpress server running. Since port 3306 is the default MySQL port, wordpress will try to connect on that port by itself.
 
 ## Making a container network
 
