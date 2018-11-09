@@ -93,7 +93,7 @@ You can now use this data volume in all containers. Try to mount it to an nginx 
 Try now to look at the data stored in `/var/lib/docker/volumes/data/_data` on the host:
 
 ```bash
-ls /var/lib/docker/volumes/data/_data/
+sudo ls /var/lib/docker/volumes/data/_data/
 50x.html  index.html
 ```
 
