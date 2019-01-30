@@ -71,6 +71,14 @@ Compare the size of the two images.
 
 You can read more about this on: [Use multi-stage builds - docs.docker.com](https://docs.docker.com/develop/develop-images/multistage-build/)
 
-Bonus exercise: by statically compiling a go application,
-    you can actually use `scratch` as the `base image`.
-    This is left as an exercise to the reader.
+## Bonus exercise
+
+Since go is a statically compiled language,
+    we can actually use `scratch` as the `base image`.
+
+Hint: the "scratch" container has no shell,
+    so in the Dockerfile you _also_ need to change the entrypoint from "shell form" to "exec form."
+    See: `ENTRYPOINT` under [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+
+After building with your new Dockerfile, inspect the size of the images.
+    You new image should be even smaller than the alpine example.
