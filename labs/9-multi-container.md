@@ -240,13 +240,13 @@ To shut down the container and network, issue a `docker-compose down`
 
 ### Creating the wordpress container
 
-You now have all the pieces of information to make the Wordpress container. We copied the run command from before if you cant remember it by hart.
+You now have all the pieces of information to make the Wordpress container. We've copied the run command from before if you can't remember it by heart:
 
 `docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress`
 
 You must
 
-- un-comment the `wordpress_container` part of the services section
+- uncomment the `wordpress_container` part of the services section
 - map the pieces of information from the docker container run command to the yaml format.
 - remove MySQL port mapping to close that from outside reach.
 
