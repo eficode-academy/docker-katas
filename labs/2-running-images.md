@@ -76,7 +76,9 @@ c317d0a9e3d2        hello-world         "/hello"                 34 seconds ago 
 
 What you see above is a list of all containers that you ran. Notice that the `STATUS` column shows that these containers exited a few minutes ago.
 
-Try using the `run` command again with the `-it` flag, so it attaches you to an interactive tty in the container. You can run as many commands in the container as you want! Take some time to run your favorite commands. (Remember, you can write `exit` when you want to quit.)
+Try using the `run` command again with the flags `-it` (se note below), so it attaches you to an interactive tty in the container. You can run as many commands in the container as you want! Take some time to run your favorite commands. Remember, you can write `exit` when you want to quit. 
+
+Note: the flags `-it` are short for `-i -t` which again are the short forms of `--interactive` (Keep STDIN open) and  `--tty` (Allocate a terminal).
 
 ## Naming your container
 
