@@ -116,7 +116,7 @@ Docker provides a `prune` command, taking all dangling containers/images/network
 * `docker network prune`
 * `docker volume prune`
 
-The docker image prune command allows you to clean up unused images. By default, docker image prune only cleans up dangling images. A dangling image is one that is not tagged and is not referenced by any container. To remove all _unused_ resources, resources that are not directly used by any existing containers, use the `-a` command as well.
+The docker image prune command allows you to clean up unused images. By default, docker image prune only cleans up dangling images. A dangling image is one that is not tagged and is not referenced by any container. To remove all _unused_ resources, resources that are not directly used by any existing containers, use the `-a` switch as well.
 
 If you want a general cleanup, then `docker system prune` is your friend.
 
