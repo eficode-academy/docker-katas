@@ -4,7 +4,7 @@ Now that you have everything setup, it's time to get your hands dirty. In this s
 
 To get started, let's run the following in our terminal:
 ```
-$ docker pull alpine
+$ docker image pull alpine
 ```
 
 > **Note:** Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. You may need to prefix your `docker` commands with `sudo` as stated before. Alternatively you can [create a docker group](https://docs.docker.com/engine/installation/linux/linux-postinstall/) to get rid of this issue.
