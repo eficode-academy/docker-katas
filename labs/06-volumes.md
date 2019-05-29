@@ -38,7 +38,7 @@ This will give you a nginx server running, serving your static files... _But on 
 
 * Run a `docker container ls` command to find out if it has any ports forwarded from the host.
 
-Remember the past exercise on port forwarding in Docker.
+Remember the [past exercise](04-port-forward.md) on port forwarding in Docker.
 
 * Make it host the site on port 8000
 * Check that it is running by navigating to the hostname or IP with your browser, and on port 8000.
