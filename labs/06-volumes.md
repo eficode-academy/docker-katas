@@ -1,5 +1,7 @@
 # Docker volumes
 
+> *Hint: This lab only covers volumes on Docker for Linux. If you are on windows or mac, things can look different.*
+
 Not everything can be in a container. The whole idea is that you can start, stop and delete the containers without losing data.
 
 So if you need to persist data, do it outside of the containers.
