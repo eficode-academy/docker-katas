@@ -36,7 +36,7 @@ The chat room should be used for general questions and comments.
 Ready to begin?
 ---------------
 
-Head over to [the first lab](labs/0-getting-started.md) to begin.
+Head over to [the first lab](labs/00-getting-started.md) to begin.
 
 
 
