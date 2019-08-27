@@ -263,7 +263,7 @@ Head over to `http://localhost:8888` or your server's URL and your app should be
 
 ##  and layers
 
-When dealing with docker images, a layer, or image layer is a change on an image, or an intermediate image. Every command you specify (FROM, RUN, COPY, etc.) in your Dockerfile causes the previous image to change, thus creating a new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
+When dealing with docker images, a layer, or image layer is a change on an image, or an intermediate image. Every time you run one of the commands RUN, COPY or ADD in your Dockerfile it causes the previous image to change, thus creating a new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
 
 Consider the following Dockerfile:
 
