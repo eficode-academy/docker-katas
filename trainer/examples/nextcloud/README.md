@@ -10,5 +10,3 @@ Up them again to show that it upgrades and runs
 
 You can show them the version under the gear icon.
 This compose file is missing a network directive- but that is ok. Docker will create a network for these containers and connect them on that network.
-
-
