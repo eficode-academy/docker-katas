@@ -221,6 +221,12 @@ Now look at the docker-compose example again:
 - `ports` defines a list of port mappings from host to container
 - `environment` describes the `-e` variable made before in a yaml list
 
+Instead of keeping sensitive information in the `docker-compose.yml` file, you can also use an [`.env`](https://docs.docker.com/compose/env-file/) file to keep all the environment variables. That way, it's easier to make a development environment and a production environment with the same `docker-compose.yml`.
+
+```
+MYSQL_ROOT_PASSWORD=wordpress
+```
+
 Try to spin up the container in detached mode:
 
 ```bash
