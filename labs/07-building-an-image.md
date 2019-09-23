@@ -2,7 +2,7 @@
 
 Running containers others made is useful, but if you want to use docker for production, chances are you want to construct a container on your own.
 
-### Dockerfile commands summary
+## Dockerfile commands summary
 
 Here's a quick summary of some basic commands we will use in our Dockerfile.
 
@@ -15,15 +15,17 @@ Here's a quick summary of some basic commands we will use in our Dockerfile.
 - EXPOSE
 - ENTRYPOINT
 
-* `FROM` is always the first item in the Dockerfile. It is a requirement that the Dockerfile starts with the `FROM` command. Images are created in layers, which means you can use another image as the base image for your own. The `FROM` command defines your base layer. As argument, it takes the name of the image. Optionally, you can add the Docker Hub username of the maintainer and image version, in the format `username/imagename:version`.
+Details:
 
-* `RUN` is used to build up the image you're creating. For each `RUN` command, Docker will run the command then create a new layer of the image. This way you can roll back your image to previous states easily. The syntax for a `RUN` instruction is to place the full text of the shell command after the `RUN` (e.g., `RUN mkdir /user/local/foo`). This will automatically run in a `/bin/sh` shell. You can define a different shell like this: `RUN /bin/bash -c 'mkdir /user/local/foo'`
+- `FROM` is always the first item in the Dockerfile. It is a requirement that the Dockerfile starts with the `FROM` command. Images are created in layers, which means you can use another image as the base image for your own. The `FROM` command defines your base layer. As argument, it takes the name of the image. Optionally, you can add the Docker Hub username of the maintainer and image version, in the format `username/imagename:version`.
 
-* `COPY` copies local files into the container. The files need to be in the same folder (or a sub folder) as the Dockerfile itself. An example is copying the requirements for a python app into the container: `COPY requirements.txt /usr/src/app/`.
+- `RUN` is used to build up the image you're creating. For each `RUN` command, Docker will run the command then create a new layer of the image. This way you can roll back your image to previous states easily. The syntax for a `RUN` instruction is to place the full text of the shell command after the `RUN` (e.g., `RUN mkdir /user/local/foo`). This will automatically run in a `/bin/sh` shell. You can define a different shell like this: `RUN /bin/bash -c 'mkdir /user/local/foo'`
 
-* `ADD` should only be used if you want to copy and unpack a tar file into the image. In any other case, use `COPY`.
+- `COPY` copies local files into the container. The files need to be in the same folder (or a sub folder) as the Dockerfile itself. An example is copying the requirements for a python app into the container: `COPY requirements.txt /usr/src/app/`.
 
-* `CMD` defines the commands that will run on the image at start-up. Unlike a `RUN`, this does not create a new layer for the image, but simply runs the command. There can only be one `CMD` in a Dockerfile. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
+- `ADD` should only be used if you want to copy and unpack a tar file into the image. In any other case, use `COPY`. `ADD` can also be used to add a file directly from an URL; consider whether this is good practice.
+
+- `CMD` defines the commands that will run on the image at start-up. Unlike a `RUN`, this does not create a new layer for the image, but simply runs the command. There can only be one `CMD` in a Dockerfile. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
 
 ```docker
   CMD ["python", "./app.py"]
@@ -31,12 +33,12 @@ Here's a quick summary of some basic commands we will use in our Dockerfile.
   CMD ["/bin/bash", "echo", "Hello World"]
 ```
 
-* `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker container inspect <container-id>`.
+- `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker container inspect <container-id>`.
 
 > **Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
 publishing ports by means of the `-p` or `-P` flag when using `$ docker container run`.
 
-* `ENTRYPOINT` configures a command that will run no matter what the user specifies at runtime.
+- `ENTRYPOINT` configures a command that will run no matter what the user specifies at runtime.
 
 ## Write a Dockerfile
 
@@ -52,78 +54,82 @@ It is a simple way to automate the image creation process. The best part is that
 
 1. Create a file called **Dockerfile**, and add content to it as described below. We have made a small boilerplate file and app for you in the [/building-an-image](./building-an-image/) folder, so head over there.
 
-> If you want to make a file from scratch, you can use the linux command `touch <filename>` to create an empty file, and the text editor `nano <filename>` to manipulate the file.
+    > If you want to make a file from scratch, you can use the linux command `touch <filename>` to create an empty file, and the text editor `nano <filename>` to manipulate the file.
 
-We'll start by specifying our base image, using the `FROM` keyword:
+    We'll start by specifying our base image, using the `FROM` keyword:
 
-  ```docker
-  FROM ubuntu:latest
-  ```
+    ```docker
+    FROM ubuntu:latest
+    ```
 
-2. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
+1. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
 
-  ```docker
-  RUN apt-get update -y
-  RUN apt-get install -y python-pip python-dev build-essential
-  ```
+    ```docker
+    RUN apt-get update -y
+    RUN apt-get install -y python-pip python-dev build-essential
+    ```
 
+1. Let's add the files that make up the Flask Application.
 
-3. Let's add the files that make up the Flask Application.
+    Install all Python requirements for our app to run. This will be accomplished by adding the lines:
 
-  Install all Python requirements for our app to run. This will be accomplished by adding the lines:
+    ```docker
+    COPY requirements.txt /usr/src/app/
+    RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+    ```
 
-  ```docker
-  COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-  ```
+    Copy the application app.py into our image by using the [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
 
-  Copy the application app.py into our image by using the [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
+    ```docker
+    COPY app.py /usr/src/app/
 
-  ```docker
-  COPY app.py /usr/src/app/
+    ```
 
-  ```
+1. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
 
-4. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
+    ```docker
+    EXPOSE 5000
+    ```
 
-  ```docker
-  EXPOSE 5000
-  ```
-> The `EXPOSE` instruction does not actually publish the port. It functions as a type of documentation between the person who builds the image and the person who runs the container, about which ports are intended to be published. You need the `-p`/`-P` command to actually open the host ports.
+    > The `EXPOSE` instruction does not actually publish the port.
+    > It functions as a type of documentation between the person who builds the
+    > image and the person who runs the container,
+    > about which ports are intended to be published.
+    > You need the `-p`/`-P` command to actually open the host ports.
 
-5. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
+1. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
-  ```docker
-  CMD ["python", "/usr/src/app/app.py"]
-  ```
+    ```docker
+    CMD ["python", "/usr/src/app/app.py"]
+    ```
 
-  The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
+    The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
 
-6. Verify your Dockerfile.
+1. Verify your Dockerfile.
 
-  Our `Dockerfile` is now ready. This is how it looks:
+    Our `Dockerfile` is now ready. This is how it looks:
 
-```docker
-  # The base image
-  FROM ubuntu:latest
+    ```docker
+    # The base image
+    FROM ubuntu:latest
 
-  # Install python and pip
-  RUN apt-get update -y
-  RUN apt-get install -y python-pip python-dev build-essential
+    # Install python and pip
+    RUN apt-get update -y
+    RUN apt-get install -y python-pip python-dev build-essential
 
-  # Install Python modules needed by the Python app
-  COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+    # Install Python modules needed by the Python app
+    COPY requirements.txt /usr/src/app/
+    RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
-  # Copy files required for the app to run
-  COPY app.py /usr/src/app/
+    # Copy files required for the app to run
+    COPY app.py /usr/src/app/
 
-  # Declare the port number the container should expose
-  EXPOSE 5000
+    # Declare the port number the container should expose
+    EXPOSE 5000
 
-  # Run the application
-  CMD ["python", "/usr/src/app/app.py"]
-  ```
+    # Run the application
+    CMD ["python", "/usr/src/app/app.py"]
+    ```
 
 ### Build the image
 
@@ -261,7 +267,7 @@ $ docker container run -p 8888:5000 --name myfirstapp myfirstapp
 
 Head over to `http://localhost:8888` or your server's URL and your app should be live.
 
-##  and layers
+## Images and layers
 
 When dealing with docker images, a layer, or image layer is a change on an image, or an intermediate image. Every time you run one of the commands RUN, COPY or ADD in your Dockerfile it causes the previous image to change, thus creating a new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
 
@@ -376,22 +382,22 @@ Try now to first:
 ### Instructions
 Here is the list of all the instructions that can be used in a Dockerfile:
 
-* [.dockerignore](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
-* [FROM](https://docs.docker.com/engine/reference/builder/#from) Sets the Base Image for subsequent instructions.
-* [RUN](https://docs.docker.com/engine/reference/builder/#run) execute any commands in a new layer on top of the current image and commit the results.
-* [CMD](https://docs.docker.com/engine/reference/builder/#cmd) provide defaults for an executing container.
-* [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose) informs Docker that the container listens on the specified network ports at runtime.  NOTE: does not actually make ports accessible.
-* [ENV](https://docs.docker.com/engine/reference/builder/#env) sets environment variable.
-* [ADD](https://docs.docker.com/engine/reference/builder/#add) copies new files, directories or remote file to container.  Invalidates caches. Avoid `ADD` and use `COPY` instead.
-* [COPY](https://docs.docker.com/engine/reference/builder/#copy) copies new files or directories to container.  Note that this only copies as root, so you have to chown manually regardless of your USER / WORKDIR setting.  See https://github.com/moby/moby/issues/30110
-* [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) configures a container that will run as an executable.
-* [VOLUME](https://docs.docker.com/engine/reference/builder/#volume) creates a mount point for externally mounted volumes or other containers.
-* [USER](https://docs.docker.com/engine/reference/builder/#user) sets the user name for following RUN / CMD / ENTRYPOINT commands.
-* [WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir) sets the working directory.
-* [ARG](https://docs.docker.com/engine/reference/builder/#arg) defines a build-time variable.
-* [ONBUILD](https://docs.docker.com/engine/reference/builder/#onbuild) adds a trigger instruction when the image is used as the base for another build.
-* [STOPSIGNAL](https://docs.docker.com/engine/reference/builder/#stopsignal) sets the system call signal that will be sent to the container to exit.
-* [LABEL](https://docs.docker.com/engine/userguide/labels-custom-metadata/) apply key/value metadata to your images, containers, or daemons.
+- [.dockerignore](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+- [FROM](https://docs.docker.com/engine/reference/builder/#from) Sets the Base Image for subsequent instructions.
+- [RUN](https://docs.docker.com/engine/reference/builder/#run) execute any commands in a new layer on top of the current image and commit the results.
+- [CMD](https://docs.docker.com/engine/reference/builder/#cmd) provide defaults for an executing container.
+- [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose) informs Docker that the container listens on the specified network ports at runtime.  NOTE: does not actually make ports accessible.
+- [ENV](https://docs.docker.com/engine/reference/builder/#env) sets environment variable.
+- [ADD](https://docs.docker.com/engine/reference/builder/#add) copies new files, directories or remote file to container.  Invalidates caches. Avoid `ADD` and use `COPY` instead.
+- [COPY](https://docs.docker.com/engine/reference/builder/#copy) copies new files or directories to container.  Note that this only copies as root, so you have to chown manually regardless of your USER / WORKDIR setting.  See https://github.com/moby/moby/issues/30110
+- [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) configures a container that will run as an executable.
+- [VOLUME](https://docs.docker.com/engine/reference/builder/#volume) creates a mount point for externally mounted volumes or other containers.
+- [USER](https://docs.docker.com/engine/reference/builder/#user) sets the user name for following RUN / CMD / ENTRYPOINT commands.
+- [WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir) sets the working directory.
+- [ARG](https://docs.docker.com/engine/reference/builder/#arg) defines a build-time variable.
+- [ONBUILD](https://docs.docker.com/engine/reference/builder/#onbuild) adds a trigger instruction when the image is used as the base for another build.
+- [STOPSIGNAL](https://docs.docker.com/engine/reference/builder/#stopsignal) sets the system call signal that will be sent to the container to exit.
+- [LABEL](https://docs.docker.com/engine/userguide/labels-custom-metadata/) apply key/value metadata to your images, containers, or daemons.
 
 ## Summary
 

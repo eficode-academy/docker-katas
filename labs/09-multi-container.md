@@ -123,7 +123,7 @@ docker network inspect if_wordpress
 
 ```
 
-As, we have linked both the container now wordpress container can be accessed from browser using the address http://localhost:8080 and setup of wordpress can be done easily. MySQL is not accessible from the outside so security is much better than before.
+As, we have linked both the container now wordpress container can be accessed from browser using the address [http://localhost:8080](http://localhost:8080) and setup of wordpress can be done easily. MySQL is not accessible from the outside so security is much better than before.
 
 ### Cleanup
 
@@ -223,7 +223,7 @@ Now look at the docker-compose example again:
 
 Instead of keeping sensitive information in the `docker-compose.yml` file, you can also use an [`.env`](https://docs.docker.com/compose/env-file/) file to keep all the environment variables. That way, it's easier to make a development environment and a production environment with the same `docker-compose.yml`.
 
-```
+```conf
 MYSQL_ROOT_PASSWORD=wordpress
 ```
 
@@ -256,6 +256,6 @@ You must
 - map the pieces of information from the docker container run command to the yaml format.
 - remove MySQL port mapping to close that from outside reach.
 
-When you made that, run `docker-compose up -d` and access your wordpress site from http://IP:8080
+When you made that, run `docker-compose up -d` and access your wordpress site from [http://IP:8080](http://IP:8080)
 
 > **Hint**: If you are stuck, look at the file docker-compose_final.yaml in the same folder.

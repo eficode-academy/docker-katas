@@ -1,13 +1,12 @@
 # hello-world
 
-
 Try running a command with Docker:
 
 `docker container run hello-world`
 
 Your terminal output should look like this:
-```
 
+```bash
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 78445dd45222: Pull complete
@@ -33,8 +32,8 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
-
 ```
+
 This message shows that your installation appears to be working correctly.
 
 _*Q: So what did this do?*_

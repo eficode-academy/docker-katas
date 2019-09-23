@@ -4,7 +4,8 @@ Before we can take our dockerized Flask app to another computer, we need to push
 
 Docker Hub is sort of like GitHub of Docker images. It’s the main place people store their Docker images in the cloud.
 
-First, create an account on the Docker Hub if you haven't already - it's free: https://hub.docker.com/account/signup/
+First, create an account on the Docker Hub if you haven't already - it's free:
+[https://hub.docker.com/account/signup/](https://hub.docker.com/account/signup/)
 
 Then, login to that account by running the ``docker login`` command on your laptop.
 
@@ -38,10 +39,12 @@ b27287a6dbce: Mounted from library/ubuntu
 latest: digest: sha256:e7016870c297b3c49996ee00972d8abe7f20b4cbe45089dc914193fa894991d3 size: 2407
 ```
 
-Go to your profile page on the Docker Hub and you should see your new repository listed: https://hub.docker.com/repos/u/<username>
+Go to your profile page on the Docker Hub and you should see your new repository listed:
+[https://hub.docker.com/repos/u/<username>](https://hub.docker.com/repos/u/<username>)
 
 **Congrats!** You just made your first Docker image and shared it with the world!
 
 Try to pull down the images that your fellows have pushed to see that it's really up there.
 
-For more info on the Docker Hub, and the cli integration, head over to https://docs.docker.com/docker-hub/ and read the guides there.
+For more info on the Docker Hub, and the cli integration,
+head over to [https://docs.docker.com/docker-hub/](https://docs.docker.com/docker-hub/) and read the guides there.

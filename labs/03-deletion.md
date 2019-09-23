@@ -65,7 +65,8 @@ This will remove the container immediately after it is stopped.
 Containers are still persisted, even though they are stopped.
 If you want to delete them from your server you need to use the `docker container rm` command.
 `docker container rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
-```
+
+```bash
 sofus@Praq-Sof:~/git/docker-exercises$ docker container ls -a
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES
 6a9246ff53cb        hello-world               "/hello"                 18 seconds ago      Exited (0) 16 seconds ago                                                                  ecstatic_cray
@@ -79,11 +80,12 @@ The container is now gone when you execute a `ls -a` command.
 > **Tip:** As with Git, you can use any unique part of the container ID to refer to it.
 
 ### Deleting images
+
 You deleted the container instance above, but not the image of hello-world itself. And as you are now on the verge to become a docker expert, you do not need the hello-world image anymore so let us delete it.
 
 First off, list all the images you have downloaded to your computer:
 
-```
+```bash
 sofus@praq-sal:~$ docker image ls
 REPOSITORY                              TAG                   IMAGE ID            CREATED             SIZE
 alpine                                  latest                053cde6e8953        9 days ago          3.97MB
@@ -93,7 +95,7 @@ hello-world                             latest                48b5124b2768      
 Here you can see the images downloaded as well as their size.
 To remove the hello-world image use the `docker image rm` command together with the id of the docker image.
 
-```
+```bash
 sofus@praq-sal:~$ docker image rm 48b5124b2768
 Untagged: hello-world:latest
 Untagged: hello-world@sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7
@@ -120,7 +122,7 @@ The docker image prune command allows you to clean up unused images. By default,
 
 If you want a general cleanup, then `docker system prune` is your friend.
 
-**Summary**
+## Summary
 
 You have now seen the swiftness of creating a new container from an image, trash it, and create a new one on top of it.
 You have learned to use `container rm` for deleting containers, `image rm` for images, `image ls` for listing the images and `container ls -a` to look at all the containers on your host.

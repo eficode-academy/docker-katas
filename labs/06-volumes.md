@@ -121,6 +121,7 @@ Head over to your newly created webpage at: `http://<IP>:8080/hello.html`
 Exit out of your ubuntu server and execute a `docker container stop www` to stop the nginx container.
 
 Run a `docker container ls` to make sure that no other containers are running.
+
 ```bash
 docker container ls
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                          NAMES
