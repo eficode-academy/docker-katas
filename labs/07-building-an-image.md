@@ -400,6 +400,7 @@ See [https://github.com/moby/moby/issues/301109](https://github.com/moby/moby/is
 - [ONBUILD](https://docs.docker.com/engine/reference/builder/#onbuild) adds a trigger instruction when the image is used as the base for another build.
 - [STOPSIGNAL](https://docs.docker.com/engine/reference/builder/#stopsignal) sets the system call signal that will be sent to the container to exit.
 - [LABEL](https://docs.docker.com/engine/userguide/labels-custom-metadata/) apply key/value metadata to your images, containers, or daemons.
+- [HEALTHCHECK](https://docs.docker.com/engine/reference/builder/#healthcheck) adds a healtch check that is run periodically, and depending on the [restart policy](https://docs.docker.com/config/containers/start-containers-automatically/), it's used by the docker daemon to check if the container should be restarted.
 
 ## Summary
 
