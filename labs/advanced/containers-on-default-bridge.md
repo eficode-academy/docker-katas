@@ -3,6 +3,7 @@ In this exercise, you will explore various characterstics of the default network
 
 
 ## You should investigate:
+* What docker networks exist on the host network? (`docker network ls`)
 * See what network interfaces exist on the host network? Do you see docker0?
 * Inpsect docker0 bridge.
 * What does docker0 network interface on the host look like? (IP/network address, NetMask, MAC address, etc?)
@@ -27,10 +28,15 @@ $ docker run --name db \
 * Do you see any **veth** interfaces on the host?
 * Compare MAC addresses of veth interfaces on the host and the **eth0** interfaces on each container.
 * Inspect containers for their IP addresses, MAC addresses, etc.
+* Explore what processes are listening on various network interfaces on the host.
+* Explore what processes are listening on various network interfaces on the container.
 
-Useful commands:
+
+# Useful commands:
 * docker ps
 * docker ls
+* docker network ls
 * docker inspect
 * docker exec -it <container name|id> </some/shell>
 * ip addr show
+* netstat
