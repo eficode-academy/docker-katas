@@ -47,6 +47,10 @@ $ docker run --name=db --network=mynet \
 $ docker run --cap-add=NET_ADMIN --cap-add=NET_RAW \
   --name multitool --network mynet \
   -it praqma/network-multitool /bin/bash
+
+$ iptables-save
+
+$ netstat -ntlp
 ```
 
 
