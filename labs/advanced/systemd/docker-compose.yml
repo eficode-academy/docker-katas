@@ -1,0 +1,17 @@
+version: "3"
+services:
+  mailserver:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+      - "25:25"
+      - "110:110"
+      - "143:143"
+      - "993:993"
+      - "995:995"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /run  
+
