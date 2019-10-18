@@ -1,0 +1,73 @@
+defaultEntryPoints = ["http", "https"]
+logLevel = "INFO"
+
+[docker]
+  endpoint = "unix:///var/run/docker.sock"
+  exposedByDefault = false
+
+
+# enabling api is not absolutely necessary, it is needed only if you need dashboard.
+[api]
+  dashboard = true
+  entrypoint = "dashboard"
+
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+
+  [entryPoints.dashboard]
+  address = ":8080"
+
+    [entryPoints.dashboard.auth.basic]
+    # admin/secret
+    # users = ["admin:$2y$08$64hQda74gXS80mS63hN3xOFGVB9KA2vUOXtW.NDaBjX9pEHq7qdUa"]
+    users = ["kamran:$2y$05$oCAwtNymC1be9.uDq.LbG./1ENktYoGKU.KNo5o7.DL26FJVGCiY2"]
+
+[acme]
+email = "kaz@praqma.net"
+storage = "/acme.json"
+
+# CA server to use.
+# Uncomment the 'caServer' line to use Let's Encrypt's staging server.
+#   Or, leave caServer line commented to goto/use production certificates.
+#
+caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+
+
+entryPoint = "https"
+
+
+#########################################################
+#
+# Enable this section if you want to use DNS challenge.
+# You will need to provide DNS credentials in your
+#   as environment variables in your docker-compose.yml.
+#
+#
+#  [acme.dnsChallenge]
+#  provider = "route53"
+#  delayBeforeCheck = 0
+#
+#    [[acme.domains]]
+#    main = "*.example.com"
+#
+#########################################################
+
+
+#########################################################
+#
+# Enable this section if you want to use HTTP challenge.
+#
+# onHostRule = true
+#   [acme.httpChallenge]
+#   entryPoint = "http"
+#
+#########################################################

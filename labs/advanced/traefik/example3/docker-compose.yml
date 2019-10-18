@@ -1,0 +1,43 @@
+version: "3"
+services:
+  traefik:
+    image: traefik:1.7
+    labels:
+      - traefik.frontend.rule=Host:traefik.example.com
+      - traefik.port=8080
+      - traefik.enable=true
+    environment:
+      # You need to specify credentials for your DNS provider,
+      #   "if" you are using DNS challenge in traefik.toml.
+      # You don't need these if you are using HTTP challenge.
+      #
+      AWS_ACCESS_KEY_ID: 'YOUR_AWS_ACCESS_KEY_ID_HERE'
+      AWS_SECRET_ACCESS_KEY: 'YOUR_AWS_SECRET_ACCESS_KEY_HERE'
+      AWS_DEFAULT_REGION: 'eu-central-1'
+      AWS_HOSTED_ZONE_ID: 'ABC123456789XYZ'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/traefik.toml:/etc/traefik/traefik.toml
+      # acme.json need to have 0600 permissions.
+      - ${PWD}/acme.json:/acme.json
+      # The password file is generated with command:- 
+      #          "htpasswd -c -B traefik-dashboard-users.passwd  admin"
+      - ${PWD}/traefik-dashboard-users.passwd:/traefik-dashboard-users.passwd
+
+    ports:
+      - 80:80
+      - 443:443
+      # The way this works, e.g. traefik dashboard having it's own label as "traefik.example.com",
+      #   you do not need to enable port 8080.
+      # You will be able to reach Traefik dashboard through "https://traefik.example.com" ,
+      #   without needing to specify 8080 in front of it.
+      # Though, you can enable it if you like to.
+      # - 8080:8080 
+
+  nginx:
+    image: nginx:alpine
+    labels:
+      - traefik.frontend.rule=Host:example.com,www.example.com
+      - traefik.port=80
+      - traefik.enable=true
+
