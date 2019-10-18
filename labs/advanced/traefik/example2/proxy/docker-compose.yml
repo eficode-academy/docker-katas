@@ -1,0 +1,20 @@
+version: "3"
+services:
+  traefik:
+    image: traefik:1.7
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/traefik.toml:/etc/traefik/traefik.toml
+    ports:
+      - 80:80
+    networks:
+      - services-network
+
+networks:
+  services-network:
+    external: true
+
+
+# Note: "services-network" is a bridge network created manually on the docker host,
+#         using: `$ docker network create services-network`
+#       This network needs to exist before any of the compose services are able to use it.

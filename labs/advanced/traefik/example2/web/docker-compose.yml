@@ -1,0 +1,15 @@
+version: "3"
+services:
+  multitool:
+    image: praqma/network-multitool
+    labels:
+      - traefik.enable=true
+      - traefik.port=80
+      - traefik.frontend.rule=Host:example.com,www.example.com
+    networks:
+      - services-network
+
+networks:
+  services-network:
+    external: true
+
