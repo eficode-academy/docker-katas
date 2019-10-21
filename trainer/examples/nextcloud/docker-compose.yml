@@ -3,14 +3,9 @@ volumes:
   nextcloud:
   db:
 services:
-  db:
-    image: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: nextcloud
-    volumes:
-    - db:/var/lib/mysql:rw
   app:
-    image: nextcloud:15
+    image: nextcloud:16.0.5
+    # image: nextcloud:17.0.0
     depends_on:
       - db
     environment:
@@ -22,4 +17,10 @@ services:
     - 80:80
     volumes:
     - nextcloud:/var/www/html:rw
+  db:
+    image: mariadb:10.4.8-bionic
+    environment:
+      MYSQL_ROOT_PASSWORD: nextcloud
+    volumes:
+    - db:/var/lib/mysql:rw
 

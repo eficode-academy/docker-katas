@@ -1,12 +1,109 @@
 # Nextcloud showcase
 
-Spin it up, and create an admin account.
-Upload an image to the server, to prove that you have persistent storage.
-Make a docker-compose down + up to show that the containers are disposable.
-Down them and change nextcloud:11 to :12
-Up them and observe that app dies right after start.
-Append “depends_on:” annotation
-Up them again to show that it upgrades and runs
+An example of starting a two-container application using docker-compose;  Nextcloud with a MariaDB backend.
 
-You can show them the version under the gear icon.
-This compose file is missing a network directive- but that is ok. Docker will create a network for these containers and connect them on that network.
+We show that the volumes persist killing the containers,
+and a version-upgrade of Nextcloud.
+
+Tags: docker-compose, volumes, upgrading
+
+## Start the application
+
+1. Run:
+
+    ```shell
+    docker-compose up
+    ```
+
+1. Visit Nextcloud in a browser on: [localhost](http://localhost),
+and create an admin account.
+
+> NB: It takes ~1 min for `mariadb` to become ready.
+> (During a demo, you'll usually talk for this minute about the demo..)
+> If you get the error:
+>
+> ```output
+> Fejl:
+> Error while trying to create admin user: Failed to connect to the database: An exception occured in driver: SQLSTATE[HY000] [2002]Connection refused
+> ```
+>
+> Wait a little while, fill in the password again, and try to finish the setup again.
+
+## Upload a file
+
+1. Drag a picture or other file from your computer into the UI,
+to upload it to your Nextcloud.
+
+1. Stop the services afterwards.
+    > If you ran `docker-compose` without `-d`,
+    > then `ctrl+c` will stop the services.
+
+    ```shell
+    docker-compose down
+    ```
+
+1. Reload the window in the browser; Nextcloud is down.
+1. Show that no containers are running with the command:
+
+    ```shell
+    docker ps
+    ```
+
+## Removing the containers (optional)
+
+1. You can even remove the containers:
+
+    ```shell
+    docker-compose rm
+    ```
+
+1. Show that they're gone with `docker ps -a`.
+
+## Restart Nextcloud
+
+1. Start the application again with,
+
+    ```shell
+    docker-compose up
+    ```
+
+1. Reload your browser window,
+Nextcloud should be available again;
+you might even still be logged in.
+
+## Persistent storage
+
+1. Notice how the file you uploaded before is still available.
+
+## Upgrading Nextcloud
+
+1. Stop the services again, using `docker-compose down` or `ctrl+c`.
+1. Change the version of the Nextcloud image from `nextcloud:16`
+    to `nextcloud:17` (swap the commented image-version lines,
+    in the `docker-compose.yml`.)
+
+## Start the Application
+
+1. Run `docker-compose up` to start the application.
+
+You can show them the version under the `gear icon -> help`,
+[link](http://localhost/settings/help).
+
+## Downgrading Nextcloud
+
+> Downgrading is not supported in Nextcloud.
+
+1. Try stopping the containers again
+with `docker-compose down` or `ctrl+c`.
+1. Changing the version back to `nextcloud:16`.
+1: Starting the application again with `docker-compose up`.
+
+Nextcloud will fail to start with the message:
+
+```shell
+app_1  | Can't start Nextcloud because the version of the data (17.0.0.9) is higher than the docker image version (16.0.5.1) and downgrading is not supported. Are you sure you have pulled the newest image version?
+```
+
+> NB: This composefile is missing a network directive, but that is ok.
+> Docker will create a network for these containers
+> and connect them on that network.
