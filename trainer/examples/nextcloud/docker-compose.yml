@@ -4,8 +4,8 @@ volumes:
   db:
 services:
   app:
-    image: nextcloud:16.0.5
-    # image: nextcloud:17.0.0
+    image: nextcloud:11
+    # image: nextcloud:12
     depends_on:
       - db
     environment:

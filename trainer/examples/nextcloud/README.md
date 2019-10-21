@@ -78,8 +78,8 @@ you might even still be logged in.
 ## Upgrading Nextcloud
 
 1. Stop the services again, using `docker-compose down` or `ctrl+c`.
-1. Change the version of the Nextcloud image from `nextcloud:16`
-    to `nextcloud:17` (swap the commented image-version lines,
+1. Change the version of the Nextcloud image from `nextcloud:11`
+    to `nextcloud:12` (swap the commented image-version lines,
     in the `docker-compose.yml`.)
 
 ## Start the Application
@@ -95,15 +95,26 @@ You can show them the version under the `gear icon -> help`,
 
 1. Try stopping the containers again
 with `docker-compose down` or `ctrl+c`.
-1. Changing the version back to `nextcloud:16`.
+1. Changing the version back to `nextcloud:12`.
 1: Starting the application again with `docker-compose up`.
 
 Nextcloud will fail to start with the message:
 
 ```shell
-app_1  | Can't start Nextcloud because the version of the data (17.0.0.9) is higher than the docker image version (16.0.5.1) and downgrading is not supported. Are you sure you have pulled the newest image version?
+app_1  | Can't start Nextcloud because the version of the data (12.0.13.2) is higher than the docker image version (11.0.8.1) and downgrading is not supported. Are you sure you have pulled the newest image version?
 ```
 
 > NB: This composefile is missing a network directive, but that is ok.
 > Docker will create a network for these containers
 > and connect them on that network.
+
+## Possible issues
+
+### Making Nextcloud fail without `depends_on`
+
+In the original example,
+the upgrade would fail without adding the `depends_on: db`
+to the docker-compose file.
+Nicolaj has been unable to reproduce this error on `Docker for Windows 19.03`, and thus the "example of using `depends_on`" is left out of the tutorial.
+`depends_on` is however kept in the docker-compose file,
+so as to not cause any unintentional errors.
