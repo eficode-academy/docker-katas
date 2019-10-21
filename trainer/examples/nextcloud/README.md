@@ -7,9 +7,9 @@ and a version-upgrade of Nextcloud.
 
 Tags: docker-compose, volumes, upgrading
 
-## Start the application
+## Part 1: Persistent storage
 
-1. Run:
+1. Start the application with:
 
     ```shell
     docker-compose up
@@ -75,7 +75,7 @@ you might even still be logged in.
 
 1. Notice how the file you uploaded before is still available.
 
-## Upgrading Nextcloud
+## Part 2: Upgrading Nextcloud
 
 1. Stop the services again, using `docker-compose down` or `ctrl+c`.
 1. Change the version of the Nextcloud image from `nextcloud:11`
@@ -86,7 +86,7 @@ you might even still be logged in.
 
 1. Run `docker-compose up` to start the application.
 
-You can show them the version under the `gear icon -> help`,
+You can find the version under the `gear icon -> help`,
 [link](http://localhost/settings/help).
 
 ## Downgrading Nextcloud
@@ -96,7 +96,7 @@ You can show them the version under the `gear icon -> help`,
 1. Try stopping the containers again
 with `docker-compose down` or `ctrl+c`.
 1. Changing the version back to `nextcloud:12`.
-1: Starting the application again with `docker-compose up`.
+1. Starting the application again with `docker-compose up`.
 
 Nextcloud will fail to start with the message:
 
