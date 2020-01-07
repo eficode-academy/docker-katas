@@ -1,0 +1,2 @@
+#Prevent leaking any premade solutions
+*.yml
