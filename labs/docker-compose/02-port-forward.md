@@ -60,7 +60,7 @@ Starting docker-compose_nginx_1 ... done
 
 Docker prints out the service name and returns to the terminal.
 
-To see what services you've running from copose file you can use `docker-compose ps`
+To see what services you've running from compose file you can use `docker-compose ps`
 
 _*Q: What is the status?*_
 
