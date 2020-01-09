@@ -1,0 +1,120 @@
+# TAKEN FROM K8S DAY2. NEEDS REWAMP
+
+
+This exercise will demonstrate unit and component testing of applications using containers.
+
+Our application consists of three microservices:
+
+* [sentences-age](../k8s-sentences-age) To output a random number between 0-100.
+* [sentences-name](../k8s-sentences-name) To output a random name from the group Monty Python.
+* [sentences-sentences](../k8s-sentences-sentence) That is the frontend, displaying the result from both microservices.
+
+In this excercise we will build, spin up, use and test the docker images
+
+All three applications follows the same structure:
+
+```
+.
+├── app
+├── build-app.sh
+├── component-test
+├── .git
+├── .github
+├── helm
+├── push-app.sh
+├── README.md
+├── test
+└── unit-test.sh
+
+```
+
+## Familiarizing with the setup
+
+In each of the repositories, we have created a pipeline for the individual applications, going through the steps listed below.
+
+`test-code -> build-docker-image -> component-test`
+
+* `test-code` runs the unit test through `unit-test.sh`
+* `build-docker-image` builds the image, and pushes it up to dockerhub via `build-app.sh` and `push-app.sh`
+* `component-test` takes the recently pushed image and runs `test/component-test.sh`
+
+In the section below, we are familiarizing ourselves with the build pipline by hand before enabling it in GitHub Actions.
+
+## Running Unit Tests
+
+Open up each of the three repositories and run the unit test to make sure that everything works:
+
+```shell
+$ ./unit-test.sh
+=== RUN   TestAgeIntegerShouldBeBetween
+--- PASS: TestAgeIntegerShouldBeBetween (0.00s)
+    age_test.go:11: GetAge(0, 100) PASSED, expected 16 to be between 0 and 100
+PASS
+ok  	_/go	0.002s
+
+```
+
+The `unit-test.sh` script runs a (golang)[https://hub.docker.com/_/golang/] image, voluming in the code.
+
+### Tasks
+
+* try enabling the commented-out test in the file [age_test.go](../k8s-sentences-age/app/age_test.go). If you now try to run the command from above, you will see an error instead.
+* Comment out the failed test again, so the pipeline will run smooth when set-up.
+
+## Building and pushing the image
+
+Next 
+
+### Tasks
+
+Login to dockerhub with the `docker login` command on the server.
+
+## Running Component Tests
+
+Running component tests means that we run a microservice and then test it by
+making requests to it and validate the responses.
+
+First, run the `name` microservice using docker:
+
+```shell
+$ docker run --rm -p8889:5000 sentences:v1 --mode name
+```
+
+This will start the `name` service on the local host (IP address 127.0.0.1, port 8889).
+
+The docker container will hold onto the terminal for debug output, i.e. run the
+following command in another shell (remember to change to the `sentences-app`
+folder).
+
+To run tests against this service, pass the URL to the name service to the tests
+inside the testing container using an environment variable and run the
+name-servce tests with the following command:
+
+```shell
+$ docker run --rm --net host -e SERVICE_URL='http://127.0.0.1:8889' sentences-test:v1 /usr/src/app/tests/test_name_service.py
+```
+
+Running tests against the main sentences service (which relies on the `name` and
+`age` services), we need to start all three microservices. We can do this with
+docker-compose with the following command:
+
+```shell
+$ docker-compose -f deploy/docker-compose.yaml up
+```
+
+Run tests again the main sentences service with the following command:
+
+```shell
+$ docker run --rm --net host sentences-test:v1
+```
+
+> When running tests against the main sentences service we didn't specify any
+> URL or test suite. How does this work?
+
+> Running component tests from locally stored tests are left as an exercise to
+> the reader.
+
+
+## Cleanup
+
+Stop any running containers and docker-compose deployments by pressing Ctrl-C.
