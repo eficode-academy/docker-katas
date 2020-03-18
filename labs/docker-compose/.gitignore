@@ -1,0 +1,3 @@
+#Prevent leaking any premade solutions
+*.yml
+web_content
