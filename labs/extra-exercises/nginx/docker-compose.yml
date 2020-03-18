@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  one:
+    image: nginx:latest
+    restart: unless-stopped
+    volumes:
+      - "./html1:/usr/share/nginx/html"
+    ports:
+      - 9001:80
+
+  two:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - 9002:80
+    volumes:
+      - "./html2:/usr/share/nginx/html"
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - 9090:80
+    volumes:
+      - "./nginx:/etc/nginx/conf.d"
+    depends_on:
+      - one
+      - two
