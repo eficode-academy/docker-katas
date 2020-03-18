@@ -61,7 +61,7 @@ First off make a new network for the containers to communicate through:
 
 `docker network create if_wordpress`
 
-Docker will return the networkID for the newly created network. You can reference it by name as well as the ID.
+Docker will return the `networkID` for the newly created network. You can reference it by name as well as the ID.
 
 Now you need to connect the two containers to the network, by adding the `--network` option:
 
@@ -73,7 +73,7 @@ docker container run --name wordpress-container --rm --network if_wordpress -e W
 fd4fd096c064094d7758cefce41d0f1124e78b86623160466973007cf0af8556
 ```
 
-Notice the `WORDPRESS_DB_HOST` env variable. When you make a container join a network, it automatically gets the container name as DNS name as well, making it super easy to make containers discover each other.
+Notice the `WORDPRESS_DB_HOST` env variable. When you make a container join a network, it automatically gets the container name as DNS name as well, making it super easy to make containers discover each other. The DNS name is only visible inside the Docker network, which is also true for the `IP` address (usually an address starting with `172`) that is assigned to them. If you do not expose a port for a container, the container is only visible to Docker.
 
 You have now deployed both containers into the network. Take a deeper look into the container network by issuing: `docker network inspect if_wordpress`.
 
@@ -120,7 +120,6 @@ docker network inspect if_wordpress
         "Labels": {}
     }
 ]
-
 ```
 
 As, we have linked both the container now wordpress container can be accessed from browser using the address [http://localhost:8080](http://localhost:8080) and setup of wordpress can be done easily. MySQL is not accessible from the outside so security is much better than before.
