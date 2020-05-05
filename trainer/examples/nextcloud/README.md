@@ -78,8 +78,8 @@ you might even still be logged in.
 ## Part 2: Upgrading Nextcloud
 
 1. Stop the services again, using `docker-compose down` or `ctrl+c`.
-1. Change the version of the Nextcloud image from `nextcloud:11`
-    to `nextcloud:12` (swap the commented image-version lines,
+1. Change the version of the Nextcloud image from `nextcloud:X`
+    to `nextcloud:X+1` (swap the commented image-version lines,
     in the `docker-compose.yml`.)
 
 ## Start the Application
