@@ -28,7 +28,7 @@ Details:
 - `CMD` defines the commands that will run on the image at start-up. Unlike a `RUN`, this does not create a new layer for the image, but simply runs the command. There can only be one `CMD` in a Dockerfile. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
 
 ```docker
-  CMD ["python", "./app.py"]
+  CMD ["python3", "./app.py"]
 
   CMD ["/bin/bash", "echo", "Hello World"]
 ```
@@ -66,7 +66,7 @@ It is a simple way to automate the image creation process. The best part is that
 
     ```docker
     RUN apt-get update -y
-    RUN apt-get install -y python-pip python-dev build-essential
+    RUN apt-get install -y python3-pip python3-dev build-essential
     ```
 
 1. Let's add the files that make up the Flask Application.
@@ -75,7 +75,7 @@ It is a simple way to automate the image creation process. The best part is that
 
     ```docker
     COPY requirements.txt /usr/src/app/
-    RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+    RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
     ```
 
     Copy the application app.py into our image by using the [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
@@ -100,7 +100,7 @@ It is a simple way to automate the image creation process. The best part is that
 1. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
     ```docker
-    CMD ["python", "/usr/src/app/app.py"]
+    CMD ["python3", "/usr/src/app/app.py"]
     ```
 
     The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
@@ -115,11 +115,11 @@ It is a simple way to automate the image creation process. The best part is that
 
     # Install python and pip
     RUN apt-get update -y
-    RUN apt-get install -y python-pip python-dev build-essential
+    RUN apt-get install -y python3-pip python3-dev build-essential
 
     # Install Python modules needed by the Python app
     COPY requirements.txt /usr/src/app/
-    RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+    RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
 
     # Copy files required for the app to run
     COPY app.py /usr/src/app/
@@ -128,7 +128,7 @@ It is a simple way to automate the image creation process. The best part is that
     EXPOSE 5000
 
     # Run the application
-    CMD ["python", "/usr/src/app/app.py"]
+    CMD ["python3", "/usr/src/app/app.py"]
     ```
 
 ### Build the image
