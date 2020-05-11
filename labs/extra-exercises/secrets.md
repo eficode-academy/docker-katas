@@ -89,3 +89,7 @@ Cleanup the service, secret and leave swarm mode:
 ## Slides (later)
 
 High level overview - why secrets, diagram of how
+
+## Additonal exercises
+
+* [Docker lab on secrets](https://github.com/docker/labs/tree/master/security/secrets)
