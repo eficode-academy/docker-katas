@@ -8,9 +8,12 @@ So if you need to persist data, do it outside of the containers.
 
 You have two different ways of mounting data from your container `bind mounts` and `volumes`.
 
-**A bind mount** is the simpler one to understand. It takes a host path `/data` and mounts it inside your container eg. `/opt/app/data`. The positive about bind is that it is easy and connects directly to the host filesystem. The downside is that you need to specify it at runtime with no indication on what mounts a given container has, and that you need to deal with backup,migration etc. in an tool outside the Docker ecosystem.
+**A bind mount** is the simpler one to understand. It takes a host path, like `/data`, and mounts it inside your container eg. `/opt/app/data`.
+The good thing about bindmounts is that they are easy and allow you to connect directly to the host filesystem.
+The downside is that you need to specify it at runtime, and path to mount might vary from host to host, which can be confusing when you want to run your containers on different hosts.
+With bindmounts you will also need to deal with backup, migration etc. in an tool outside the Docker ecosystem.
 
-**A docker Volume** is where you can use a named or unnamed volume to store the external data. You would normally use a volume driver for this, but you can get a host mounted path using the default local volume driver.
+**A docker Volume** is where you can use a `named` or `unnamed` volume to store the external data. You would normally use a volume driver for this, but you can get a host mounted path using the default local volume driver.
 
 In the next section, you will get to try both of them.
 
@@ -31,8 +34,11 @@ That will map whatever files are in the `/some/content` folder on the host to `/
 
 Try to do the following:
 
-* `git clone` this repository down and navigate to the `labs/volumes/` folder.
-* Try to run the above command with the right folder instead of `/some/content`. You can use the command `pwd` (Print working directory) to display where you are.
+* `git clone` this repository down
+    * If you are at training the repository is most likely already cloned on your training VM.
+* Navigate to the `labs/volumes/` directory, which contains a file we can try to serve: `index.html`.
+* We need change `/some/content` to the right path, it must be an absolute path, starting from the root of the filesystem, (which in linux is `/`). You can use the command `pwd` (Print working directory) to display the path to where you are.
+* Now try to run the container with the `labs/volumes` directory bindmounted.
 
 This will give you a nginx server running, serving your static files... _But on which port?_
 
