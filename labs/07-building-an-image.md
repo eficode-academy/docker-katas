@@ -66,7 +66,7 @@ It is a simple way to automate the image creation process. The best part is that
 
     ```docker
     RUN apt-get update -y
-    RUN apt-get install -y python3-pip python3-dev build-essential
+    RUN apt-get install -y python3 python3-pip python3-dev build-essential
     ```
 
 1. Let's add the files that make up the Flask Application.
@@ -115,7 +115,7 @@ It is a simple way to automate the image creation process. The best part is that
 
     # Install python and pip
     RUN apt-get update -y
-    RUN apt-get install -y python3-pip python3-dev build-essential
+    RUN apt-get install -y python3 python3-pip python3-dev build-essential
 
     # Install Python modules needed by the Python app
     COPY requirements.txt /usr/src/app/
@@ -276,12 +276,12 @@ Consider the following Dockerfile:
 ```bash
   FROM ubuntu:latest
   RUN apt-get update -y
-  RUN apt-get install -y python-pip python-dev build-essential
+  RUN apt-get install -y python3 python3-pip python3-dev build-essential
   COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+  RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
   COPY app.py /usr/src/app/
   EXPOSE 5000
-  CMD ["python", "/usr/src/app/app.py"]
+  CMD ["python3", "/usr/src/app/app.py"]
 ```
 
 First, we choose a starting image: `ubuntu:latest`, which in turn has many layers.
@@ -297,14 +297,15 @@ If you want to concatenate two layers (e.g. the update and install [which is a g
 ```bash
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y \
- python-pip \
- python-dev \
+ python3 \
+ python3-pip \
+ python3-dev \
  build-essential
 COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
 COPY app.py /usr/src/app/
 EXPOSE 5000
-CMD ["python", "/usr/src/app/app.py"]
+CMD ["python3", "/usr/src/app/app.py"]
 ```
 
 If you want to be able to use any cached layers from last time, they need to be run _before the update command_.
@@ -346,7 +347,7 @@ The id of the layer will likely be different than the example above.
 
 You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 
-```bash
+```
 
 root@cc5490748b2a:/# ls
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var

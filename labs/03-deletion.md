@@ -8,9 +8,8 @@ Spin up the container with `docker container run -ti alpine`
 
 list all the folders on the root level to see the whole distribution:
 
-```bash
+```
 # ls /
-
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
@@ -21,22 +20,20 @@ Now, delete the whole file system with `rm -rf /`
 
 Try to navigate around to see how much of the OS is gone
 
-```bash
+```
 # ls
 /bin/sh: ls: not found
-
 # whoami
-sh: whoami: not found
-
+/bin/sh: whoami: not found
 # date
 /bin/sh: date: not found
 ```
 
 Exit out by `Ctrl+D` and create a new instance of the Alpine image and look a bit around:
 
-```bash
+```
 $ docker container run -ti alpine
-# ls /
+ls /
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```

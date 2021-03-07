@@ -26,7 +26,7 @@ You want to containerize it. That's easy!
 `Dockerfile`
 
 ```Dockerfile
-FROM golang:alpine
+FROM golang:1.13.2
 WORKDIR /app
 ADD . /app
 RUN cd /app && go build -o goapp
@@ -48,7 +48,7 @@ See the following `Dockerfile`, it has two `build stages`,
 
 ```Dockerfile
 # build stage
-FROM golang:alpine AS builder
+FROM golang:1.13.2 AS builder
 ADD . /src/
 RUN cd /src && go build -o goapp
 

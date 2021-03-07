@@ -17,16 +17,16 @@ docker container run -d -p 8000:80 nginx
 661c6dd59d78b97f8142d67eff6b1d58fbbd42247900241e08f46abdbad19f06
 ```
 
-Try to attach to the container. Exit it, and browse the webpage again to acknowledge it is gone.
+Try to attach to the container. Exit it using `Ctrl+C`, and browse to the webpage again to verify that it is no longer serving (since we stopped the webserver by exiting the container).
 
-Step into a new container by executing a bash inside the container:
+Step into a new container by executing a bash shell inside the container:
 
 ```bash
 docker container run -d -p 8000:80 nginx
 docker container exec -it CONTAINER bash
 ```
 
-Inside, we want to run a longer running process, like pinging itself 100 times.
+Inside, we want to run a longer running process, like pinging the container 100 times.
 Because containers only have the bare minimum installed, we need to first install ping, and then use it:
 
 ```bash
@@ -34,7 +34,8 @@ apt-get update && apt-get install iputils-ping -y
 ping 127.0.0.1 -c 100 > /tmp/ping
 ```
 
-Then detach from the container with `Ctrl+p Ctrl+q` and run the following:
+Then detach from the container with `Ctrl+p Ctrl+q`.
+Now that we have detached from the container, we can open a new shell in the container again with the `exec` command, and `tail` (tail prints the file contents to the terminal) the contents of the ping output file:
 
 ```bash
 docker container exec -it CONTAINER bash

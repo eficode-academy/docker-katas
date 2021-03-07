@@ -36,12 +36,12 @@ sofus@Praq-Sof:~/git/docker-exercises$ docker container run -p 8080:80 nginx
 
 Press **control + c** in your terminal window to stop your container.
 
-## Working with your docker container
+## Running the webserver container in the background
 
-When running a webserver like nginx, it's pretty useful that you do not have to have an open session into the server at all times to run it.
-We need to make it run in the background, freeing up our terminal for other things.
-Docker enables this with the `-d` parameter for run.
-`docker container run -p 8080:80 -d nginx`
+When running a webserver like nginx, it is very useful to not run the container in the foreground of our terminal.
+Instead we should make it run in the background, freeing up our terminal for other things.
+Docker enables this with the `-d` parameter for the `run` command.
+For example: `docker container run -d -p 8080:80 nginx`
 
 ```bash
 sofus@Praq-Sof:~/git/docker-exercises$ docker container run -p 8080:80 -d nginx
