@@ -17,9 +17,9 @@ docker container run -d -p 8000:80 nginx
 661c6dd59d78b97f8142d67eff6b1d58fbbd42247900241e08f46abdbad19f06
 ```
 
-Try to attach to the container. Exit it, and browse the webpage again to verify that it is no longer serving (since we stopped the webserver by exitting the container).
+Try to attach to the container. Exit it using `Ctrl+C`, and browse to the webpage again to verify that it is no longer serving (since we stopped the webserver by exiting the container).
 
-Step into a new container by executing a bash inside the container:
+Step into a new container by executing a bash shell inside the container:
 
 ```bash
 docker container run -d -p 8000:80 nginx
