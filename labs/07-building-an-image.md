@@ -97,7 +97,7 @@ It is a simple way to automate the image creation process. The best part is that
     > about which ports are intended to be published.
     > You need the `-p`/`-P` command to actually open the host ports.
 
-1. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
+1. The last step is the command for running the application which is simply - `python3 ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
     ```docker
     CMD ["python3", "/usr/src/app/app.py"]
@@ -355,7 +355,7 @@ bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  s
 root@cc5490748b2a:/# ls /usr/src/app/
 app.py  requirements.txt
 
-root@cc5490748b2a:/# python /usr/src/app/app.py
+root@cc5490748b2a:/# python3 /usr/src/app/app.py
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
 ```
@@ -369,7 +369,7 @@ If you make a `docker container ls -a` command, you can now see a container with
 ```bash
 sofus@Praq-Sof:/4$ docker container ls -a
 CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS                      PORTS                                                          NAMES
-fcfba2dfb8ee        myfirstapp                "python /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
+fcfba2dfb8ee        myfirstapp                "python3 /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
 ```
 
 Make a `docker image ls` command to see that you have a docker image with the name `myfirstapp`
