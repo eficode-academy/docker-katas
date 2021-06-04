@@ -10,3 +10,8 @@ Before the docker CLI sends the context to the docker daemon, it looks for a fil
 
 [Hadolint](https://hadolint.github.io/hadolint/) highlights dubious constraints in your `Dockerfile`. 
 The linter uses the principles described in [Docker's documentation on best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) as the basis for the suggestions.
+
+## Consider security when building images
+
+[Snyk](https://snyk.io/blog/10-docker-image-security-best-practices/) wrote a blog with 10 things that you should consider when building images. They consider adding a label for the security policy of
+the image, using a linter (as described above), and [signing docker images](https://docs.docker.com/notary/getting_started/).
