@@ -8,5 +8,6 @@ Before the docker CLI sends the context to the docker daemon, it looks for a fil
 
 ## Lint your Dockerfile
 
-[Hadolint](https://hadolint.github.io/hadolint/) highlights dubious constraints in your `Dockerfile`. 
+[Hadolint](https://hadolint.github.io/hadolint/) highlights dubious constraints in your `Dockerfile`.
+
 The linter uses the principles described in [Docker's documentation on best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) as the basis for the suggestions.
