@@ -7,8 +7,10 @@ services:
     ports:
       - 8080:80
     environment:
+      - WORDPRESS_DB_USER=root
       - WORDPRESS_DB_PASSWORD=wordpress
       - WORDPRESS_DB_HOST=mysql_container
+      - WORDPRESS_DB_NAME=wordpressdb
     depends_on:
       - mysql_container
 
@@ -16,3 +18,4 @@ services:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_DATABASE=wordpressdb
