@@ -21,7 +21,7 @@ Open a web browser and go to port 8080 on your host. The exact address will depe
 
 * **Native Linux** - [http://localhost:8080](http://localhost:8080)
 * **Cloud server** - Make sure firewall rules are configured to allow traffic on port 8080. Open browser and use the hostname (or IP) for your server.
-Ex: [http://ec2-54-69-126-146.us-west-2.compute.amazonaws.com:8080](http://ec2-54-69-126-146.us-west-2.compute.amazonaws.com:8080) -
+Ex: [http://inst1.training.eficode.academy:8080](http://inst1.training.eficode.academy:8080) -
 Alternatively open a new shell and issue `curl localhost:8080`
 * **Google Cloud Shell** - Open Web Preview (upper right corner)
 
