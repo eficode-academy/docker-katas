@@ -33,10 +33,10 @@ Details:
   CMD ["/bin/bash", "echo", "Hello World"]
 ```
 
-- `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker container inspect <container-id>`.
+- `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker inspect <container-id>`.
 
 > **Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
-publishing ports by means of the `-p` or `-P` flag when using `$ docker container run`.
+> publishing ports by means of the `-p` or `-P` flag when using `$ docker run`.
 
 - `ENTRYPOINT` configures a command that will run no matter what the user specifies at runtime.
 
@@ -50,86 +50,86 @@ As mentioned above, all user images are based on a _base image_. Since our appli
 
 A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file containing a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up.
 
-It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are *almost* identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
+It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are _almost_ identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
 
 1. Create a file called **Dockerfile**, and add content to it as described below. We have made a small boilerplate file and app for you in the [/building-an-image](./building-an-image/) folder, so head over there.
 
-    > If you want to make a file from scratch, you can use the linux command `touch <filename>` to create an empty file, and the text editor `nano <filename>` to manipulate the file.
+   > If you want to make a file from scratch, you can use the linux command `touch <filename>` to create an empty file, and the text editor `nano <filename>` to manipulate the file.
 
-    We'll start by specifying our base image, using the `FROM` keyword:
+   We'll start by specifying our base image, using the `FROM` keyword:
 
-    ```docker
-    FROM ubuntu:latest
-    ```
+   ```docker
+   FROM ubuntu:latest
+   ```
 
 1. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
 
-    ```docker
-    RUN apt-get update -y
-    RUN apt-get install -y python3 python3-pip python3-dev build-essential
-    ```
+   ```docker
+   RUN apt-get update -y
+   RUN apt-get install -y python3 python3-pip python3-dev build-essential
+   ```
 
 1. Let's add the files that make up the Flask Application.
 
-    Install all Python requirements for our app to run. This will be accomplished by adding the lines:
+   Install all Python requirements for our app to run. This will be accomplished by adding the lines:
 
-    ```docker
-    COPY requirements.txt /usr/src/app/
-    RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
-    ```
+   ```docker
+   COPY requirements.txt /usr/src/app/
+   RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
+   ```
 
-    Copy the application app.py into our image by using the [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
+   Copy the application app.py into our image by using the [COPY](https://docs.docker.com/engine/reference/builder/#copy) command.
 
-    ```docker
-    COPY app.py /usr/src/app/
+   ```docker
+   COPY app.py /usr/src/app/
 
-    ```
+   ```
 
 1. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
 
-    ```docker
-    EXPOSE 5000
-    ```
+   ```docker
+   EXPOSE 5000
+   ```
 
-    > The `EXPOSE` instruction does not actually publish the port.
-    > It functions as a type of documentation between the person who builds the
-    > image and the person who runs the container,
-    > about which ports are intended to be published.
-    > You need the `-p`/`-P` command to actually open the host ports.
+   > The `EXPOSE` instruction does not actually publish the port.
+   > It functions as a type of documentation between the person who builds the
+   > image and the person who runs the container,
+   > about which ports are intended to be published.
+   > You need the `-p`/`-P` command to actually open the host ports.
 
 1. The last step is the command for running the application which is simply - `python3 ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
-    ```docker
-    CMD ["python3", "/usr/src/app/app.py"]
-    ```
+   ```docker
+   CMD ["python3", "/usr/src/app/app.py"]
+   ```
 
-    The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
+   The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
 
 1. Verify your Dockerfile.
 
-    Our `Dockerfile` is now ready. This is how it looks:
+   Our `Dockerfile` is now ready. This is how it looks:
 
-    ```docker
-    # The base image
-    FROM ubuntu:latest
+   ```docker
+   # The base image
+   FROM ubuntu:latest
 
-    # Install python and pip
-    RUN apt-get update -y
-    RUN apt-get install -y python3 python3-pip python3-dev build-essential
+   # Install python and pip
+   RUN apt-get update -y
+   RUN apt-get install -y python3 python3-pip python3-dev build-essential
 
-    # Install Python modules needed by the Python app
-    COPY requirements.txt /usr/src/app/
-    RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
+   # Install Python modules needed by the Python app
+   COPY requirements.txt /usr/src/app/
+   RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
 
-    # Copy files required for the app to run
-    COPY app.py /usr/src/app/
+   # Copy files required for the app to run
+   COPY app.py /usr/src/app/
 
-    # Declare the port number the container should expose
-    EXPOSE 5000
+   # Declare the port number the container should expose
+   EXPOSE 5000
 
-    # Run the application
-    CMD ["python3", "/usr/src/app/app.py"]
-    ```
+   # Run the application
+   CMD ["python3", "/usr/src/app/app.py"]
+   ```
 
 ### Build the image
 
@@ -261,7 +261,7 @@ The next step in this section is to run the image and see if it actually works.
 
 ```bash
 
-$ docker container run -p 8888:5000 --name myfirstapp myfirstapp
+$ docker run -p 8888:5000 --name myfirstapp myfirstapp
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
@@ -330,7 +330,7 @@ Removing intermediate container 61a68a949d68
 Step 7/8 : EXPOSE 5000
  ---> Running in 1f939928b7d5
  ---> 6c14a93b72f2
- ```
+```
 
 So what docker actually does is
 
@@ -343,7 +343,7 @@ in a loop untill all the commands have been made.
 Try to create a container from your `COPY app.py /usr/src/app/` command.
 The id of the layer will likely be different than the example above.
 
-`docker container run -ti -p 5000:5000 6ed47d3c544a bash`.
+`docker run -ti -p 5000:5000 6ed47d3c544a bash`.
 
 You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 
@@ -364,10 +364,10 @@ And just like the image you built above, you can browse the website now.
 
 ### Delete your image
 
-If you make a `docker container ls -a` command, you can now see a container with the name *myfirstapp* from the image named *myfirstapp*.
+If you make a `docker ps -a` command, you can now see a container with the name _myfirstapp_ from the image named _myfirstapp_.
 
 ```bash
-sofus@Praq-Sof:/4$ docker container ls -a
+sofus@Praq-Sof:/4$ docker ps -a
 CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS                      PORTS                                                          NAMES
 fcfba2dfb8ee        myfirstapp                "python3 /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
 ```
@@ -388,11 +388,11 @@ Here is the list of all the instructions that can be used in a Dockerfile:
 - [FROM](https://docs.docker.com/engine/reference/builder/#from) Sets the Base Image for subsequent instructions.
 - [RUN](https://docs.docker.com/engine/reference/builder/#run) execute any commands in a new layer on top of the current image and commit the results.
 - [CMD](https://docs.docker.com/engine/reference/builder/#cmd) provide defaults for an executing container.
-- [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose) informs Docker that the container listens on the specified network ports at runtime.  NOTE: does not actually make ports accessible.
+- [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose) informs Docker that the container listens on the specified network ports at runtime. NOTE: does not actually make ports accessible.
 - [ENV](https://docs.docker.com/engine/reference/builder/#env) sets environment variable.
-- [ADD](https://docs.docker.com/engine/reference/builder/#add) copies new files, directories or remote file to container.  Invalidates caches. Avoid `ADD` and use `COPY` instead.
-- [COPY](https://docs.docker.com/engine/reference/builder/#copy) copies new files or directories to container.  Note that this only copies as root, so you have to chown manually regardless of your USER / WORKDIR setting.
-See [https://github.com/moby/moby/issues/301109](https://github.com/moby/moby/issues/30110)
+- [ADD](https://docs.docker.com/engine/reference/builder/#add) copies new files, directories or remote file to container. Invalidates caches. Avoid `ADD` and use `COPY` instead.
+- [COPY](https://docs.docker.com/engine/reference/builder/#copy) copies new files or directories to container. Note that this only copies as root, so you have to chown manually regardless of your USER / WORKDIR setting.
+  See [https://github.com/moby/moby/issues/301109](https://github.com/moby/moby/issues/30110)
 - [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) configures a container that will run as an executable.
 - [VOLUME](https://docs.docker.com/engine/reference/builder/#volume) creates a mount point for externally mounted volumes or other containers.
 - [USER](https://docs.docker.com/engine/reference/builder/#user) sets the user name for following RUN / CMD / ENTRYPOINT commands.

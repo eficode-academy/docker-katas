@@ -10,13 +10,13 @@ In this exercise, we want to change a file in an already running container, by e
 
 ### Step by step
 
-- Spin up a new NGINX container: `docker container run -d -p 8000:80 nginx`
+- Spin up a new NGINX container: `docker run -d -p 8000:80 nginx`
 - Visit the webpage to make sure that NGINX have been setup correctly.
 
 Step into a new container by executing a bash shell inside the container:
 
 ```bash
-docker container exec -it CONTAINERNAME bash
+docker exec -it CONTAINERNAME bash
 ```
 
 > :bulb: note that the CONTAINERNAME is the name of the NGINX container you just started.
