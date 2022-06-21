@@ -4,46 +4,36 @@
 
 > NB: requires docker version 17.05
 
-Imagine you have the following go application.
-
-`hello.go`
-
-```go
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello world!")
-}
-```
+In [multi-stage-build/hello.go](multi-stage-build/hello.go) we have created a small go application that writes out `hello world`.
 
 You want to containerize it. That's easy!
+
     You don't even have to have go installed,
     because you can just use a `base image`
     that has go!
 
-`Dockerfile`
+The [Dockerfile](multi-stage-build/Dockerfile) is already created for you in the same folder.
 
-```Dockerfile
-FROM golang:1.13.2
-WORKDIR /app
-ADD . /app
-RUN cd /app && go build -o goapp
-ENTRYPOINT ./goapp
-```
+## Exercise
 
-Try building the image with `docker build` and run it.
-    You should see "Hello world!" printed to the console
+* Try building the image with `docker build` 
+* Try run run it.
+    * You should see "Hello world!" printed to the console
 
 ## Using Multi Stage Builds
 
-Now try `docker image ls`.
-    Could we make it smaller?
+The image we build have both the compiler and the binary, which is too much: the only thing we need is just our binary.
+
+By utilizing multi-stage builds, we can seperate compilation image from running image.
+
+## Exercise
+
+* try `docker image ls`.
+    * Could we make it smaller?
     We only need the compiler on build-time,
     since go is a statically compiled language.
 
-See the following `Dockerfile`, it has two `build stages`,
+* See the following `Dockerfile`, it has two `build stages`,
     wherein the latter stage is using the compiled artifacts from the first,
 
 ```Dockerfile
@@ -59,12 +49,12 @@ COPY --from=builder /src/goapp /app/
 ENTRYPOINT ./goapp
 ```
 
-Try building it with a different tag and running it.
-    It should still print "Hello world!" to your console.
+* Replace the original `Dockerfile` content and try building it with a different tag and running it.
+    * It should still print "Hello world!" to your console.
 
-Try inspecting the size with `docker image ls`.
+* Try inspecting the size with `docker image ls`.
 
-Compare the size of the two images.
+* Compare the size of the two images.
     The latter image should be much smaller,
     since it's just containing the go-application using `alpine` as the `base image`,
     and not the entire `golang`-suite of tools.
