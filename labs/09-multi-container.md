@@ -18,13 +18,12 @@ Both containers already exists on the dockerhub: [Wordpress](https://hub.docker.
 To start a mysql container, issue the following command
 
 ```bash
-docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
+docker run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
 ```
 
 Let's recap what this command does:
 
 - `docker` invokes the docker engine
-- `container` manage the container part of docker
 - `run` tells docker to run a new container off an image
 - `--name mysql-container` gives the new container a name for better referencing
 - `--rm` tells docker to remove the container after it is stopped
@@ -42,7 +41,7 @@ You can either use the external IP address of your server, or the docker host IP
 After you have noted down the IP, spin up the wordpress container with the host IP as a variable:
 
 ```bash
-docker container run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+docker run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
 ```
 
 You can now browse to the IP:8080 and have your very own wordpress server running. Since port 3306 is the default MySQL port, wordpress will try to connect on that port by itself.
@@ -69,10 +68,10 @@ Docker will return the `networkID` for the newly created network. You can refere
 Now you need to connect the two containers to the network, by adding the `--network` option:
 
 ```bash
-docker container run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
+docker run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
 af38acac52301a7c9689d708e6c3255704cdffb1972bcc245d67b02840983a50
 
-docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
 fd4fd096c064094d7758cefce41d0f1124e78b86623160466973007cf0af8556
 ```
 
@@ -131,16 +130,16 @@ As, we have linked both the container now wordpress container can be accessed fr
 
 Close both of the containers down by issuing the following command:
 
-`docker container stop wordpress-container mysql-container`
+`docker stop wordpress-container mysql-container`
 
 ## Using Docker compose
 
 If you have started working with Docker and are building container images for your application services, you most likely have noticed that after a while you may end up writing long `docker container run` commands.
 These commands, while very intuitive, can become cumbersome to write, especially if you are developing a multi-container applications and spinning up containers quickly.
 
-[Docker Compose](https://docs.docker.com/compose/install/) is a “*tool for defining and running your multi-container Docker applications*”.
+[Docker Compose](https://docs.docker.com/compose/install/) is a “_tool for defining and running your multi-container Docker applications_”.
 
-Your applications can be defined in a YAML file where all the options that you used in `docker container run` are defined.
+Your applications can be defined in a YAML file where all the options that you used in `docker run` are defined.
 
 Compose also allows you to manage your application as a single entity rather than dealing with individual containers.
 
@@ -155,7 +154,7 @@ This file defines all of the containers and settings you need to launch your set
   - `down` : stops and removes containers, networks, images, and volumes
   - `restart` :
   - `logs` : streams the acummulated logs from all the containers in the compose file
-  - `ps` : same as pure `docker container` variant; shows you all containers that are currently running.
+  - `ps` : same as `docker ps`; shows you all containers that are currently running.
   - `rm` : removes all the containers from the given compose file.
   - `start` : starts the services
   - `stop` : stops the services
@@ -185,11 +184,10 @@ Open the file `docker.compose.yaml` with a text editor:
 You should see something like this:
 
 ```yaml
-version: '3.1'
+version: "3.1"
 
 services:
-
-#  wordpress_container:
+  #  wordpress_container:
 
   mysql_container:
     image: mysql:5.7

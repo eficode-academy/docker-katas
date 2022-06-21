@@ -2,7 +2,7 @@
 
 Try running a command with Docker:
 
-`docker container run hello-world`
+`docker run hello-world`
 
 Your terminal output should look like this:
 
@@ -38,6 +38,6 @@ This message shows that your installation appears to be working correctly.
 
 _*Q: So what did this do?*_
 
-Try to run `docker container run hello-world` again.
+Try to run `docker run hello-world` again.
 
 Docker has now already downloaded the image locally, and can therefore execute the container straight away.

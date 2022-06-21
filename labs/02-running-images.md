@@ -5,7 +5,7 @@ Now that you have everything setup, it's time to get your hands dirty. In this s
 To get started, let's run the following in our terminal:
 
 ```bash
-docker image pull alpine
+docker pull alpine
 ```
 
 > **Note:** Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. You may need to prefix your `docker` commands with `sudo` as stated before. Alternatively you can [create a docker group](https://docs.docker.com/engine/installation/linux/linux-postinstall/) to get rid of this issue.
@@ -19,12 +19,12 @@ alpine                  latest              c51f86c28340        4 weeks ago     
 hello-world             latest              690ed74de00f        5 months ago        960 B
 ```
 
-## 1.1 docker container run
+## 1.1 docker run
 
 Great! Now let's run a Docker **container** based on this image. To do that you are going to use the `docker container run` command.
 
 ```bash
-$ docker container run alpine ls -l
+$ docker run alpine ls -l
 total 48
 drwxr-xr-x    2 root     root          4096 Mar  2 16:20 bin
 drwxr-xr-x    5 root     root           360 Mar 18 09:47 dev
@@ -41,12 +41,12 @@ What happened? Behind the scenes, a lot of stuff happened. When you call `run`,
 2. The Docker daemon creates the container and then runs a command in that container.
 3. The Docker daemon streams the output of the command to the Docker client
 
-When you run `docker container run alpine`, you provided a command (`ls -l`), so Docker started the command specified and you saw the listing.
+When you run `docker run alpine`, you provided a command (`ls -l`), so Docker started the command specified and you saw the listing.
 
 Let's try something more exciting.
 
 ```bash
-$ docker container run alpine echo "hello from alpine"
+$ docker run alpine echo "hello from alpine"
 hello from alpine
 ```
 
@@ -55,24 +55,24 @@ OK, that's some actual output. In this case, the Docker client dutifully ran the
 Try another command.
 
 ```bash
-docker container run alpine /bin/sh
+docker run alpine /bin/sh
 ```
 
-Wait, nothing happened! Is that a bug? Well, no. These interactive shells will exit after running any scripted commands, unless they are run in an interactive terminal - so for this example to not exit, you need to `docker container run -it alpine /bin/sh`.
+Wait, nothing happened! Is that a bug? Well, no. These interactive shells will exit after running any scripted commands, unless they are run in an interactive terminal - so for this example to not exit, you need to `docker run -it alpine /bin/sh`.
 
 You are now inside the container shell and you can try out a few commands like `ls -l`, `uname -a` and others. Exit out of the container by giving the `exit` command.
 
-Ok, now it's time to see the `docker container ls` command. The `docker container ls` command shows you all containers that are currently running.
+Ok, now it's time to see the `docker ps` command. The `docker ps` command shows you all containers that are currently running.
 
 ```bash
-$ docker container ls
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
-Is _this_ a bug? Also no; when you wrote `exit` in the shell, the process stopped. No containers are running, you see a blank line. Let's try a more useful variant: `docker container ls -a`
+Is _this_ a bug? Also no; when you wrote `exit` in the shell, the process stopped. No containers are running, you see a blank line. Let's try a more useful variant: `docker ps -a`
 
 ```bash
-$ docker container ls -a
+$ docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 36171a5da744        alpine              "/bin/sh"                5 minutes ago       Exited (0) 2 minutes ago                        fervent_newton
 a6a9d46d0b2f        alpine              "echo 'hello from alp"   6 minutes ago       Exited (0) 6 minutes ago                        lonely_kilby
@@ -88,10 +88,10 @@ Note: the flags `-it` are short for `-i -t` which again are the short forms of `
 
 ## Naming your container
 
-Take a look again at the output of the `docker container ls -a`:
+Take a look again at the output of the `docker ps -a`:
 
 ```bash
-$ docker container ls -a
+$ docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 36171a5da744        alpine              "/bin/sh"                5 minutes ago       Exited (0) 2 minutes ago                        fervent_newton
 a6a9d46d0b2f        alpine              "echo 'hello from alp"   6 minutes ago       Exited (0) 6 minutes ago                        lonely_kilby
@@ -104,4 +104,4 @@ If you want to assign a specific name to a container then you can use the `--nam
 
 ## Summary
 
-That concludes a whirlwind tour of the `docker container run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker container run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker container run`.
+That concludes a whirlwind tour of the `docker run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker run`.

@@ -1,6 +1,6 @@
 # Docker volumes
 
-> *Hint: This lab only covers volumes on Docker for Linux. If you are on windows or mac, things can look different.*
+> _Hint: This lab only covers volumes on Docker for Linux. If you are on windows or mac, things can look different._
 
 Not everything can be in a container. The whole idea is that you can start, stop and delete the containers without losing data.
 
@@ -24,8 +24,8 @@ The server itself is of little use, if it cannot access our web content on the h
 
 We need to create a mapping between the host system, and the container with the `-v` command:
 
-``` bash
-docker container run --name some-nginx -v /some/content:/usr/share/nginx/html:ro -d nginx
+```bash
+docker run --name some-nginx -v /some/content:/usr/share/nginx/html:ro -d nginx
 ```
 
 That will map whatever files are in the `/some/content` folder on the host to `/usr/share/nginx/html` in the container.
@@ -34,32 +34,32 @@ That will map whatever files are in the `/some/content` folder on the host to `/
 
 Try to do the following:
 
-* `git clone` this repository down
-    * If you are at training the repository is most likely already cloned on your training VM.
-* Navigate to the `labs/volumes/` directory, which contains a file we can try to serve: `index.html`.
-* We need change `/some/content` to the right path, it must be an absolute path, starting from the root of the filesystem, (which in linux is `/`). You can use the command `pwd` (Print working directory) to display the path to where you are.
-* Now try to run the container with the `labs/volumes` directory bind mounted.
+- `git clone` this repository down
+  - If you are at training the repository is most likely already cloned on your training VM.
+- Navigate to the `labs/volumes/` directory, which contains a file we can try to serve: `index.html`.
+- We need change `/some/content` to the right path, it must be an absolute path, starting from the root of the filesystem, (which in linux is `/`). You can use the command `pwd` (Print working directory) to display the path to where you are.
+- Now try to run the container with the `labs/volumes` directory bind mounted.
 
 This will give you a nginx server running, serving your static files... _But on which port?_
 
-* Run a `docker container ls` command to find out if it has any ports forwarded from the host.
+- Run a `docker ps` command to find out if it has any ports forwarded from the host.
 
 Remember the [past exercise](04-port-forward.md) on port forwarding in Docker.
 
-* Make it host the site on port 8000
-* Check that it is running by navigating to the hostname or IP with your browser, and on port 8000.
+- Make it host the site on port 8000
+- Check that it is running by navigating to the hostname or IP with your browser, and on port 8000.
 
 ## Volumes
 
 Volumes are entities inside docker, and can be created in three different ways.
 
-* By explicitly creating it with the `docker volume create <volume_name>` command
-* By creating a named volume at container creation time with `docker container run -d -v DataVolume:/opt/app/data nginx`
-* By creating an anonymous volume at container creation time with `docker container run -d -v /opt/app/data nginx`
+- By explicitly creating it with the `docker volume create <volume_name>` command
+- By creating a named volume at container creation time with `docker container run -d -v DataVolume:/opt/app/data nginx`
+- By creating an anonymous volume at container creation time with `docker container run -d -v /opt/app/data nginx`
 
 First off, lets try to make a data volume called `data`:
 
-``` bash
+```bash
 docker volume create data
 ```
 
@@ -114,7 +114,7 @@ Multiple containers can attach to the same volume with data. Docker doesn't hand
 Let's try to go in and make a new html page for nginx to serve. We do this by making a new ubuntu container that has the `data` volume attached to `/tmp`, and thereafter create a new html file with the `echo` command:
 
 ```bash
-docker container run -ti --rm -v data:/tmp ubuntu bash
+docker run -ti --rm -v data:/tmp ubuntu bash
 root@9c36fcfcc048:# echo "<html><h1>hello world</h1></html>" > /tmp/hello.html
 root@9c36fcfcc048:# ls /tmp
 hello.html  50x.html  index.html
@@ -124,12 +124,12 @@ Head over to your newly created webpage at: `http://<IP>:8080/hello.html`
 
 ## cleanup
 
-Exit out of your ubuntu server and execute a `docker container stop www` to stop the nginx container.
+Exit out of your ubuntu server and execute a `docker stop www` to stop the nginx container.
 
-Run a `docker container ls` to make sure that no other containers are running.
+Run a `docker ps` to make sure that no other containers are running.
 
 ```bash
-docker container ls
+docker ps
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                          NAMES
 ```
 
@@ -139,8 +139,8 @@ The data volume is still present, and will be there until you remove it with a `
 
 As you have seen, the `-v` flag can both create a bind mount or name a volume depending on the syntax. If the first argument begins with a / or ~/ you're creating a bind mount. Remove that, and you're naming the volume. For example:
 
-* `-v /path:/path/in/container` mounts the host directory, `/path` at the `/path/in/container`
-* `-v path:/path/in/container` creates a volume named path with no relationship to the host.
+- `-v /path:/path/in/container` mounts the host directory, `/path` at the `/path/in/container`
+- `-v path:/path/in/container` creates a volume named path with no relationship to the host.
 
 ### Sharing data
 
@@ -150,13 +150,13 @@ If you want to share volumes or bind mount between two containers, then use the 
 
 Before you go on, use the [Docker command line interface](https://docs.docker.com/engine/reference/commandline/cli/) documentation to try a few more commands:
 
-* While your detached container is running, use the ``docker container ls`` command to see what silly name Docker gave your container. **This is one command you're going to use often!**
-* While your detached container is still running, look at its logs. Try following its logs and refreshing your browser.
-* Stop your detached container, and confirm that it is stopped with the `ls` command.
-* Start it again, wait 10 seconds for it to fire up, and stop it again.
-* Then delete that container from your system.
+- While your detached container is running, use the `docker ps` command to see what silly name Docker gave your container. **This is one command you're going to use often!**
+- While your detached container is still running, look at its logs. Try following its logs and refreshing your browser.
+- Stop your detached container, and confirm that it is stopped with the `ls` command.
+- Start it again, wait 10 seconds for it to fire up, and stop it again.
+- Then delete that container from your system.
 
-> **NOTE:** When running most docker commands, you only need to specify the first few characters of a container's ID. For example, if a container has the ID ``df4fd19392ba``, you can stop it with ``docker container stop df4``. You can also use the silly names Docker provides containers by default, such as ``boring_bardeen``.
+> **NOTE:** When running most docker commands, you only need to specify the first few characters of a container's ID. For example, if a container has the ID `df4fd19392ba`, you can stop it with `docker stop df4`. You can also use the silly names Docker provides containers by default, such as `boring_bardeen`.
 
 If you want to read more, I recommend [Digital Oceans](https://www.digitalocean.com/community/tutorials/how-to-share-data-between-docker-containers) guides to sharing data through containers, as well as Dockers own article about [volumes](https://docs.docker.com/engine/admin/volumes).
 

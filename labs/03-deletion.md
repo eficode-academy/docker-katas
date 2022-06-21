@@ -4,7 +4,7 @@ As containers are just a thin base layer on top of the host kernel, it is really
 
 Let's try to run an alpine container and delete the file system.
 
-Spin up the container with `docker container run -ti alpine`
+Spin up the container with `docker run -ti alpine`
 
 list all the folders on the root level to see the whole distribution:
 
@@ -14,7 +14,7 @@ bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
 
-> **Warning:** Do never try to run the following command as a super user in your own environment, as it will delete *everything* on your computer.
+> **Warning:** Do never try to run the following command as a super user in your own environment, as it will delete _everything_ on your computer.
 
 Now, delete the whole file system with `rm -rf /`
 
@@ -32,7 +32,7 @@ Try to navigate around to see how much of the OS is gone
 Exit out by `Ctrl+D` and create a new instance of the Alpine image and look a bit around:
 
 ```
-$ docker container run -ti alpine
+$ docker run -ti alpine
 ls /
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
@@ -43,7 +43,7 @@ Try to perform the same tasks as displayed above to see that you have a fresh ne
 ## Auto-remove a container after use
 
 Every time you create a new container, it will take up some space, even though it usually is minimal.
-To see what your containers are taking up of space try to run the `docker container ls -as` command.
+To see what your containers are taking up of space try to run the `docker ls -as` command.
 
 ```bash
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES               SIZE
@@ -53,15 +53,15 @@ CONTAINER ID        IMAGE                     COMMAND                  CREATED  
 Here you can see that the alpine image itself takes 3.97MB, and the container itself takes 0B. When you begin to manipulate files in your container, the size of the container will rise.
 
 If you are creating a lot of new containers eg. to test something, you can tell the Docker daemon to remove the container once stopped with the `--rm` option:
-`docker container run --rm -it alpine`
+`docker run --rm -it alpine`
 
 This will remove the container immediately after it is stopped.
 
 ## Cleaning up containers you do not use anymore
 
 Containers are still persisted, even though they are stopped.
-If you want to delete them from your server you need to use the `docker container rm` command.
-`docker container rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
+If you want to delete them from your server you need to use the `docker rm` command.
+`docker rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
 
 ```bash
 sofus@Praq-Sof:~/git/docker-exercises$ docker container ls -a
@@ -110,10 +110,10 @@ Docker provides a `prune` command, taking all dangling containers/images/network
 
 > You need version `1.13` or newer to have access to pruning.
 
-* `docker container prune`
-* `docker image prune`
-* `docker network prune`
-* `docker volume prune`
+- `docker container prune`
+- `docker image prune`
+- `docker network prune`
+- `docker volume prune`
 
 The docker image prune command allows you to clean up unused images. By default, docker image prune only cleans up dangling images. A dangling image is one that is not tagged and is not referenced by any container. To remove all _unused_ resources, resources that are not directly used by any existing containers, use the `-a` switch as well.
 
