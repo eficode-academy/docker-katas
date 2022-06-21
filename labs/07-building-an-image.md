@@ -36,7 +36,7 @@ Details:
 - `EXPOSE` creates a hint for users of an image that provides services on ports. It is included in the information which can be retrieved via `$ docker container inspect <container-id>`.
 
 > **Note:** The `EXPOSE` command does not actually make any ports accessible to the host! Instead, this requires
-publishing ports by means of the `-p` or `-P` flag when using `$ docker container run`.
+publishing ports by means of the `-p` or `-P` flag when using `$ docker run`.
 
 - `ENTRYPOINT` configures a command that will run no matter what the user specifies at runtime.
 
@@ -261,7 +261,7 @@ The next step in this section is to run the image and see if it actually works.
 
 ```bash
 
-$ docker container run -p 8888:5000 --name myfirstapp myfirstapp
+$ docker run -p 8888:5000 --name myfirstapp myfirstapp
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
@@ -343,7 +343,7 @@ in a loop untill all the commands have been made.
 Try to create a container from your `COPY app.py /usr/src/app/` command.
 The id of the layer will likely be different than the example above.
 
-`docker container run -ti -p 5000:5000 6ed47d3c544a bash`.
+`docker run -ti -p 5000:5000 6ed47d3c544a bash`.
 
 You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 

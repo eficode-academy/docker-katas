@@ -25,7 +25,7 @@ The server itself is of little use, if it cannot access our web content on the h
 We need to create a mapping between the host system, and the container with the `-v` command:
 
 ``` bash
-docker container run --name some-nginx -v /some/content:/usr/share/nginx/html:ro -d nginx
+docker run --name some-nginx -v /some/content:/usr/share/nginx/html:ro -d nginx
 ```
 
 That will map whatever files are in the `/some/content` folder on the host to `/usr/share/nginx/html` in the container.
@@ -54,8 +54,8 @@ Remember the [past exercise](04-port-forward.md) on port forwarding in Docker.
 Volumes are entities inside docker, and can be created in three different ways.
 
 * By explicitly creating it with the `docker volume create <volume_name>` command
-* By creating a named volume at container creation time with `docker container run -d -v DataVolume:/opt/app/data nginx`
-* By creating an anonymous volume at container creation time with `docker container run -d -v /opt/app/data nginx`
+* By creating a named volume at container creation time with `docker run -d -v DataVolume:/opt/app/data nginx`
+* By creating an anonymous volume at container creation time with `docker run -d -v /opt/app/data nginx`
 
 First off, lets try to make a data volume called `data`:
 
@@ -94,7 +94,7 @@ You can see that the `data` volumes is mounted at `/var/lib/docker/volumes/data/
 
 > **Note** we will not go through the different drivers. For more info look at Dockers own [example](https://docs.docker.com/engine/admin/volumes/volumes/#use-a-volume-driver).
 
-You can now use this data volume in all containers. Try to mount it to an nginx server with the `docker container run --rm --name www -d -p 8080:80 -v data:/usr/share/nginx/html nginx` command.
+You can now use this data volume in all containers. Try to mount it to an nginx server with the `docker run --rm --name www -d -p 8080:80 -v data:/usr/share/nginx/html nginx` command.
 
 > **Note:** If the volume refer to is empty and we provide the path to a directory that contains data in the base image, that data will be copied into the volume.
 
@@ -114,7 +114,7 @@ Multiple containers can attach to the same volume with data. Docker doesn't hand
 Let's try to go in and make a new html page for nginx to serve. We do this by making a new ubuntu container that has the `data` volume attached to `/tmp`, and thereafter create a new html file with the `echo` command:
 
 ```bash
-docker container run -ti --rm -v data:/tmp ubuntu bash
+docker run -ti --rm -v data:/tmp ubuntu bash
 root@9c36fcfcc048:# echo "<html><h1>hello world</h1></html>" > /tmp/hello.html
 root@9c36fcfcc048:# ls /tmp
 hello.html  50x.html  index.html

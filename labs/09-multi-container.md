@@ -18,7 +18,7 @@ Both containers already exists on the dockerhub: [Wordpress](https://hub.docker.
 To start a mysql container, issue the following command
 
 ```bash
-docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
+docker run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
 ```
 
 Let's recap what this command does:
@@ -42,7 +42,7 @@ You can either use the external IP address of your server, or the docker host IP
 After you have noted down the IP, spin up the wordpress container with the host IP as a variable:
 
 ```bash
-docker container run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+docker run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
 ```
 
 You can now browse to the IP:8080 and have your very own wordpress server running. Since port 3306 is the default MySQL port, wordpress will try to connect on that port by itself.
@@ -69,10 +69,10 @@ Docker will return the `networkID` for the newly created network. You can refere
 Now you need to connect the two containers to the network, by adding the `--network` option:
 
 ```bash
-docker container run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
+docker run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
 af38acac52301a7c9689d708e6c3255704cdffb1972bcc245d67b02840983a50
 
-docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
 fd4fd096c064094d7758cefce41d0f1124e78b86623160466973007cf0af8556
 ```
 
@@ -135,12 +135,12 @@ Close both of the containers down by issuing the following command:
 
 ## Using Docker compose
 
-If you have started working with Docker and are building container images for your application services, you most likely have noticed that after a while you may end up writing long `docker container run` commands.
+If you have started working with Docker and are building container images for your application services, you most likely have noticed that after a while you may end up writing long `docker run` commands.
 These commands, while very intuitive, can become cumbersome to write, especially if you are developing a multi-container applications and spinning up containers quickly.
 
 [Docker Compose](https://docs.docker.com/compose/install/) is a “*tool for defining and running your multi-container Docker applications*”.
 
-Your applications can be defined in a YAML file where all the options that you used in `docker container run` are defined.
+Your applications can be defined in a YAML file where all the options that you used in `docker run` are defined.
 
 Compose also allows you to manage your application as a single entity rather than dealing with individual containers.
 
@@ -208,11 +208,11 @@ This is the template we are building our compose file upon so let's drill this o
 
 > For more information on docker-compose yaml files, head over to the [documentation](https://docs.docker.com/compose/overview/).
 
-The `services` part is equivalent to our `docker container run` command. Likewise there is a `network` and `volumes` section for those as well corresponding to `docker network create` and `docker volume create`.
+The `services` part is equivalent to our `docker run` command. Likewise there is a `network` and `volumes` section for those as well corresponding to `docker network create` and `docker volume create`.
 
 Let's look the mysql_container part together, making you able to create the other container yourself. Look at the original command we made to spin up the container:
 
-`docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql`
+`docker run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql`
 
 The command gives out following information: a `name`, a `port` mapping, an `environment` variable and the `image` we want to run.
 
@@ -250,12 +250,12 @@ To shut down the container and network, issue a `docker-compose down`
 
 You now have all the pieces of information to make the Wordpress container. We've copied the run command from before if you can't remember it by heart:
 
-`docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress`
+`docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress`
 
 You must
 
 - uncomment the `wordpress_container` part of the services section
-- map the pieces of information from the docker container run command to the yaml format.
+- map the pieces of information from the docker run command to the yaml format.
 - remove MySQL port mapping to close that from outside reach.
 
 When you made that, run `docker-compose up -d` and access your wordpress site from [http://IP:8080](http://IP:8080)

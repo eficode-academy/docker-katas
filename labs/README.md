@@ -7,11 +7,11 @@ Below is a cheatsheet for many of the commands we will touch uppon in the lab.
 ```bash
 docker build -t friendlyname .              # Create image using this directory's Dockerfile
 
-docker container run -p 4000:80 friendlyname    # Run "friendlyname" mapping port 4000 to 80
+docker run -p 4000:80 friendlyname    # Run "friendlyname" mapping port 4000 to 80
 
-docker container run -d -p 4000:80 friendlyname           # Same thing, but in detached mode
+docker run -d -p 4000:80 friendlyname           # Same thing, but in detached mode
 
-docker container run -ti friendlyname               # Run "friendlyname" in interactive mode
+docker run -ti friendlyname               # Run "friendlyname" in interactive mode
 
 docker container ls                                            # List all running containers
 

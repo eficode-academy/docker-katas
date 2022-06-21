@@ -10,7 +10,7 @@ And since there is always people wondering if it is production ready - .NET core
 Anyway let's get started ! 
 
 ```
-docker container run -it -p 5000:5000 microsoft/dotnet
+docker run -it -p 5000:5000 microsoft/dotnet
 ```
 
 We expose port 5000 preemptively, since that is what our app will run on. 
