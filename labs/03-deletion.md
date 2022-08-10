@@ -43,7 +43,7 @@ Try to perform the same tasks as displayed above to see that you have a fresh ne
 ## Auto-remove a container after use
 
 Every time you create a new container, it will take up some space, even though it usually is minimal.
-To see what your containers are taking up of space try to run the `docker ls -as` command.
+To see what your containers are taking up of space try to run the `docker container ls -as` command.
 
 ```bash
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES               SIZE
