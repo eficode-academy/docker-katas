@@ -265,7 +265,7 @@ $ docker run -p 8888:5000 --name myfirstapp myfirstapp
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
-Head over to `http://localhost:8888` or your server's URL and your app should be live.
+Head over to `http://<IP>:8888` or your server's URL and your app should be live.
 
 ## Images and layers
 
