@@ -343,7 +343,7 @@ in a loop untill all the commands have been made.
 Try to create a container from your `COPY app.py /usr/src/app/` command.
 The id of the layer will likely be different than the example above.
 
-`docker run -ti -p 5000:5000 6ed47d3c544a bash`.
+`docker run -ti -p 8080:5000 6ed47d3c544a bash`.
 
 You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 
