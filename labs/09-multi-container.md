@@ -36,12 +36,12 @@ Let's recap what this command does:
 MySQL is now exposing it's port 3306 on the host, and everybody can attach to it **so do not do this in production without proper security settings**.
 
 We need to connect our wordpress container to the host's IP address.
-You can either use the external IP address of your server, or the docker host IP `172.17.0.1`.
+You can either use the external IP address of your server, or the DNS name if you are at a training, e.g. `inst<num>.<training>.eficode.academy`.
 
 After you have noted down the IP, spin up the wordpress container with the host IP as a variable:
 
 ```
-docker run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+docker run --name wordpress-container --rm -e WORDPRESS_DB_HOST=inst<num>.<training>.eficode.academy -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
 ```
 
 You can now browse to the IP:8080 and have your very own wordpress server running. Since port 3306 is the default MySQL port, wordpress will try to connect on that port by itself.
