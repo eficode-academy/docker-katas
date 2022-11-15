@@ -15,7 +15,7 @@ In this exercise, we want to change a file in an already running container, by e
 
 Step into a new container by executing a bash shell inside the container:
 
-```bash
+```
 docker exec -it CONTAINERNAME bash
 ```
 
