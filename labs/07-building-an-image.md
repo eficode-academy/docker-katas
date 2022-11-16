@@ -1,12 +1,16 @@
 # Constructing a docker image
 
-Running containers others made is useful, but if you want to use docker for production, chances are you want to construct a container on your own.
+Running images others made is useful, but if you want to use docker for your own application, chances are you want to construct an image on your own.
+
+A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file containing a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up.
+
+It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are _almost_ identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
 
 ## Dockerfile commands summary
 
 Here's a quick summary of some basic commands we will use in our Dockerfile.
 
-> As a rule of thumb, all commands in CAPITAL LETTERS are intended for the docker engine.
+> As a rule of thumb, all commands in CAPITAL LETTERS are intended for the docker engine. E.g.
 
 - FROM
 - RUN
@@ -40,21 +44,17 @@ Details:
 
 - `ENTRYPOINT` configures a command that will run no matter what the user specifies at runtime.
 
+> :bulb: this is not the full list of commands, but the ones you will be using in the exercise. For a full list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+
 ## Write a Dockerfile
 
 We want to create a Docker image with a Python web app.
 
-As mentioned above, all user images are based on a _base image_. Since our application is written in Python, we will build our own Python image based on [Ubuntu](https://hub.docker.com/_/ubuntu/). We'll do that using a **Dockerfile**.
+As mentioned above, all user images are based on a _base image_. We will build our own Python image based on [Ubuntu](https://hub.docker.com/_/ubuntu/). We'll do that using a **Dockerfile**.
 
-> **Note:** If you want to learn more about Dockerfiles, check out [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+> :bulb: If you want to learn more about Dockerfiles, check out [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
 
-A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file containing a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up.
-
-It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are _almost_ identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
-
-1. Create a file called **Dockerfile**, and add content to it as described below. We have made a small boilerplate file and app for you in the [/building-an-image](./building-an-image/) folder, so head over there.
-
-   > If you want to make a file from scratch, you can use the linux command `touch <filename>` to create an empty file, and the text editor `nano <filename>` to manipulate the file.
+1. We have made a small boilerplate file and app for you in the [/building-an-image](./building-an-image/) folder, so head over there and add content to the Dockerfile as described below
 
    We'll start by specifying our base image, using the `FROM` keyword:
 
@@ -62,7 +62,7 @@ It is a simple way to automate the image creation process. The best part is that
    FROM ubuntu:latest
    ```
 
-1. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
+1. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) commands next:
 
    ```docker
    RUN apt-get update -y
@@ -91,7 +91,7 @@ It is a simple way to automate the image creation process. The best part is that
    EXPOSE 5000
    ```
 
-   > The `EXPOSE` instruction does not actually publish the port.
+   > :bulb: The `EXPOSE` instruction does not actually publish the port.
    > It functions as a type of documentation between the person who builds the
    > image and the person who runs the container,
    > about which ports are intended to be published.
@@ -107,7 +107,7 @@ It is a simple way to automate the image creation process. The best part is that
 
 1. Verify your Dockerfile.
 
-   Our `Dockerfile` is now ready. This is how it looks:
+   Our `Dockerfile` is now ready. This is how the file should look:
 
    ```docker
    # The base image
@@ -265,11 +265,13 @@ $ docker run -p 8888:5000 --name myfirstapp myfirstapp
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
+> :bulb: remember that the application is listening on port 5000 on the Docker virtual network, but on the host it is listening on port 8888.
+
 Head over to `http://<IP>:8888` or your server's URL and your app should be live.
 
 ## Images and layers
 
-When dealing with docker images, a layer, or image layer is a change on an image, or an intermediate image. Every time you run one of the commands RUN, COPY or ADD in your Dockerfile it causes the previous image to change, thus creating a new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
+When dealing with docker images, a layer, or image layer, is a change on an image. Every time you run one of the commands RUN, COPY or ADD in your Dockerfile it adds a new layer, causes the image to change to the new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
 
 Consider the following Dockerfile:
 
@@ -361,6 +363,8 @@ root@cc5490748b2a:/# python3 /usr/src/app/app.py
 ```
 
 And just like the image you built above, you can browse the website now.
+
+> :bulb: this only works for images you have build on the same machine. Images you have pulled from the Docker Hub will not have the metadata needed to create a container from a layer.
 
 ### Delete your image
 
