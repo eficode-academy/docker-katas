@@ -6,7 +6,7 @@ Pull down the `nginx` Docker image from the Docker Hub. This Docker image uses t
 
 Start a new container from the `nginx` image that exposes port 80 from the container to port 8080 on your host. You will need to use the `-p` flag with the docker container run command.
 
-> NB: Mapping ports between your host machine and your containers can get confusing.
+> :bulb: Mapping ports between your host machine and your containers can get confusing.
 > Here is the syntax you will use:
 >
 > ```bash
@@ -21,7 +21,7 @@ Open a web browser and go to port 8080 on your host. The exact address will depe
 
 - **Native Linux** - [http://localhost:8080](http://localhost:8080)
 - **Cloud server** - Make sure firewall rules are configured to allow traffic on port 8080. Open browser and use the hostname (or IP) for your server.
-  Ex: [http://inst1.training.eficode.academy:8080](http://inst1.training.eficode.academy:8080) -
+  Ex: [http://inst1.prefix.eficode.academy:8080](http://inst1.prefix.eficode.academy:8080) -
   Alternatively open a new shell and issue `curl localhost:8080`
 - **Google Cloud Shell** - Open Web Preview (upper right corner)
 
@@ -49,3 +49,14 @@ sofus@Praq-Sof:~/git/docker-exercises$ docker run -p 8080:80 -d nginx
 ```
 
 Docker prints out the container ID and returns to the terminal.
+
+Congratulations! You have just started a container in the background. :tada:
+
+## Cleanup
+
+Stop the container you just started.
+Remember that your container ID is different from the one in the example.
+
+```bash
+docker stop 78c943461b49584ebdf841f36d113567540ae460387bbd7b2f885343e7ad7554
+```
