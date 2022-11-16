@@ -2,7 +2,7 @@
 
 ## Task: create a tiny go-application container
 
-> NB: requires docker version 17.05
+> NB: requires docker version 17.05 or higher
 
 In [multi-stage-build/hello.go](multi-stage-build/hello.go) we have created a small go application that prints `hello world` to your terminal.
 
@@ -34,14 +34,16 @@ By utilizing multi-stage builds, we can separate the build stage (compiling) fro
 
 ```Dockerfile
 # build stage
-FROM golang:1.13.2 AS builder
-ADD . /src/
-RUN cd /src && go build -o goapp
+FROM golang:1.19 as builder
+WORKDIR /app
+COPY . /app
+RUN go mod download && go mod verify
+RUN cd /app && go build -o goapp
 
 # final stage
 FROM alpine
 WORKDIR /app
-COPY --from=builder /src/goapp /app/
+COPY --from=builder /app/goapp /app/
 ENTRYPOINT ./goapp
 ```
 
@@ -73,3 +75,16 @@ See: `ENTRYPOINT` under [Dockerfile reference](https://docs.docker.com/engine/re
 
 After building with your new Dockerfile, inspect the size of the images.
 Your new image should be even smaller than the alpine-based image!
+
+
+```Dockerfile
+FROM golang:1.19 as builder
+WORKDIR /app
+COPY . /app
+RUN go mod download && go mod verify
+RUN cd /app && go build -o goapp
+FROM scratch
+WORKDIR /app
+COPY --from=builder /app/goapp /app/
+ENTRYPOINT ["./goapp"]
+```

@@ -1,5 +1,6 @@
-FROM golang:1.13.2
+FROM golang:1.19 as builder
 WORKDIR /app
-ADD . /app
+COPY . /app
+RUN go mod download && go mod verify
 RUN cd /app && go build -o goapp
 ENTRYPOINT ./goapp
