@@ -74,7 +74,7 @@ local               data
 
 Unlike the bind mount, you do not specify where the data is stored on the host.
 
-In the volume API, like for almost all other of Docker’s APIs, there is an `inspect` command giving you low level details. Let’s use it against the html volume.
+In the volume API, like for almost all other of Docker’s APIs, there is an `inspect` command giving you low level details. Let’s use it against the data volume.
 
 ```bash
 docker volume inspect data
@@ -152,7 +152,7 @@ Before you go on, use the [Docker command line interface](https://docs.docker.co
 
 - While your detached container is running, use the `docker ps` command to see what silly name Docker gave your container. **This is one command you're going to use often!**
 - While your detached container is still running, look at its logs. Try following its logs and refreshing your browser.
-- Stop your detached container, and confirm that it is stopped with the `ls` command.
+- Stop your detached container, and confirm that it is stopped with the `ps` command.
 - Start it again, wait 10 seconds for it to fire up, and stop it again.
 - Then delete that container from your system.
 
