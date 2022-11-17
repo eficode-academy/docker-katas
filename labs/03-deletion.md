@@ -27,7 +27,7 @@ Now, delete the whole file system with
 rm -rf /
 ```
 
-Try to navigate around to see how much of the OS is gone: run the `ls`, `whami` and `date`.
+Try to navigate around to see how much of the OS is gone: try to run the `ls`, `whoami` and `date` commands.
 They should all echo back that the binary is not found.
 
 Exit out by pressing `Ctrl+d` and create a new instance of the Alpine image and look a bit around:
