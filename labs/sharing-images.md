@@ -7,25 +7,29 @@ Docker Hub is sort of like GitHub of Docker images. It’s the main place people
 First, create an account on the Docker Hub if you haven't already - it's free:
 [https://hub.docker.com/signup](https://hub.docker.com/signup)
 
-Then, login to that account by running the ``docker login`` command on your laptop.
+Then, login to that account by running the `docker login` command on your laptop.
 
 We're almost ready to push our Flask image up to the Docker Hub. We just need to rename it to our namespace first.
 
-Using the ``docker tag`` command, tag the image you created in the previous section to your namespace. For example, I would run:
+Using the `docker tag` command, tag the image you created in the previous section to your namespace. For example, I would run:
 
-```bash
-sofus@Praq-Sof:/tmp/4$ docker tag myfirstapp praqmasofus/myfirstapp:latest
+```
+docker tag myfirstapp <your-dockerhub-username>/myfirstapp:latest
 ```
 
-``myfirstapp`` is the tag I used in my ``docker build`` commands in the previous section, and ``praqmasofus/myfirstapp:`` is the full name of the new Docker image I want to push to the Hub.
-`praqmasofus` is my username at dockerhub, and also my namespace for all my images.
+`myfirstapp` is the tag I used in my `docker build` commands in the previous section, and `<your-dockerhub-username>/myfirstapp:` is the full name of the new Docker image I want to push to the Hub.
 The `:latest` is a versioning scheme you can append to.
 
 All that's left to do is push up your image:
 
-```bash
-sofus@Praq-Sof:/tmp/4$ docker push praqmasofus/myfirstapp
-The push refers to a repository [docker.io/praqmasofus/myfirstapp]
+```
+docker push <your-dockerhub-username>/myfirstapp
+```
+
+Expected output:
+
+```
+The push refers to a repository [docker.io/<your-dockerhub-username>/myfirstapp]
 6daf7f1140cb: Pushed
 7f74a217d86b: Pushed
 09ccfff62b13: Pushed

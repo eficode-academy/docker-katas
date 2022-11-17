@@ -2,11 +2,13 @@
 
 Try running a command with Docker:
 
-`docker run hello-world`
+```
+docker run hello-world
+```
 
 Your terminal output should look like this:
 
-```bash
+```
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 78445dd45222: Pull complete
