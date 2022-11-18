@@ -9,42 +9,60 @@ Spin up the container with `docker run -ti alpine`
 list all the folders on the root level to see the whole distribution:
 
 ```
-# ls /
+ls /
+```
+
+Expected output:
+
+```
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
+``` bash
+whoami
+```
+Expected output:
 
-Try to run some of the applications that are installed on the OS:
-
-```bash
-/ # ls
-bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
-/ # whoami
+```
 root
+```
+``` bash
 / # date
-Wed Nov 16 08:48:10 UTC 2022
 ```
 
-> **Warning:** Do never try to run the following command as a super user in your own environment, as it will delete _everything_ on your computer.
-
-Now, delete the whole file system with `rm -rf /`
-
-Try to navigate around to see how much of the OS is gone
+Expected output:
 
 ```
-# ls
-/bin/sh: ls: not found
-# whoami
-/bin/sh: whoami: not found
-# date
-/bin/sh: date: not found
+Wed Nov
 ```
 
-Exit out by `Ctrl+D` and create a new instance of the Alpine image and look a bit around:
+
+> **Warning:** Do not run the following command as a super user in your own environment, as it will delete _**everything**_ on your computer.
+
+Now, delete the whole file system with
 
 ```
-$ docker run -ti alpine
+rm -rf /
+```
+
+Try to navigate around to see how much of the OS is gone: try to run the `ls`, `whoami` and `date` commands.
+They should all echo back that the binary is not found.
+
+Exit out by pressing `Ctrl+d` and create a new instance of the Alpine image and look a bit around:
+
+```
+docker run -it alpine
+```
+
+In the container run:
+
+```
 ls /
+```
+
+Expected output:
+
+```
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
@@ -76,12 +94,26 @@ If you want to delete them from your server you can use the `docker rm` command.
 
 Try to remove the `hello-world` container:
 
-```bash
-sofus@Praq-Sof:~/git/docker-exercises$ docker container ls -a
+```
+ docker container ls -a
+```
+
+Expected output:
+
+```
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                      PORTS                                                          NAMES
 6a9246ff53cb        hello-world               "/hello"                 18 seconds ago      Exited (0) 16 seconds ago                                                                  ecstatic_cray
+```
 
-sofus@Praq-Sof:~/git/docker-exercises$ docker container rm ecstatic_cray
+Delete the container:
+
+```
+docker container rm ecstatic_cray
+```
+
+The name or ID specified is echoed back:
+
+```
 ecstatic_cray
 ```
 
@@ -95,8 +127,13 @@ You deleted the container instance above, but not the image of hello-world itsel
 
 First off, list all the images you have downloaded to your computer:
 
-```bash
-sofus@praq-sal:~$ docker image ls
+```
+docker image ls
+```
+
+Expected output:
+
+```
 REPOSITORY                              TAG                   IMAGE ID            CREATED             SIZE
 alpine                                  latest                053cde6e8953        9 days ago          3.97MB
 hello-world                             latest                48b5124b2768        10 months ago       1.84kB
@@ -105,8 +142,13 @@ hello-world                             latest                48b5124b2768      
 Here you can see the images downloaded as well as their size.
 To remove the hello-world image use the `docker image rm` command together with the id of the docker image.
 
-```bash
-sofus@praq-sal:~$ docker image rm 48b5124b2768
+```
+docker image rm 48b5124b2768
+```
+
+Expected output:
+
+```
 Untagged: hello-world:latest
 Untagged: hello-world@sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7
 Deleted: sha256:48b5124b2768d2b917edcb640435044a97967015485e812545546cbed5cf0233
@@ -120,8 +162,6 @@ What docker did here was to `untag` the image removing the references to the sha
 When building, running and rebuilding images, you download and store a lot of layers. These layers will not be deleted, as docker takes a very conservative approach to clean up.
 
 Docker provides a `prune` command, taking all dangling containers/images/networks/volumes.
-
-> You need version `1.13` or newer to have access to pruning.
 
 - `docker container prune`
 - `docker image prune`

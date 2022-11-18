@@ -74,7 +74,7 @@ local               data
 
 Unlike the bind mount, you do not specify where the data is stored on the host.
 
-In the volume API, like for almost all other of Docker’s APIs, there is an `inspect` command giving you low level details. Let’s use it against the html volume.
+In the volume API, like for almost all other of Docker’s APIs, there is an `inspect` command giving you low level details. Let’s use it against the data volume.
 
 ```bash
 docker volume inspect data
@@ -100,8 +100,13 @@ You can now use this data volume in all containers. Try to mount it to an nginx 
 
 Try now to look at the data stored in `/var/lib/docker/volumes/data/_data` on the host:
 
-```bash
+```
 sudo ls /var/lib/docker/volumes/data/_data/
+```
+
+Expected output:
+
+```
 50x.html  index.html
 ```
 
@@ -113,10 +118,27 @@ Multiple containers can attach to the same volume with data. Docker doesn't hand
 
 Let's try to go in and make a new html page for nginx to serve. We do this by making a new ubuntu container that has the `data` volume attached to `/tmp`, and thereafter create a new html file with the `echo` command:
 
-```bash
-docker run -ti --rm -v data:/tmp ubuntu bash
-root@9c36fcfcc048:# echo "<html><h1>hello world</h1></html>" > /tmp/hello.html
-root@9c36fcfcc048:# ls /tmp
+Start the container:
+
+```
+docker run -it --rm -v data:/tmp ubuntu bash
+```
+
+In the container run:
+
+```
+echo "<html><h1>hello world</h1></html>" > /tmp/hello.html
+```
+
+Verify the file was created by running in the container:
+
+```
+ls /tmp
+```
+
+Expected output:
+
+```
 hello.html  50x.html  index.html
 ```
 
@@ -128,8 +150,13 @@ Exit out of your ubuntu server and execute a `docker stop www` to stop the nginx
 
 Run a `docker ps` to make sure that no other containers are running.
 
-```bash
+```
 docker ps
+```
+
+Expected output:
+
+```
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                          NAMES
 ```
 
@@ -152,7 +179,7 @@ Before you go on, use the [Docker command line interface](https://docs.docker.co
 
 - While your detached container is running, use the `docker ps` command to see what silly name Docker gave your container. **This is one command you're going to use often!**
 - While your detached container is still running, look at its logs. Try following its logs and refreshing your browser.
-- Stop your detached container, and confirm that it is stopped with the `ls` command.
+- Stop your detached container, and confirm that it is stopped with the `ps` command.
 - Start it again, wait 10 seconds for it to fire up, and stop it again.
 - Then delete that container from your system.
 

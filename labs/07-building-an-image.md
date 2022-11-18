@@ -31,7 +31,7 @@ Details:
 
 - `CMD` defines the commands that will run on the image at start-up. Unlike a `RUN`, this does not create a new layer for the image, but simply runs the command. There can only be one `CMD` in a Dockerfile. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
 
-```docker
+```dockerfile
   CMD ["python3", "./app.py"]
 
   CMD ["/bin/bash", "echo", "Hello World"]
@@ -137,8 +137,13 @@ Now that you have your `Dockerfile`, you can build your image. The `docker build
 
 The `docker build` command is quite simple - it takes an optional tag name with the `-t` flag, and the location of the directory containing the `Dockerfile` - the `.` indicates the current directory:
 
-```bash
-$ docker build -t myfirstapp .
+```
+docker build -t myfirstapp .
+```
+
+Expected output:
+
+```
 Sending build context to Docker daemon   5.12kB
 Step 1/8 : FROM ubuntu:latest
 latest: Pulling from library/ubuntu
@@ -259,9 +264,13 @@ If everything went well, your image should be ready! Run `docker image ls` and s
 
 The next step in this section is to run the image and see if it actually works.
 
-```bash
+```
+docker run -p 8888:5000 --name myfirstapp myfirstapp
+```
 
-$ docker run -p 8888:5000 --name myfirstapp myfirstapp
+Expected output:
+
+```
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
@@ -275,7 +284,7 @@ When dealing with docker images, a layer, or image layer, is a change on an imag
 
 Consider the following Dockerfile:
 
-```bash
+```dockerfile
   FROM ubuntu:latest
   RUN apt-get update -y
   RUN apt-get install -y python3 python3-pip python3-dev build-essential
@@ -296,7 +305,7 @@ Each layer is build on top of it's parent layer, meaning if the parent layer cha
 
 If you want to concatenate two layers (e.g. the update and install [which is a good idea](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run)), then do them in the same RUN command:
 
-```bash
+```dockerfile
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y \
  python3 \
@@ -323,7 +332,7 @@ As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new laye
 
 Take a look again at some of the output from building the image above:
 
-```bash
+```
  ---> c1f2dc732c7c
 Removing intermediate container f92f9c719287
 Step 6/8 : COPY app.py /usr/src/app/
@@ -345,7 +354,9 @@ in a loop untill all the commands have been made.
 Try to create a container from your `COPY app.py /usr/src/app/` command.
 The id of the layer will likely be different than the example above.
 
-`docker run -ti -p 8080:5000 6ed47d3c544a bash`.
+```
+docker run -ti -p 8080:5000 6ed47d3c544a bash`.
+```
 
 You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
 
@@ -370,8 +381,13 @@ And just like the image you built above, you can browse the website now.
 
 If you make a `docker ps -a` command, you can now see a container with the name _myfirstapp_ from the image named _myfirstapp_.
 
-```bash
-sofus@Praq-Sof:/4$ docker ps -a
+```
+docker ps -a
+```
+
+Expected output (you might have more containers):
+
+```
 CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS                      PORTS                                                          NAMES
 fcfba2dfb8ee        myfirstapp                "python3 /usr/src/a..."   About a minute ago   Exited (0) 28 seconds ago                                                                  myfirstapp
 ```
