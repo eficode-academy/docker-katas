@@ -14,4 +14,4 @@ In this section, you will see a lot of Docker-specific jargon which might be con
 
 ## Installing Docker
 
-Depending on what OS you are running, installation is different, but head over to the [Community Edition](https://www.docker.com/community-edition) website and follow the instructions there.
+Depending on what OS you are running, installation is different, but head over to the [Get started](https://www.docker.com/get-started/) website and follow the instructions there.
