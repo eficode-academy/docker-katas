@@ -18,6 +18,24 @@ Expected output:
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
+``` bash
+whoami
+```
+Expected output:
+
+```
+root
+```
+``` bash
+/ # date
+```
+
+Expected output:
+
+```
+Wed Nov
+```
+
 
 > **Warning:** Do not run the following command as a super user in your own environment, as it will delete _**everything**_ on your computer.
 
@@ -71,8 +89,10 @@ This will remove the container immediately after it is stopped.
 ## Cleaning up containers you do not use anymore
 
 Containers are still persisted, even though they are stopped.
-If you want to delete them from your server you need to use the `docker rm` command.
-`docker rm` can take either the `CONTAINER ID` or `NAME` as seen above. Try to remove the `hello-world` container:
+If you want to delete them from your server you can use the `docker rm` command.
+`docker rm` can take either the `CONTAINER ID` or `NAME` as seen above. 
+
+Try to remove the `hello-world` container:
 
 ```
  docker container ls -a
@@ -99,7 +119,7 @@ ecstatic_cray
 
 The container is now gone when you execute a `ls -a` command.
 
-> **Tip:** As with Git, you can use any unique part of the container ID to refer to it.
+> :bulb: **Tip:** As with Git, you can use any unique part of the container ID to refer to it.
 
 ### Deleting images
 

@@ -1,15 +1,15 @@
 # Sharing images
 
-Before we can take our dockerized Flask app to another computer, we need to push it up to the Docker Hub so that we (or other people) can pull it down on other machines.
+Before we can take our dockerized Flask app to another computer, we need to push it up to Docker Hub so that publicly avaliable.
 
-Docker Hub is sort of like GitHub of Docker images. It’s the main place people store their Docker images in the cloud.
+Docker Hub is like GitHub for Docker images. It’s the main place people store their Docker images in the cloud.
 
-First, create an account on the Docker Hub if you haven't already - it's free:
-[https://hub.docker.com/signup](https://hub.docker.com/signup)
+> :bulb: In order for you to do this exercise, you need to have an account. If not, create an account on the Docker Hub - it's free:
+> [https://hub.docker.com/signup](https://hub.docker.com/signup)
 
 Then, login to that account by running the `docker login` command on your laptop.
 
-We're almost ready to push our Flask image up to the Docker Hub. We just need to rename it to our namespace first.
+We're almost ready to push our Flask image up to the Docker Hub. We just need to rename it to our namespace (which is the same as our docker username) first.
 
 Using the `docker tag` command, tag the image you created in the previous section to your namespace. For example, I would run:
 
