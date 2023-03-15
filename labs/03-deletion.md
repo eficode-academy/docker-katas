@@ -6,7 +6,7 @@ Let's try to run an alpine container and delete the file system.
 
 Spin up the container with `docker run -ti alpine`
 
-list all the folders on the root level to see the whole distribution:
+and then list all the folders on the root level to see the whole distribution:
 
 ```
 ls /
@@ -18,6 +18,8 @@ Expected output:
 bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
+
+List the current user:
 ``` bash
 whoami
 ```
@@ -26,8 +28,10 @@ Expected output:
 ```
 root
 ```
+
+List the current date:
 ``` bash
-/ # date
+date
 ```
 
 Expected output:
@@ -39,7 +43,7 @@ Wed Nov
 
 > **Warning:** Do not run the following command as a super user in your own environment, as it will delete _**everything**_ on your computer.
 
-Now, delete the whole file system with
+Now, delete the whole file system with:
 
 ```
 rm -rf /
