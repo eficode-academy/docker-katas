@@ -12,12 +12,15 @@ Here's a quick summary of some basic commands we will use in our Dockerfile.
 
 > As a rule of thumb, all commands in CAPITAL LETTERS are intended for the docker engine. E.g.
 
-- FROM
-- RUN
-- ADD and COPY
-- CMD
-- EXPOSE
-- ENTRYPOINT
+- FROM # base image
+- RUN # run a command
+- ADD and COPY # copy files into the image
+- CMD # run a command at start-up, but can be overridden
+- EXPOSE # expose a port
+- ENTRYPOINT # run a command at start-up
+
+<details>
+<summary>Click to see the full list of commands</summary>
 
 Details:
 
@@ -45,6 +48,8 @@ Details:
 - `ENTRYPOINT` configures a command that will run no matter what the user specifies at runtime.
 
 > :bulb: this is not the full list of commands, but the ones you will be using in the exercise. For a full list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+
+</details>
 
 ## Write a Dockerfile
 
@@ -278,7 +283,7 @@ Expected output:
 
 Head over to `http://<IP>:8888` or your server's URL and your app should be live.
 
-## Images and layers
+## EXTRA Images and layers
 
 When dealing with docker images, a layer, or image layer, is a change on an image. Every time you run one of the commands RUN, COPY or ADD in your Dockerfile it adds a new layer, causes the image to change to the new layer. You can think of it as staging changes when you're using Git: You add a file's change, then another one, then another one...
 
