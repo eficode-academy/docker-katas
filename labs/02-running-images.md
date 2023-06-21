@@ -79,9 +79,9 @@ These interactive shells will exit after running any scripted commands, unless t
 
 Try it out yourself:
     
-    ```bash
+```bash
     docker run -it alpine /bin/sh
-    ```
+```
 
 You are now inside the container shell and you can try out a few commands like `ls -l`, `uname -a` and others. Exit out of the container by giving the `exit` command.
 

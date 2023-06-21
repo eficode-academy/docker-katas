@@ -64,7 +64,7 @@ Remember that your container ID is different from the one in the example.
 ```bash
 docker stop 78c943461b49584ebdf841f36d113567540ae460387bbd7b2f885343e7ad7554
 ```
-Docker prints out the ID of the started container.
+Docker prints out the ID of the stopped container.
 
 ```
 78c943461b49584ebdf841f36d113567540ae460387bbd7b2f885343e7ad7554
