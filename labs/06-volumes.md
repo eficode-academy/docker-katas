@@ -47,7 +47,16 @@ This will give you a nginx server running, serving your static files... _But on 
 Remember the [past exercise](04-port-forward.md) on port forwarding in Docker.
 
 - Make it host the site on port 8000
+
+<details>
+<summary>How to do this?</summary>
+
+The parameter `-p 8000:80` will map port 80 in the container to port 8000 on the host.
+
+</details>
+
 - Check that it is running by navigating to the hostname or IP with your browser, and on port 8000.
+- Stop the container with `docker stop <container_name>`.
 
 ## Volumes
 
@@ -74,10 +83,11 @@ local               data
 
 Unlike the bind mount, you do not specify where the data is stored on the host.
 
-In the volume API, like for almost all other of Docker’s APIs, there is an `inspect` command giving you low level details. Let’s use it against the data volume.
+In the volume API, like for almost all other of Docker’s APIs, there is an `inspect` command giving you low level details. 
 
-```bash
-docker volume inspect data
+- run `docker volume inspect data` to see where the data is stored on the host.
+
+```json
 [
     {
         "Driver": "local",
@@ -114,9 +124,14 @@ Those two files comes from the Nginx image and is the standard files the webserv
 
 ### Attaching multiple containers to a volume
 
-Multiple containers can attach to the same volume with data. Docker doesn't handle any file locking, so applications must account for the file locking themselves.
+Multiple containers can attach to the same volume with data. 
 
-Let's try to go in and make a new html page for nginx to serve. We do this by making a new ubuntu container that has the `data` volume attached to `/tmp`, and thereafter create a new html file with the `echo` command:
+Docker doesn't handle any file locking, so applications must account for the file locking themselves.
+
+
+Let's try to go in and make a new html page for nginx to serve. 
+
+We do this by making a new ubuntu container that has the `data` volume attached to `/tmp`, and thereafter create a new html file with the `echo` command:
 
 Start the container:
 
