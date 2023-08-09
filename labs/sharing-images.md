@@ -9,6 +9,8 @@ Docker Hub is like GitHub for Docker images. It’s the main place people store 
 
 Then, login to that account by running the `docker login` command on your laptop.
 
+> :bulb: If you do not want your password to be stored on the workstation, create an access token instead: https://hub.docker.com/settings/security
+
 We're almost ready to push our Flask image up to the Docker Hub. We just need to rename it to our namespace (which is the same as our docker username) first.
 
 Using the `docker tag` command, tag the image you created in the previous section to your namespace. For example, I would run:
