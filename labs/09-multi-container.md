@@ -17,8 +17,8 @@ Both containers already exists on the dockerhub: [Wordpress](https://hub.docker.
 
 To start a mysql container, issue the following command
 
-```
-docker run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
+```bash
+docker run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7.36
 ```
 
 Let's recap what this command does:
@@ -40,8 +40,8 @@ You can either use the external IP address of your server, or the DNS name if yo
 
 After you have noted down the IP, spin up the wordpress container with the host IP as a variable:
 
-```
-docker run --name wordpress-container --rm -e WORDPRESS_DB_HOST=inst<num>.<training>.eficode.academy -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+```bash
+docker run --name wordpress-container --rm -e WORDPRESS_DB_HOST=172.17.0.1 -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress:5.7.2-apache
 ```
 
 You can now browse to the IP:8080 and have your very own wordpress server running. Since port 3306 is the default MySQL port, wordpress will try to connect on that port by itself.
@@ -67,19 +67,19 @@ Docker will return the `networkID` for the newly created network. You can refere
 
 Now you need to connect the two containers to the network, by adding the `--network` option:
 
-```
-docker run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7
-```
+```bash
+docker run --name mysql-container --rm --network if_wordpress -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7.36
+af38acac52301a7c9689d708e6c3255704cdffb1972bcc245d67b02840983a50
 
-```
-docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress
+docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress:5.7.2-apache
+fd4fd096c064094d7758cefce41d0f1124e78b86623160466973007cf0af8556
 ```
 
 Notice the `WORDPRESS_DB_HOST` env variable. When you make a container join a network, it automatically gets the container name as DNS name as well, making it super easy to make containers discover each other. The DNS name is only visible inside the Docker network, which is also true for the `IP` address (usually an address starting with `172`) that is assigned to them. If you do not expose a port for a container, the container is only visible to Docker.
 
 You have now deployed both containers into the network. Take a deeper look into the container network by issuing: `docker network inspect if_wordpress`.
 
-```
+```bash
 docker network inspect if_wordpress
 ```
 
@@ -135,7 +135,7 @@ As, we have linked both the container now wordpress container can be accessed fr
 
 Close both of the containers down by issuing the following command:
 
-```
+```bash
 docker stop wordpress-container mysql-container
 ```
 
@@ -255,7 +255,9 @@ To shut down the container and network, issue a `docker-compose down`
 
 You now have all the pieces of information to make the Wordpress container. We've copied the run command from before if you can't remember it by heart:
 
-`docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress`
+```bash
+docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress:5.7.2-apache`
+```
 
 You must
 
