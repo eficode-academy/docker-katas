@@ -36,7 +36,7 @@ Let's recap what this command does:
 MySQL is now exposing it's port 3306 on the host, and everybody can attach to it **so do not do this in production without proper security settings**.
 
 We need to connect our wordpress container to the host's IP address.
-You can either use the external IP address of your server, or the DNS name if you are at a training, e.g. `inst<num>.<training>.eficode.academy`.
+You can either use the external IP address of your server, or the DNS name if you are at a training, e.g. `workstation-<num>.<prefix>.eficode.academy`.
 
 After you have noted down the IP, spin up the wordpress container with the host IP as a variable:
 
