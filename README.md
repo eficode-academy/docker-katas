@@ -1,6 +1,6 @@
 # Docker katas
 
-[![Open the exercises in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/praqma-training/docker-katas.git)
+[![Open the exercises in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/eficode-academy/docker-katas.git)
 
 This workshop will take you from "Hello Docker" to deploying a containerized web application to a server.
 
@@ -30,3 +30,9 @@ Ready to begin?
 ---------------
 
 Head over to [the first lab](labs/00-getting-started.md) to begin.
+
+## Cheat sheet
+
+For a quick reference of the most common docker commands, see [CHEATSHEET.md](CHEATSHEET.md).
+
+
