@@ -1,5 +1,16 @@
 # hello-world
 
+## Learning Goals
+
+The goal of this scenario is to make you run your first Docker container.
+
+## Terminology
+
+*Docker Container*: An isolated, runnable environment that holds everything needed to run an application.
+*Docker Image*: A lightweight, standalone package that contains all necessary code, libraries, and dependencies to run an application.
+
+## Exercise
+
 Try running a command with Docker:
 
 ```
