@@ -5,21 +5,34 @@
 
 - Run an [Alpine Linux](http://www.alpinelinux.org/) container (a lightweight linux distribution) on your system and get a taste of the `docker run` command.
 
+## Introduction
+
+To get started with running your first container from an image, you'll first pull the Alpine Linux image, a lightweight Linux distribution, and then explore various commands to interact with it.
+
+## Exercise
+
+### Overview
+
+- Pull the Alpine Linux image.
+- List all images on your system.
+- Run a Docker container based on the Alpine image.
+- Explore various commands inside the container.
+- Understand container naming and IDs.
+
+### Step by step instructions
+
+
 To get started, let's run the following in our terminal:
 
-```
-docker pull alpine
-```
+* `docker pull alpine`
 
 The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in your system. You can use the `docker image ls` command to see a list of all images on your system.
 
-```
-docker image ls
-```
+* `docker image ls`
 
 Expected output (your list of images will look different):
 
-```
+``` bash
 REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 alpine                  latest              c51f86c28340        4 weeks ago         1.109 MB
 hello-world             latest              690ed74de00f        5 months ago        960 B
@@ -27,15 +40,13 @@ hello-world             latest              690ed74de00f        5 months ago    
 
 ## 1.1 docker run
 
-Great! Now let's run a Docker **container** based on this image. To do that you are going to use the `docker run` command.
+Let's run a Docker **container** based on this image.
 
-```
-docker run alpine ls -l
-```
+* `docker run alpine ls -l`
 
 Expected output:
 
-```
+```bash
 total 48
 drwxr-xr-x    2 root     root          4096 Mar  2 16:20 bin
 drwxr-xr-x    5 root     root           360 Mar 18 09:47 dev
@@ -46,53 +57,47 @@ drwxr-xr-x    5 root     root          4096 Mar  2 16:20 lib
 ......
 ```
 
-What happened? Behind the scenes, a lot of stuff happened. When you call `run`,
-
-1. The Docker client contacts the Docker daemon
-2. The Docker daemon creates the container and then runs a command in that container.
-3. The Docker daemon streams the output of the command to the Docker client
-
 When you run `docker run alpine`, you provided a command (`ls -l`), so Docker started the command specified and you saw the listing.
 
-Let's try something more exciting.
+Try run the following:
 
-```
-docker run alpine echo "hello from alpine"
-```
+* `docker run alpine echo "hello from alpine"`
 
 Expected output:
 
-```
+``` bash
 hello from alpine
 ```
 
-OK, that's some actual output. In this case, the Docker client ran the `echo` command in our alpine container and then exited it. If you've noticed, all of that happened pretty quickly. Imagine booting up a virtual machine, running a command and then killing it. Now you know why they say containers are fast!
+<details>
+<summary>More Details</summary>
+In this case, the Docker client ran the `echo` command in our alpine container and then exited it. If you've noticed, all of that happened pretty quickly. Imagine booting up a virtual machine, running a command and then killing it. Now you know why they say containers are fast!
+
+</details>
 
 Try another command:
 
-```
-docker run alpine /bin/sh
-```
+* `docker run alpine /bin/sh`
 
 Wait, nothing happened! Is that a bug? 
 
 Well, no. 
 
-These interactive shells will exit after running any scripted commands, unless they are run in an interactive terminal - so for this example to not exit, you need to `docker run -it alpine /bin/sh`.
+These interactive shells will exit after running any scripted commands, unless they are run in an interactive terminal - so for this example to not exit, you need to add the parameters `i` and `t`.
 
-Try it out yourself:
-    
-```bash
-    docker run -it alpine /bin/sh
-```
+> :bulb: The flags `-it` are short for `-i -t` which again are the short forms of `--interactive` (Keep STDIN open) and  `--tty` (Allocate a terminal).
 
-You are now inside the container shell and you can try out a few commands like `ls -l`, `uname -a` and others. Exit out of the container by giving the `exit` command.
+* `docker run -it alpine /bin/sh`
 
-Ok, now it's time to see the `docker ps` command. The `docker ps` command shows you all containers that are currently running.
+You are inside the container shell and you can try out a few commands like `ls -l`, `uname -a` and others. 
 
-```
-docker ps
-```
+* Exit out of the container by giving the `exit` command.
+
+Ok, now it's time to list our containers. 
+
+The `docker ps` command shows you all containers that are currently running.
+
+* `docker ps`
 
 Expected output:
 
@@ -100,11 +105,9 @@ Expected output:
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
-Is _this_ a bug? Also no; when you wrote `exit` in the shell, the primary process (`/bin/sh`) stopped. No containers are running, you see a blank line. Let's try a more useful variant: `docker ps -a`
+Notice that you have no running containers. When you wrote `exit` in the shell, the primary process (`/bin/sh`) stopped. No containers are running, you see a blank line. Let's try a more useful variant, listing all containers, both stopped and started.
 
-```bash
-docker ps -a
-```
+* `docker ps -a`
 
 Expected output:
 
@@ -118,19 +121,11 @@ c317d0a9e3d2        hello-world         "/hello"                 34 seconds ago 
 
 What you see above is a list of all containers that you ran. Notice that the `STATUS` column shows that these containers exited a few minutes ago.
 
-Try using the `run` command again with the flags `-it` (se note below), so it attaches you to an interactive tty in the container.
-
-You can run as many commands in the container as you want! Take some time to run your favorite commands. Remember, you can write `exit` when you want to quit.
-
-> :bulb: The flags `-it` are short for `-i -t` which again are the short forms of `--interactive` (Keep STDIN open) and  `--tty` (Allocate a terminal).
-
 ## Naming your container
 
 Take a look again at the output of the `docker ps -a`:
 
-```
-docker ps -a
-```
+* `docker ps -a`
 
 Expected output:
 

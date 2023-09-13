@@ -2,8 +2,6 @@
 
 ## Task: create a tiny go-application container
 
-> NB: requires docker version 17.05 or higher
-
 In [multi-stage-build/hello.go](multi-stage-build/hello.go) we have created a small go application that prints `hello world` to your terminal.
 
 You want to containerize it - that's easy!
