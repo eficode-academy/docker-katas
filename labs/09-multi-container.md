@@ -217,9 +217,9 @@ The `services` part is equivalent to our `docker container run` command. Likewis
 
 Let's look the mysql_container part together, making you able to create the other container yourself. Look at the original command we made to spin up the container:
 
-`docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -d mysql`
+`docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7.36`
 
-The command gives out following information: a `name`, a `port` mapping, an `environment` variable and the `image` we want to run.
+The command gives out following information: a `name`, a `port` mapping, two `environment` variables and the `image` we want to run.
 
 Now look at the docker-compose example again:
 
@@ -256,7 +256,7 @@ To shut down the container and network, issue a `docker-compose down`
 You now have all the pieces of information to make the Wordpress container. We've copied the run command from before if you can't remember it by heart:
 
 ```bash
-docker container run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 -d wordpress:5.7.2-apache`
+docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_DB_HOST=mysql-container -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_NAME=wordpressdb -p 8080:80 -d wordpress:5.7.2-apache
 ```
 
 You must
