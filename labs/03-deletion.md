@@ -41,7 +41,7 @@ Wed Nov
 ```
 
 
-> **Warning:** Do not run the following command as a super user in your own environment, as it will delete _**everything**_ on your computer.
+> **Warning:** Make sure that you are inside your container. most likely you can see that by your command promt showing `/ #` instead of `ubuntu@inst1:~/docker-katas/labs$`
 
 Now, delete the whole file system with:
 
