@@ -43,10 +43,10 @@ Wed Nov
 
 > **Warning:** Make sure that you are inside your container. most likely you can see that by your command promt showing `/ #` instead of `ubuntu@inst1:~/docker-katas/labs$`
 
-Now, delete the whole file system with:
+Now, delete the binaries that the system is build up of with:
 
 ```
-rm -rf /
+rm -rf /bin
 ```
 
 Try to navigate around to see how much of the OS is gone: try to run the `ls`, `whoami` and `date` commands.
