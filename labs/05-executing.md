@@ -28,7 +28,7 @@ Because containers only have the bare minimum installed, we need to first instal
 
 - install nano on the container: `apt-get update && apt-get install -y nano`
 - Edit the index html page: `nano /usr/share/nginx/html/index.html`
-- Save and exit nano by pressing: `CTRL + O` to save and `CTRL + X` to exit Nano
+- Save and exit nano by pressing: `CTRL + O` and `enter` to save and `CTRL + X` to exit Nano
 - Revisit the page to check that your edition is in effect.
 
 ## Summary
