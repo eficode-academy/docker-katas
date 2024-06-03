@@ -155,7 +155,7 @@ This file defines all of the containers and settings you need to launch your set
 ## Terminology
 
 - `docker-compose.yml` The YAML file where all your configuration of your docker containers go.
-- `docker-compose` The cli tool that enables you to define and run multi-container applications with Docker
+- `docker compose` The cli tool that enables you to define and run multi-container applications with Docker
 
   - `up` : creates and starts the services stated in the compose file
   - `down` : stops and removes containers, networks, images, and volumes
@@ -237,7 +237,7 @@ MYSQL_ROOT_PASSWORD=wordpress
 Try to spin up the container in detached mode:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 Creating network "multicontainer_default" with the default driver
 Creating multicontainer_mysql_container_1 ...
 Creating multicontainer_mysql_container_1 ... done
@@ -247,9 +247,9 @@ Looking at the output you can see that it made a `docker network` named `multico
 
 Issue a `docker container ls` as well as `docker network ls` to see that both the container and network are listed.
 
-To shut down the container and network, issue a `docker-compose down`
+To shut down the container and network, issue a `docker compose down`
 
-> **note**: The command docker-compose down removes the containers and default network.
+> **note**: The command docker compose down removes the containers and default network.
 
 ### Creating the wordpress container
 
@@ -265,6 +265,6 @@ You must
 - map the pieces of information from the docker container run command to the yaml format.
 - remove MySQL port mapping to close that from outside reach.
 
-When you made that, run `docker-compose up -d` and access your wordpress site from [http://IP:8080](http://IP:8080)
+When you made that, run `docker compose up -d` and access your wordpress site from [http://IP:8080](http://IP:8080)
 
 > **Hint**: If you are stuck, look at the file docker-compose_final.yaml in the same folder.
