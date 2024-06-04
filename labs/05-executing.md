@@ -34,4 +34,4 @@ Because containers only have the bare minimum installed, we need to first instal
 ## Summary
 
 You have tried to start a new process by the `exec` command in order to look around in a container, or to edit something.
-You have also seen that terminating any of the the process by `Ctrl+d` that does not have PID 1 will not make the container stop.
+You have also seen that terminating any of the the processes created with `docker exec` will not make the container stop.
