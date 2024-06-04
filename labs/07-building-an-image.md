@@ -64,7 +64,7 @@ As mentioned above, all user images are based on a _base image_. We will build o
    We'll start by specifying our base image, using the `FROM` keyword:
 
    ```docker
-   FROM ubuntu:latest
+   FROM ubuntu:22.04
    ```
 
 1. The next step is usually to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the ubuntu linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) commands next:
