@@ -116,7 +116,7 @@ As mentioned above, all user images are based on a _base image_. We will build o
 
    ```docker
    # The base image
-   FROM ubuntu:latest
+   FROM ubuntu:22.04
 
    # Install python and pip
    RUN apt-get update -y
@@ -150,15 +150,15 @@ Expected output:
 
 ```
 Sending build context to Docker daemon   5.12kB
-Step 1/8 : FROM ubuntu:latest
-latest: Pulling from library/ubuntu
+Step 1/8 : FROM ubuntu:22.04
+22.04: Pulling from library/ubuntu
 b6f892c0043b: Pull complete
 55010f332b04: Pull complete
 2955fb827c94: Pull complete
 3deef3fcbd30: Pull complete
 cf9722e506aa: Pull complete
 Digest: sha256:382452f82a8bbd34443b2c727650af46aced0f94a44463c62a9848133ecb1aa8
-Status: Downloaded newer image for ubuntu:latest
+Status: Downloaded newer image for ubuntu:22.04
  ---> ebcd9d4fca80
 Step 2/8 : RUN apt-get update -y
  ---> Running in 42d5752a0faf
@@ -261,7 +261,7 @@ Successfully tagged myfirstapp:latest
 
 ```
 
-If you don't have the `ubuntu:latest` image, the client will first pull the image and then create your image. If you do have it, your output on running the command will look different from mine.
+If you don't have the `ubuntu:22.04` image, the client will first pull the image and then create your image. If you do have it, your output on running the command will look different from mine.
 
 If everything went well, your image should be ready! Run `docker image ls` and see if your image (`myfirstapp`) shows.
 
@@ -290,7 +290,7 @@ When dealing with docker images, a layer, or image layer, is a change on an imag
 Consider the following Dockerfile:
 
 ```dockerfile
-  FROM ubuntu:latest
+  FROM ubuntu:22.04
   RUN apt-get update -y
   RUN apt-get install -y python3 python3-pip python3-dev build-essential
   COPY requirements.txt /usr/src/app/
@@ -300,7 +300,7 @@ Consider the following Dockerfile:
   CMD ["python3", "/usr/src/app/app.py"]
 ```
 
-First, we choose a starting image: `ubuntu:latest`, which in turn has many layers.
+First, we choose a starting image: `ubuntu:22.04`, which in turn has many layers.
 We add another layer on top of our starting image, running an update on the system. After that yet another for installing the python ecosystem.
 Then, we tell docker to copy the requirements to the container. That's another layer.
 
@@ -311,7 +311,7 @@ Each layer is build on top of it's parent layer, meaning if the parent layer cha
 If you want to concatenate two layers (e.g. the update and install [which is a good idea](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run)), then do them in the same RUN command:
 
 ```dockerfile
-FROM ubuntu:latest
+FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y \
  python3 \
  python3-pip \
