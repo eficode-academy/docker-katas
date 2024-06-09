@@ -46,16 +46,16 @@ This will give you a nginx server running, serving your static files... _But on 
 
 Remember the [past exercise](04-port-forward.md) on port forwarding in Docker.
 
-- Make it host the site on port 8000
+- Make it host the site on port 8080
 
 <details>
 <summary>How to do this?</summary>
 
-The parameter `-p 8000:80` will map port 80 in the container to port 8000 on the host.
+The parameter `-p 8080:80` will map port 80 in the container to port 8080 on the host.
 
 </details>
 
-- Check that it is running by navigating to the hostname or IP with your browser, and on port 8000.
+- Check that it is running by navigating to the hostname or IP with your browser, and on port 8080.
 - Stop the container with `docker stop <container_name>`.
 
 ## Volumes
