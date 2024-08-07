@@ -270,7 +270,7 @@ If everything went well, your image should be ready! Run `docker image ls` and s
 The next step in this section is to run the image and see if it actually works.
 
 ```
-docker run -p 8888:5000 --name myfirstapp myfirstapp
+docker run -p 8080:5000 --name myfirstapp myfirstapp
 ```
 
 Expected output:
@@ -279,9 +279,9 @@ Expected output:
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
-> :bulb: remember that the application is listening on port 5000 on the Docker virtual network, but on the host it is listening on port 8888.
+> :bulb: remember that the application is listening on port 5000 on the Docker virtual network, but on the host it is listening on port 8080.
 
-Head over to `http://<IP>:8888` or your server's URL and your app should be live.
+Head over to `http://<IP>:8080` or your server's URL and your app should be live.
 
 ## EXTRA Images and layers
 
