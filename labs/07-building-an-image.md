@@ -331,57 +331,6 @@ If you want to be able to use any cached layers from last time, they need to be 
 
 Try to move the two `COPY` commands before for the `RUN` and build again to see it taking the cached layers instead of making new ones.
 
-## Every layer can be a container
-
-As stated above, all FROM, RUN, ADD, COPY, CMD and EXPOSE will create a new layer in your image, and therefore also be an image of their own.
-
-Take a look again at some of the output from building the image above:
-
-```
- ---> c1f2dc732c7c
-Removing intermediate container f92f9c719287
-Step 6/8 : COPY app.py /usr/src/app/
- ---> 6ed47d3c544a
-Removing intermediate container 61a68a949d68
-Step 7/8 : EXPOSE 5000
- ---> Running in 1f939928b7d5
- ---> 6c14a93b72f2
-```
-
-So what docker actually does is
-
-- Taking the layer created just before
-- make a container based of it
-- run the command given
-- save the layer.
-
-in a loop untill all the commands have been made.
-Try to create a container from your `COPY app.py /usr/src/app/` command.
-The id of the layer will likely be different than the example above.
-
-```
-docker run -ti -p 8080:5000 6ed47d3c544a bash`.
-```
-
-You are now in a container run from _that_ layer in the build script. You can't make the `EXPOSE` command, but you can look around, and run the last python app:
-
-```
-
-root@cc5490748b2a:/# ls
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-
-root@cc5490748b2a:/# ls /usr/src/app/
-app.py  requirements.txt
-
-root@cc5490748b2a:/# python3 /usr/src/app/app.py
-* Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-
-```
-
-And just like the image you built above, you can browse the website now.
-
-> :bulb: this only works for images you have build on the same machine. Images you have pulled from the Docker Hub will not have the metadata needed to create a container from a layer.
-
 ### Delete your image
 
 If you make a `docker ps -a` command, you can now see a container with the name _myfirstapp_ from the image named _myfirstapp_.
