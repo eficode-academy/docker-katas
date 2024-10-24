@@ -2,9 +2,9 @@
 
 Running images others made is useful, but if you want to use docker for your own application, chances are you want to construct an image on your own.
 
-A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file containing a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up.
+A [Dockerfile](https://docs.docker.com/reference/dockerfile/) is a text file containing a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up.
 
-It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are _almost_ identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
+It is a simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/reference/dockerfile/) you write in a Dockerfile are _almost_ identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
 
 ## Dockerfile commands summary
 
@@ -146,118 +146,33 @@ The `docker build` command is quite simple - it takes an optional tag name with 
 docker build -t myfirstapp .
 ```
 
-Expected output:
+Expected output (at the end of the run):
 
 ```
-Sending build context to Docker daemon   5.12kB
-Step 1/8 : FROM ubuntu:22.04
-22.04: Pulling from library/ubuntu
-b6f892c0043b: Pull complete
-55010f332b04: Pull complete
-2955fb827c94: Pull complete
-3deef3fcbd30: Pull complete
-cf9722e506aa: Pull complete
-Digest: sha256:382452f82a8bbd34443b2c727650af46aced0f94a44463c62a9848133ecb1aa8
-Status: Downloaded newer image for ubuntu:22.04
- ---> ebcd9d4fca80
-Step 2/8 : RUN apt-get update -y
- ---> Running in 42d5752a0faf
-Get:1 http://archive.ubuntu.com/ubuntu xenial InRelease [247 kB]
-Get:2 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB]
-
-...
-
-Get:20 http://archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [4927 B]
-Get:21 http://archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [6022 B]
-Fetched 24.0 MB in 6s (3911 kB/s)
-Reading package lists...
- ---> 07205bd484c9
-Removing intermediate container 42d5752a0faf
-Step 3/8 : RUN apt-get install -y python-pip python-dev build-essential
- ---> Running in 43e6e25b8c6b
-Reading package lists...
-Building dependency tree...
-Reading state information...
-The following additional packages will be installed:
-  binutils bzip2 ca-certificates cpp cpp-5 dpkg-dev fakeroot file g++ g++-5
-...
-  python2.7-minimal rename xz-utils
-0 upgraded, 87 newly installed, 0 to remove and 3 not upgraded.
-Need to get 85.4 MB of archives.
-After this operation, 268 MB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libatm1 amd64 1:2.5.1-1.5 [24.2 kB]
-Get:2 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmnl0 amd64 1.0.3-5 [12.0 kB]
-Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgdbm3 amd64 1.8.3-13.1 [16.9 kB]
-...
-Get:86 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python-wheel all 0.29.0-1 [48.0 kB]
-Get:87 http://archive.ubuntu.com/ubuntu xenial/main amd64 rename all 0.20-4 [12.0 kB]
-debconf: delaying package configuration, since apt-utils is not installed
-Fetched 85.4 MB in 24s (3514 kB/s)
-Selecting previously unselected package libatm1:amd64.
-(Reading database ... 4764 files and directories currently installed.)
-Preparing to unpack .../libatm1_1%3a2.5.1-1.5_amd64.deb ...
-Unpacking libatm1:amd64 (1:2.5.1-1.5) ...
-...
-Selecting previously unselected package python-wheel.
-Preparing to unpack .../python-wheel_0.29.0-1_all.deb ...
-Unpacking python-wheel (0.29.0-1) ...
-Selecting previously unselected package rename.
-Preparing to unpack .../archives/rename_0.20-4_all.deb ...
-Unpacking rename (0.20-4) ...
-...
-Setting up python-setuptools (20.7.0-1) ...
-Setting up python-wheel (0.29.0-1) ...
-Setting up rename (0.20-4) ...
-update-alternatives: using /usr/bin/file-rename to provide /usr/bin/rename (rename) in auto mode
-Processing triggers for libc-bin (2.23-0ubuntu7) ...
-Processing triggers for systemd (229-4ubuntu17) ...
-Processing triggers for ca-certificates (20160104ubuntu1) ...
-Updating certificates in /etc/ssl/certs...
-173 added, 0 removed; done.
-Running hooks in /etc/ca-certificates/update.d...
-done.
- ---> 61881e70baa5
-Removing intermediate container 43e6e25b8c6b
-Step 4/8 : COPY requirements.txt /usr/src/app/
- ---> b323c089d44a
-Removing intermediate container 96aca854f3c4
-Step 5/8 : RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
- ---> Running in f92f9c719287
-Collecting Flask==0.10.1 (from -r /usr/src/app/requirements.txt (line 1))
-  Downloading Flask-0.10.1.tar.gz (544kB)
-Collecting Werkzeug>=0.7 (from Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading Werkzeug-0.12.2-py2.py3-none-any.whl (312kB)
-Collecting Jinja2>=2.4 (from Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading Jinja2-2.9.6-py2.py3-none-any.whl (340kB)
-Collecting itsdangerous>=0.21 (from Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading itsdangerous-0.24.tar.gz (46kB)
-Collecting MarkupSafe>=0.23 (from Jinja2>=2.4->Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading MarkupSafe-1.0.tar.gz
-Installing collected packages: Werkzeug, MarkupSafe, Jinja2, itsdangerous, Flask
-  Running setup.py install for MarkupSafe: started
-    Running setup.py install for MarkupSafe: finished with status 'done'
-  Running setup.py install for itsdangerous: started
-    Running setup.py install for itsdangerous: finished with status 'done'
-  Running setup.py install for Flask: started
-    Running setup.py install for Flask: finished with status 'done'
-Successfully installed Flask-0.10.1 Jinja2-2.9.6 MarkupSafe-1.0 Werkzeug-0.12.2 itsdangerous-0.24
-You are using pip version 8.1.1, however version 9.0.1 is available.
-You should consider upgrading via the 'pip install --upgrade pip' command.
- ---> c1f2dc732c7c
-Removing intermediate container f92f9c719287
-Step 6/8 : COPY app.py /usr/src/app/
- ---> 6ed47d3c544a
-Removing intermediate container 61a68a949d68
-Step 7/8 : EXPOSE 5000
- ---> Running in 1f939928b7d5
- ---> 6c14a93b72f2
-Removing intermediate container 1f939928b7d5
-Step 8/8 : CMD python /usr/src/app/app.py
- ---> Running in 8e5d5619c75e
- ---> 61fedfc3fcad
-Removing intermediate container 8e5d5619c75e
-Successfully built 61fedfc3fcad
-Successfully tagged myfirstapp:latest
+[+] Building 79.5s (11/11) FINISHED                                                                                                      docker:default
+ => [internal] load build definition from Dockerfile                                                                                               0.1s
+ => => transferring dockerfile: 583B                                                                                                               0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                                                    1.6s
+ => [internal] load .dockerignore                                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                                    0.0s
+ => [1/6] FROM docker.io/library/ubuntu:22.04@sha256:0e5e4a57c2499249aafc3b40fcd541e9a456aab7296681a3994d631587203f97                              4.9s
+ => => resolve docker.io/library/ubuntu:22.04@sha256:0e5e4a57c2499249aafc3b40fcd541e9a456aab7296681a3994d631587203f97                              0.0s
+ => => sha256:6414378b647780fee8fd903ddb9541d134a1947ce092d08bdeb23a54cb3684ac 29.54MB / 29.54MB                                                   1.2s
+ => => sha256:0e5e4a57c2499249aafc3b40fcd541e9a456aab7296681a3994d631587203f97 6.69kB / 6.69kB                                                     0.0s
+ => => sha256:3d1556a8a18cf5307b121e0a98e93f1ddf1f3f8e092f1fddfd941254785b95d7 424B / 424B                                                         0.0s
+ => => sha256:97271d29cb7956f0908cfb1449610a2cd9cb46b004ac8af25f0255663eb364ba 2.30kB / 2.30kB                                                     0.0s
+ => => extracting sha256:6414378b647780fee8fd903ddb9541d134a1947ce092d08bdeb23a54cb3684ac                                                          3.3s
+ => [internal] load build context                                                                                                                  0.0s
+ => => transferring context: 469B                                                                                                                  0.0s
+ => [2/6] RUN apt-get update -y                                                                                                                    9.1s
+ => [3/6] RUN apt-get install -y python3 python3-pip python3-dev build-essential                                                                  54.2s
+ => [4/6] COPY requirements.txt /usr/src/app/                                                                                                      0.1s 
+ => [5/6] RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt                                                                         4.6s 
+ => [6/6] COPY app.py /usr/src/app/                                                                                                                0.1s 
+ => exporting to image                                                                                                                             4.6s 
+ => => exporting layers                                                                                                                            4.6s 
+ => => writing image sha256:3c7c10734be5cfd548d5dba13ef5bf788fcc7e2050d1e8ecf4979801fee45ce9                                                       0.0s 
+ => => naming to docker.io/library/myfirstapp 
 
 ```
 
