@@ -2,24 +2,28 @@
 
 > _Hint: This lab only covers volumes on Docker for Linux. If you are on windows or mac, things can look different._
 
-Not everything can be in a container. The whole idea is that you can start, stop and delete the containers without losing data.
+Containers should be ephemeral.
 
-So if you need to persist data, do it outside of the containers.
+The whole idea is that you can start, stop and delete the containers without losing data.
+
+But how can we do that for persistent workloads like databases?
+
+We need a way to store data outside of the containers.
 
 You have two different ways of mounting data from your container `bind mounts` and `volumes`.
 
-**A bind mount** is the simpler one to understand. It takes a host path, like `/data`, and mounts it inside your container eg. `/opt/app/data`.
+### Bind mount
+
+Is the simpler one to understand. It takes a host path, like `/data`, and mounts it inside your container eg. `/opt/app/data`.
+
 The good thing about bind mount is that they are easy and allow you to connect directly to the host filesystem.
+
 The downside is that you need to specify it at runtime, and path to mount might vary from host to host, which can be confusing when you want to run your containers on different hosts.
+
 With bind mount you will also need to deal with backup, migration etc. in an tool outside the Docker ecosystem.
 
-**A docker Volume** is where you can use a `named` or `unnamed` volume to store the external data. You would normally use a volume driver for this, but you can get a host mounted path using the default local volume driver.
+As an example, let's look at the [Nginx](https://hub.docker.com/_/nginx/) container.
 
-In the next section, you will get to try both of them.
-
-## Bind mounts
-
-So let's look at the [Nginx](https://hub.docker.com/_/nginx/) container.
 The server itself is of little use, if it cannot access our web content on the host.
 
 We need to create a mapping between the host system, and the container with the `-v` command:
@@ -32,10 +36,25 @@ That will map whatever files are in the `/some/content` folder on the host to `/
 
 > The `:ro` attribute is making the host volume read-only, making sure the container can not edit the files on the host.
 
+### A docker Volume
+
+This is where you can use a `named` or `unnamed` volume to store the external data. The data will still be stored locally unless you have configured a storage driver for your system (Ops things, not covered here).
+
+Volumes are entities inside docker, and can be created in three different ways.
+
+- By explicitly creating it with the `docker volume create <volume_name>` command.
+- By creating a named volume at container creation time with `docker container run -d -v DataVolume:/opt/app/data nginx`
+- By creating an anonymous volume at container creation time with `docker container run -d -v /opt/app/data nginx`
+
+In the next section, you will get to try all of them.
+
+## Step-by-Step Instructions
+
+### Bind mount
+
 Try to do the following:
 
-- `git clone` this repository down
-  - If you are at training the repository is most likely already cloned on your training VM.
+- `git clone` this repository down. :bulb: If you are at training the repository is already cloned on your training workstation.
 - Navigate to the `labs/volumes/` directory, which contains a file we can try to serve: `index.html`.
 - We need change `/some/content` to the right path, it must be an absolute path, starting from the root of the filesystem, (which in linux is `/`). You can use the command `pwd` (Print working directory) to display the path to where you are.
 - Now try to run the container with the `labs/volumes` directory bind mounted.
@@ -58,13 +77,7 @@ The parameter `-p 8080:80` will map port 80 in the container to port 8080 on the
 - Check that it is running by navigating to the hostname or IP with your browser, and on port 8080.
 - Stop the container with `docker stop <container_name>`.
 
-## Volumes
-
-Volumes are entities inside docker, and can be created in three different ways.
-
-- By explicitly creating it with the `docker volume create <volume_name>` command
-- By creating a named volume at container creation time with `docker container run -d -v DataVolume:/opt/app/data nginx`
-- By creating an anonymous volume at container creation time with `docker container run -d -v /opt/app/data nginx`
+### Volumes
 
 First off, lets try to make a data volume called `data`:
 
@@ -158,6 +171,7 @@ hello.html  50x.html  index.html
 ```
 
 Head over to your newly created webpage at: `http://<IP>:8080/hello.html`
+
 
 ## cleanup
 
