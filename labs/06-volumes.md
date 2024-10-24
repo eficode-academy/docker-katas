@@ -170,7 +170,7 @@ Expected output:
 hello.html  50x.html  index.html
 ```
 
-Head over to your newly created webpage at: `http://<IP>:8080/hello.html`
+Head over to your newly created webpage at: `http://workstation-X.Y.eficode.academy:8080/hello.html` where X is your workstation number and Y is the prefix. It should be the same URL as your Workstation.
 
 
 ## cleanup
