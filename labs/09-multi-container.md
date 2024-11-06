@@ -15,6 +15,10 @@ Both containers already exists on the dockerhub: [Wordpress](https://hub.docker.
 
 ## Separate containers
 
+> [!NOTE]
+> The following section is only an example to show how you can run multi-container setups with `docker run`.
+> Please skip ahead to [Making a container network](#making-a-container-network) to continue with the exercise.
+
 To start a mysql container, issue the following command
 
 ```bash
