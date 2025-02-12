@@ -7,10 +7,10 @@ docker network create services-network
 ```
 
 ## Start Traefik - frond-end / proxy:
-Start the Traefik proxy service by briging up it's docker-compose stack - which is compose of just one container!
+Start the Traefik proxy service by briging up it's docker compose stack - which is compose of just one container!
 ```
 cd proxy
-docker-compose up -d
+docker compose up -d
 cd ..
 ```
 Note: Please go through the actual `docker-compose.yml` and `traefik.toml` files under the `proxy` directory.
@@ -26,7 +26,7 @@ CONTAINER ID        IMAGE                      COMMAND                  CREATED 
 ## Start the  web server - back-end:
 ```
 cd web
-docker-compose up -d
+docker compose up -d
 cd ..
 ```
 Note: Please go through the actual `docker-compose.yml` file under the `web` directory.

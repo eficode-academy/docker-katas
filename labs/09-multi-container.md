@@ -173,16 +173,16 @@ This file defines all of the containers and settings you need to launch your set
 The docker cli is used when managing individual containers on a docker engine.
 It is the client command line to access the docker daemon api.
 
-The docker-compose cli together with the yaml files can be used to manage a multi-container application.
+The docker compose cli together with the yaml files can be used to manage a multi-container application.
 
 ## Compose-erizing your wordpress
 
-So we want to take advantage of docker-compose to run our wordpress site.
+So we want to take advantage of docker compose to run our wordpress site.
 
 In order to to this we need to:
 
 1. Transform our setup into a docker-compose.yaml file
-1. Invoke docker-compose and watch the magic happen!
+1. Invoke docker compose and watch the magic happen!
 
 Head over to this labs folder:
 
@@ -215,7 +215,7 @@ This is the template we are building our compose file upon so let's drill this o
   - `wordpress_container` is the section where we define our wordpress container
   - `mysql_container` is the ditto of MySQL.
 
-> For more information on docker-compose yaml files, head over to the [documentation](https://docs.docker.com/compose/overview/).
+> For more information on docker compose yaml files, head over to the [documentation](https://docs.docker.com/compose/overview/).
 
 The `services` part is equivalent to our `docker container run` command. Likewise there is a `network` and `volumes` section for those as well corresponding to `docker network create` and `docker volume create`.
 
@@ -225,7 +225,7 @@ Let's look the mysql_container part together, making you able to create the othe
 
 The command gives out following information: a `name`, a `port` mapping, two `environment` variables and the `image` we want to run.
 
-Now look at the docker-compose example again:
+Now look at the docker compose example again:
 
 - `mysql_container` defines the name of the container
 - `image:wordpress` describes what image the container spins up from.

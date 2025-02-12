@@ -26,7 +26,7 @@ services:
 
 Where `build:` is refering the folder what docker container we should build.
 
-To make docker-compose to build you can use command `docker-compose up --build` in order to execute the `build:` configuration.
+To make docker compose to build you can use command `docker compose up --build` in order to execute the `build:` configuration.
 
 Try to build your application container and open browser to correct port.
 

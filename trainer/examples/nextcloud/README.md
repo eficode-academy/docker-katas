@@ -1,6 +1,6 @@
 # Nextcloud showcase
 
-An example of starting a two-container application using docker-compose;  Nextcloud with a MariaDB backend.
+An example of starting a two-container application using docker compose;  Nextcloud with a MariaDB backend.
 
 We show that the volumes persist killing the containers,
 and a version-upgrade of Nextcloud.
@@ -12,7 +12,7 @@ Tags: docker-compose, volumes, upgrading
 1. Start the application with:
 
     ```shell
-    docker-compose up
+    docker compose up
     ```
 
 1. Visit Nextcloud in a browser on: [localhost](http://localhost),
@@ -35,11 +35,11 @@ and create an admin account.
 to upload it to your Nextcloud.
 
 1. Stop the services afterwards.
-    > If you ran `docker-compose` without `-d`,
+    > If you ran `docker compose` without `-d`,
     > then `ctrl+c` will stop the services.
 
     ```shell
-    docker-compose down
+    docker compose down
     ```
 
 1. Reload the window in the browser; Nextcloud is down.
@@ -54,7 +54,7 @@ to upload it to your Nextcloud.
 1. You can even remove the containers:
 
     ```shell
-    docker-compose rm
+    docker compose rm
     ```
 
 1. Show that they're gone with `docker ps -a`.
@@ -64,7 +64,7 @@ to upload it to your Nextcloud.
 1. Start the application again with,
 
     ```shell
-    docker-compose up
+    docker compose up
     ```
 
 1. Reload your browser window,
@@ -77,14 +77,14 @@ you might even still be logged in.
 
 ## Part 2: Upgrading Nextcloud
 
-1. Stop the services again, using `docker-compose down` or `ctrl+c`.
+1. Stop the services again, using `docker compose down` or `ctrl+c`.
 1. Change the version of the Nextcloud image from `nextcloud:X`
     to `nextcloud:X+1` (swap the commented image-version lines,
     in the `docker-compose.yml`.)
 
 ## Start the Application
 
-1. Run `docker-compose up` to start the application.
+1. Run `docker compose up` to start the application.
 
 You can find the version under the `gear icon -> help`,
 [link](http://localhost/settings/help).
@@ -94,9 +94,9 @@ You can find the version under the `gear icon -> help`,
 > Downgrading is not supported in Nextcloud.
 
 1. Try stopping the containers again
-with `docker-compose down` or `ctrl+c`.
+with `docker compose down` or `ctrl+c`.
 1. Changing the version back to `nextcloud:12`.
-1. Starting the application again with `docker-compose up`.
+1. Starting the application again with `docker compose up`.
 
 Nextcloud will fail to start with the message:
 
@@ -114,7 +114,7 @@ app_1  | Can't start Nextcloud because the version of the data (12.0.13.2) is hi
 
 In the original example,
 the upgrade would fail without adding the `depends_on: db`
-to the docker-compose file.
+to the docker compose file.
 Nicolaj has been unable to reproduce this error on `Docker for Windows 19.03`, and thus the "example of using `depends_on`" is left out of the tutorial.
-`depends_on` is however kept in the docker-compose file,
+`depends_on` is however kept in the docker compose file,
 so as to not cause any unintentional errors.

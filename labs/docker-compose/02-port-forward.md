@@ -1,6 +1,6 @@
 # A basic webserver
 
-Running arbitrary Linux commands inside a Docker container with docker-compose is quite overhead, but let's do something more useful.
+Running arbitrary Linux commands inside a Docker container with docker compose is quite overhead, but let's do something more useful.
 
 Create docker-compose.yml file with following content:
 ```yml
@@ -10,7 +10,7 @@ services:
         image: nginx:latest
 ```
 
-Now run the command `docker-compose pull` and you should see:
+Now run the command `docker compose pull` and you should see:
 ```bash
 Pulling nginx ... done
 ```
@@ -38,7 +38,7 @@ If you see a webpage saying "Welcome to nginx!" then you're done!
 If you look at the console output from docker, you see nginx producing a line of text for each time a browser hits the webpage:
 
 ```bash
-$ docker-compose up
+$ docker compose up
 Creating docker-compose_nginx_1 ... done
 Attaching to docker-compose_nginx_1
 nginx_1  | 172.18.0.1 - - [07/Jan/2020:22:28:48 +0000] "GET / HTTP/1.1" 200 612 "-" "curl/7.58.0" "-"
@@ -51,19 +51,19 @@ Press **control + c** in your terminal window to stop your services.
 When running a webserver like nginx, it's pretty useful that you do not have to have an open session into the server at all times to run it.
 We need to make it run in the background, freeing up our terminal for other things.
 Docker enables this with the `-d` parameter for run.
-`docker-compose up -d`
+`docker compose up -d`
 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 Starting docker-compose_nginx_1 ... done
 ```
 
 Docker prints out the service name and returns to the terminal.
 
-To see what services you've running from compose file you can use `docker-compose ps`
+To see what services you've running from compose file you can use `docker compose ps`
 
 _*Q: What is the status?*_
 
-To stop services you can run `docker-compose down`
+To stop services you can run `docker compose down`
 
 _*Q: What is the status after stopping?*_
