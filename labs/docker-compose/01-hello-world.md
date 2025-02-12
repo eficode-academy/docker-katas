@@ -7,18 +7,14 @@ Try running a command with docker compose:
 Your terminal output should look like this:
 
 ```bash
-ERROR:
-        Can't find a suitable configuration file in this directory or any
-        parent. Are you in the right directory?
-
-        Supported filenames: docker-compose.yml, docker-compose.yaml
+no configuration file provided: not found
 ```
+
 Now we need to create docker-compose.yml as the message suggests.
 
 Open editor and create new file with following content:
 
 ```yml
-version: '3'
 services:
     hello-world:
         image: hello-world:latest
@@ -58,7 +54,6 @@ As we can see. The hello-world container (tagged with latest) was started using 
 
 Compose file explained:
 
-`version: '3'`: defines the API version that docker compose should use
 `services:`:  defines the configuration of the container
 `hello-world:`: is now the name of the service
 `image: hello-world:latest`: defines the container and its version that we're using for `hello-world` service.
