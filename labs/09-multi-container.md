@@ -195,8 +195,6 @@ Open the file `docker.compose.yaml` with a text editor:
 You should see something like this:
 
 ```yaml
-version: "3.1"
-
 services:
   #  wordpress_container:
 

@@ -4,7 +4,6 @@ Running arbitrary Linux commands inside a Docker container with docker compose i
 
 Create docker-compose.yml file with following content:
 ```yml
-version: '3'
 services:
     nginx:
         image: nginx:latest

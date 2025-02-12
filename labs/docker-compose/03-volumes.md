@@ -10,7 +10,6 @@ The server itself is of little use, if it cannot access our web content on the h
 We can define volumes with docker compose for the service like this:
 
 ```yml
-version: '3'
 services:
     nginx:
         image: nginx:latest

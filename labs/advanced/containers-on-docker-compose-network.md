@@ -6,7 +6,6 @@ Spoiler: Network created by `docker compose` are same as user-defined networks. 
 ## Create/run a multi-container `docker-compose.yml` application:
 ```
 $ vi docker-compose.yml
-version: "3"
 services:
   apache:
     image: httpd:alpine

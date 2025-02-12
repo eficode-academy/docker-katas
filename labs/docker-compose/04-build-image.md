@@ -17,7 +17,6 @@ Application can be started with command `python3 /path/to/app.py` and requiremen
 
 Your `docker-compose.yml` can look something like this:
 ```yml
-version: '3'
 services:
     bottle:
       build: ./bottle/
