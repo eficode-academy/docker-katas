@@ -1,4 +1,4 @@
-FROM golang:1.13.2 as builder
+FROM golang:1.13.2 AS builder
 WORKDIR /go
 COPY hello.go /go
 RUN go build hello.go

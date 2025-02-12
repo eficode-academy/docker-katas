@@ -32,7 +32,7 @@ By utilizing multi-stage builds, we can separate the build stage (compiling) fro
 
 ```Dockerfile
 # build stage
-FROM golang:1.19 as builder
+FROM golang:1.19 AS builder
 WORKDIR /app
 COPY . /app
 RUN go mod download && go mod verify
@@ -76,7 +76,7 @@ Your new image should be even smaller than the alpine-based image!
 
 
 ```Dockerfile
-FROM golang:1.19 as builder
+FROM golang:1.19 AS builder
 WORKDIR /app
 COPY . /app
 RUN go mod download && go mod verify
