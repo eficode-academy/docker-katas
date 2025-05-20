@@ -11,7 +11,7 @@ services:
       WORDPRESS_DB_HOST: mysql-container
       WORDPRESS_DB_NAME: wordpressdb
     depends_on:
-      - mysql
+      - mysql-container
 
   mysql-container:
     image: mysql:5.7.36
