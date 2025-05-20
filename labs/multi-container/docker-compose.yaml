@@ -1,7 +1,7 @@
 services:
   #  wordpress_container:
 
-  mysql_container:
+  mysql-container:
     image: mysql:5.7.36
     ports:
       - 3306:3306

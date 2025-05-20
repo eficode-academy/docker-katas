@@ -196,9 +196,9 @@ You should see something like this:
 
 ```yaml
 services:
-  #  wordpress_container:
+  #  wordpress-container:
 
-  mysql_container:
+  mysql-container:
     image: mysql:5.7
     ports:
       - 3306:3306
@@ -210,14 +210,14 @@ This is the template we are building our compose file upon so let's drill this o
 
 - `version` indicate what version of the compose syntax we are using
 - `services` is the section where we put our containers
-  - `wordpress_container` is the section where we define our wordpress container
-  - `mysql_container` is the ditto of MySQL.
+  - `wordpress-container` is the section where we define our wordpress container
+  - `mysql-container` is the ditto of MySQL.
 
 > For more information on docker compose yaml files, head over to the [documentation](https://docs.docker.com/compose/overview/).
 
 The `services` part is equivalent to our `docker container run` command. Likewise there is a `network` and `volumes` section for those as well corresponding to `docker network create` and `docker volume create`.
 
-Let's look the mysql_container part together, making you able to create the other container yourself. Look at the original command we made to spin up the container:
+Let's look the mysql-container part together, making you able to create the other container yourself. Look at the original command we made to spin up the container:
 
 `docker container run --name mysql-container --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpressdb -d mysql:5.7.36`
 
@@ -225,7 +225,7 @@ The command gives out following information: a `name`, a `port` mapping, two `en
 
 Now look at the docker compose example again:
 
-- `mysql_container` defines the name of the container
+- `mysql-container` defines the name of the container
 - `image:wordpress` describes what image the container spins up from.
 - `ports` defines a list of port mappings from host to container
 - `environment` describes the `-e` variable made before in a yaml list
@@ -241,11 +241,11 @@ Try to spin up the container in detached mode:
 ```bash
 docker compose up -d
 Creating network "multicontainer_default" with the default driver
-Creating multicontainer_mysql_container_1 ...
-Creating multicontainer_mysql_container_1 ... done
+Creating multicontainer_mysql-container_1 ...
+Creating multicontainer_mysql-container_1 ... done
 ```
 
-Looking at the output you can see that it made a `docker network` named `multicontainer_default` as well as the MySQL container named `multicontainer_mysql_container_1`.
+Looking at the output you can see that it made a `docker network` named `multicontainer_default` as well as the MySQL container named `multicontainer_mysql-container_1`.
 
 Issue a `docker container ls` as well as `docker network ls` to see that both the container and network are listed.
 
@@ -263,7 +263,7 @@ docker run --name wordpress-container --rm --network if_wordpress -e WORDPRESS_D
 
 You must
 
-- uncomment the `wordpress_container` part of the services section
+- uncomment the `wordpress-container` part of the services section
 - map the pieces of information from the docker container run command to the yaml format.
 - remove MySQL port mapping to close that from outside reach.
 
