@@ -7,10 +7,9 @@ In some cases you're going to need data outside of docker containers and to do t
 So let's look at the [Nginx](https://hub.docker.com/_/nginx/) service from port-forwarding excercise.
 The server itself is of little use, if it cannot access our web content on the host.
 
-We can define volumes with docker-compose for the service like this:
+We can define volumes with docker compose for the service like this:
 
 ```yml
-version: '3'
 services:
     nginx:
         image: nginx:latest

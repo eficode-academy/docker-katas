@@ -21,4 +21,4 @@ Show compose content
 Run with:
 `docker compose up` and demo that it is running, then stop again with `docker compose down`.
 
-Then show again with `docker-compose up -d`
+Then show again with `docker compose up -d`

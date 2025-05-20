@@ -17,7 +17,6 @@ Application can be started with command `python3 /path/to/app.py` and requiremen
 
 Your `docker-compose.yml` can look something like this:
 ```yml
-version: '3'
 services:
     bottle:
       build: ./bottle/
@@ -26,7 +25,7 @@ services:
 
 Where `build:` is refering the folder what docker container we should build.
 
-To make docker-compose to build you can use command `docker-compose up --build` in order to execute the `build:` configuration.
+To make docker compose to build you can use command `docker compose up --build` in order to execute the `build:` configuration.
 
 Try to build your application container and open browser to correct port.
 

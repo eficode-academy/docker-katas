@@ -13,13 +13,13 @@ docker run -p 80:80 -p 25:25 \
   -d local/centos7:mailserver
 ```
 
-# Build and run using docker-compose:
+# Build and run using docker compose:
 There is a docker-compose.yml, which can be used to build and run this container image. Of-course a Dockerfile is a pre-requisite.
 
 ```
-docker-compose build
+docker compose build
 
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Verify:
