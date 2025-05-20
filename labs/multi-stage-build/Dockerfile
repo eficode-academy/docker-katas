@@ -1,4 +1,4 @@
-FROM golang:1.19 as builder
+FROM golang:1.19 AS builder
 WORKDIR /app
 COPY . /app
 RUN go mod download && go mod verify
