@@ -1,6 +1,6 @@
 # Testing unicode support
 
-```
+```bash
 docker build -f Файлдокера -t unicode:latest .
 docker run -it unicode:latest
 ```

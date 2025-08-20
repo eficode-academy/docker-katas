@@ -8,7 +8,7 @@ Neither is it possible ot just do a `FROM scratch` Dockerfile.
 
 But we can do the following:
 
-```
+```dockerfile
 FROM scratch
 COPY emptyfile .
 ```

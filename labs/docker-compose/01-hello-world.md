@@ -50,14 +50,17 @@ hello-world_1  |
 docker-compose_hello-world_1 exited with code 0
 ```
 
-As we can see. The hello-world container (tagged with latest) was started using the the compose file and your docker compose installation is working!
+As we can see. The hello-world container (tagged with latest) was started using the the compose file
+and your docker compose installation is working!
 
 Compose file explained:
 
-`services:`:  defines the configuration of the container
-`hello-world:`: is now the name of the service
-`image: hello-world:latest`: defines the container and its version that we're using for `hello-world` service.
+- `services:`:  defines the configuration of the container
+- `hello-world:`: is now the name of the service
+- `image: hello-world:latest`: defines the container and its version that we're using
+  for `hello-world` service.
 
-Now re-create using hello-world service to use ubuntu container and also add `command:` for the service with value `echo "Hello from me"`
+Now re-create using hello-world service to use ubuntu container and also add `command:` for the
+service with value `echo "Hello from me"`
 
 _*Q: So what did this do?*_

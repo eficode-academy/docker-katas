@@ -2,13 +2,13 @@
 
 ## Build image
 
-```
+```bash
 docker build -t basic-compose:latest .
 ```
 
 ## Run image manually
 
-```
+```bash
 docker run --rm -p 8050:5000 -v $(pwd):/usr/src/app -d basic-compose:latest /usr/src/app/app.py
 ```
 
