@@ -2,7 +2,9 @@
 
 In some cases you're going to need data outside of docker containers and to do that you can use volumes
 
-**A docker Volume** is where you can use a named or unnamed volume to store the external data. You would normally use a volume driver for this, but you can get a host mounted path using the default local volume driver.
+**A docker Volume** is where you can use a named or unnamed volume to store the external data. You
+would normally use a volume driver for this, but you can get a host mounted path using the default
+local volume driver.
 
 So let's look at the [Nginx](https://hub.docker.com/_/nginx/) service from port-forwarding excercise.
 The server itself is of little use, if it cannot access our web content on the host.
@@ -28,8 +30,6 @@ Try to do the following:
 
 _*Q: What do you see now in the browser?*_
 
-Now modify the index.html again and *do* not restart the container.
+Now modify the index.html again and _do_ not restart the container.
 
 _*Q: What do you see after you refresh the browser page?*_
-
-

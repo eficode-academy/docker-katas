@@ -1,8 +1,10 @@
 # Building docker image using docker-compose
 
-In this excercise we're going to setup [bottlepy](https://bottlepy.org/docs/dev/) application running from our compose service.
+In this excercise we're going to setup [bottlepy](https://bottlepy.org/docs/dev/) application
+running from our compose service.
 
 Checkout the bottle folder and you should be seeing 3 files:
+
 - app.py
 - Dockerfile
 - requirements.txt
@@ -13,9 +15,11 @@ requirements.txt has the needed requirements for python to be installed before r
 
 Dockerfile is partially empty and now it's your job to fill it in in order to make the application run.
 
-Application can be started with command `python3 /path/to/app.py` and requirements can be installed with `pip3 install -r /path/to/requirements.txt`.
+Application can be started with command `python3 /path/to/app.py` and requirements can be installed
+with `pip3 install -r /path/to/requirements.txt`.
 
 Your `docker-compose.yml` can look something like this:
+
 ```yml
 services:
     bottle:
@@ -25,8 +29,9 @@ services:
 
 Where `build:` is refering the folder what docker container we should build.
 
-To make docker compose to build you can use command `docker compose up --build` in order to execute the `build:` configuration.
+To make docker compose to build you can use command `docker compose up --build` in order to execute
+the `build:` configuration.
 
 Try to build your application container and open browser to correct port.
 
-_*Q: What do you see on <domain>:<port>/hello/docker-is-awesome ?*_
+_*Q: What do you see on &lt;domain&gt;:&lt;port&gt/hello/docker-is-awesome ?*_

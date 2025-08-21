@@ -87,7 +87,7 @@ you might even still be logged in.
 1. Run `docker compose up` to start the application.
 
 You can find the version under the `gear icon -> help`,
-[link](http://localhost/settings/help).
+[Version](http://localhost/settings/help).
 
 ## Downgrading Nextcloud
 
@@ -115,6 +115,7 @@ app_1  | Can't start Nextcloud because the version of the data (12.0.13.2) is hi
 In the original example,
 the upgrade would fail without adding the `depends_on: db`
 to the docker compose file.
-Nicolaj has been unable to reproduce this error on `Docker for Windows 19.03`, and thus the "example of using `depends_on`" is left out of the tutorial.
+Nicolaj has been unable to reproduce this error on `Docker for Windows 19.03`, and thus the "example
+of using `depends_on`" is left out of the tutorial.
 `depends_on` is however kept in the docker compose file,
 so as to not cause any unintentional errors.

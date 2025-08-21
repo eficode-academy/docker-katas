@@ -7,19 +7,20 @@ The goal of this scenario is to make you run your first Docker container.
 ## Terminology
 
 *Docker Container*: An isolated, runnable environment that holds everything needed to run an application.
-*Docker Image*: A lightweight, standalone package that contains all necessary code, libraries, and dependencies to run an application.
+*Docker Image*: A lightweight, standalone package that contains all necessary code, libraries, and
+dependencies to run an application.
 
 ## Exercise
 
 Try running a command with Docker:
 
-```
+```bash
 docker run hello-world
 ```
 
 Your terminal output should look like this:
 
-```
+```bash
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 78445dd45222: Pull complete
@@ -49,8 +50,9 @@ For more examples and ideas, visit:
 
 This message shows that your installation appears to be working correctly.
 
-_*Q: So what did this do?*_
+**Q: So what did this do?**
 
 Try to run `docker run hello-world` again.
 
-Docker has now already downloaded the image locally, and can therefore execute the container straight away.
+Docker has now already downloaded the image locally, and can therefore execute the container
+straight away.

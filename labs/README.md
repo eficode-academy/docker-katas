@@ -1,8 +1,9 @@
 # Docker labs
 
-In this folder are a lot of exercises. They are numbered in the way we think makes sence to introduce the concepts.
+In this folder are a lot of exercises. They are numbered in the way we think makes sense to
+introduce the concepts.
 
-Below is a cheatsheet for many of the commands we will touch uppon in the lab.
+Below is a cheatsheet for many of the commands we will touch upon in the lab.
 
 ```bash
 docker build -t friendlyname .              # Create image using this directory's Dockerfile

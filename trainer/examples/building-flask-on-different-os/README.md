@@ -1,6 +1,7 @@
 # Building your flask application with three different from OS's
 
-Building our flask application with Ubuntu might seem like a bad idea, as Ubuntu is a general purpose OS.
+Building our flask application with Ubuntu might seem like a bad idea, as Ubuntu is a general
+purpose OS.
 
 Looking into dockerhub we see that python already have an image we can use.
 

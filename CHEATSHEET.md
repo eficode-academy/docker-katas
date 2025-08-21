@@ -1,17 +1,21 @@
-Source: https://docs.docker.com/get-started/docker_cheatsheet.pdf
+# Source: <https://docs.docker.com/get-started/docker_cheatsheet.pdf>
 
 ## General
 
-- [Docker cli](https://docs.docker.com/engine/reference/commandline/cli/) - **Docker CLI** is the command line interface for Docker
-- [Docker Desktop](https://docs.docker.com/desktop) - **Docker Desktop** is available for Mac, Linux, and Windows
+- [Docker cli](https://docs.docker.com/engine/reference/commandline/cli/) - **Docker CLI** is the
+  command line interface for Docker
+- [Docker Desktop](https://docs.docker.com/desktop) - **Docker Desktop** is available for Mac,
+  Linux, and Windows
 - `docker --help` - Get help with Docker. You can use `--help` on all subcommands
 - `docker info` - Display system-wide information
 - [Docker Docs](https://docs.docker.com) - Check out our docs for information on using Docker
 
 ## Containers
 
-- `docker run --name <container_name> <image_name>` - Create and run a container from an image, with a custom name
-- `docker run -p <host_port>:<container_port> <image_name>` - Run a container and publish a container’s port(s) to the host
+- `docker run --name <container_name> <image_name>` - Create and run a container from an image,
+  with a custom name
+- `docker run -p <host_port>:<container_port> <image_name>` - Run a container and publish a
+  container’s port(s) to the host
 - `docker run -d <image_name>` - Run a container in the background
 - `docker start|stop <container_name> (or <container-id>)` - Start or stop an existing container
 - `docker rm <container_name>` - Remove a stopped container
@@ -30,11 +34,9 @@ Source: https://docs.docker.com/get-started/docker_cheatsheet.pdf
 - `docker rmi <image_name>` - Delete an Image
 - `docker image prune` - Remove all unused images
 
-
 ## Docker Registries
 
 The default registry is [Docker Hub](https://hub.docker.com), but you can add more registries.
-
 
 - `docker login -u <username>` - Login into Docker
 - `docker push <username>/<image_name>` - Publish an image to Docker Hub
