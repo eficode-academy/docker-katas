@@ -260,3 +260,8 @@ commands,`COPY` to copy files, and `CMD` to define the default command.
 
 You also learned that each of the keywords generates an image layer on top of the previous, and
 that every one of the layers can be converted to a running container.
+
+## Instructions
+
+New keywords are constantly being added to the Dockerfile syntax. You can find a complete list of
+all the keywords [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).

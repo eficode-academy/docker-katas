@@ -1,4 +1,4 @@
-# Best practises
+# Best practices
 
 ## dockerignore
 

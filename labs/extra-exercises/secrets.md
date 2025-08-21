@@ -10,12 +10,12 @@ of the build and run process.
 
 > ## Store config in the environment
 >
-> An app’s config is everything that is likely to vary between deploys (staging, production,
-> developer environments, etc). This includes:
+> An app’s configuration includes everything likely to vary between deployments (e.g., staging,
+> production, or development environments). This includes:
 >
 > * Resource handles to the database, Memcached, and other backing services
 > * Credentials to external services such as Amazon S3 or Twitter
-> * Per-deploy values such as the canonical hostname for the deploy
+> * Per-deployment values such as the canonical hostname for the deployment
 > [https://12factor.net/config]
 
 ## Starting with Docker Secrets
@@ -113,8 +113,8 @@ docker swarm leave --force
 
 ## Slides (later)
 
-High level overview - why secrets, diagram of how
+High-level overview: Why secrets are important and a diagram explaining their usage.
 
-## Additonal exercises
+## Additional exercises
 
 * [Docker lab on secrets](https://github.com/docker/labs/tree/master/security/secrets)

@@ -11,7 +11,7 @@ It's going to be a lot of fun!
 You need to have access to a machine with docker installed.
 There are many ways of getting that:
 
-* Click the link above to get a Cloud shell from Google (require login)
+* Click the link above to get a Cloud shell from Google (requires login).
 * Docker installed on a linux box.
 * Docker desktop installed on a Mac or Windows machine.
 

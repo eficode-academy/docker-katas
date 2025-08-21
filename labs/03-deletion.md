@@ -176,7 +176,7 @@ After the image has no references, it deletes the two layers the image itself is
 When building, running and rebuilding images, you download and store a lot of layers. These layers
 will not be deleted, as docker takes a very conservative approach to clean up.
 
-Docker provides a `prune` command, taking all dangling containers/images/networks/volumes.
+Docker provides a `prune` command to clean up all dangling containers, images, networks, and volumes.
 
 - `docker container prune`
 - `docker image prune`
