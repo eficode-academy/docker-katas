@@ -267,6 +267,6 @@ You must
 - map the pieces of information from the docker container run command to the yaml format.
 - remove MySQL port mapping to close that from outside reach.
 
-When you made that, run `docker compose up -d` and access your wordpress site from [http://IP:8080](http://IP:8080).
+When you made that, run `docker compose up -d` and access your wordpress site from [http://IP:8080](http://IP:8080)
 
 > **Hint**: If you are stuck, look at the file docker-compose_final.yaml in the same folder.
