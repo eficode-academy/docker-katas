@@ -41,16 +41,13 @@ Wed Nov
 ```
 
 
-> **Warning:** Make sure that you are inside your container. most likely you can see that by your command promt showing `/ #` instead of `ubuntu@inst1:~/docker-katas/labs$`
-
-Now, delete the binaries that the system is build up of with:
+Now, add a file to the system:
 
 ```
-rm -rf /bin
+echo "here I am" > testfile.txt
 ```
 
-Try to navigate around to see how much of the OS is gone: try to run the `ls`, `whoami` and `date` commands.
-They should all echo back that the binary is not found.
+Run the `ls` command to see that the extra file is in the current directory
 
 Exit out by pressing `Ctrl+d` and create a new instance of the Alpine image and look a bit around:
 
@@ -71,7 +68,7 @@ bin    etc    lib    mnt    root   sbin   sys    usr
 dev    home   media  proc   run    srv    tmp    var
 ```
 
-Try to perform the same tasks as displayed above to see that you have a fresh new instance ready to go.
+You see that this is a fresh new instance ready to go.
 
 ## Auto-remove a container after use
 
