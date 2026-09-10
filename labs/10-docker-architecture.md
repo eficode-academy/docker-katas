@@ -144,11 +144,12 @@ Besides bridge networks, Docker ships two special-purpose modes, plus one mechan
 **`--network host`** - the container shares the host's network stack directly; it gets no IP address of its own.
 
 ```bash
-docker run -d --rm --network host --name web nginx
+docker run -d --rm --network host --name web python:3-alpine python3 -m http.server 8888
 ```
 
 - `docker exec web ip addr show` - the **host's real interfaces**, not an isolated container `eth0`.
-- `sudo ss -tulpn | grep :80` - `nginx` is listening directly on the host's port 80.
+- `docker port web` - prints nothing (or errors), since host-mode containers don't have a port mapping to report.
+- `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8888` - reaches the server directly, even though you never published a port with `-p`.
 - Because there's no container IP to map to, published ports (`-p`) are **ignored** in this mode - Docker even prints a warning if you try: `WARNING: Published ports are discarded when using host network mode`.
 
 **`--network none`** - the opposite extreme: only the loopback interface, no connectivity at all.
